@@ -1,0 +1,5 @@
+export * from "./hooks/use-product-items"
+export * from "./hooks/use-product-details-columns"
+export * from "./desctiptions/product-description"
+export * from "./tables/product-details-table"
+export * from "./forms/product-details-form"
