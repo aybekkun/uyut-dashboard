@@ -1,0 +1,33 @@
+{
+    "menu": {
+        "store": "Склад",
+        "store_list": "Список проходов",
+        "sales": "Продажи",
+        "sales_list": "Список продаж",
+        "employees": "Сотрудники",
+        "employees_list": "Список сотрудников",
+        "reports": "Отчёты",
+        "report_income": "Отчёт о поступлениях",
+        "report_write_off": "Отчёт о списании",
+        "report_sales": "Отчёт о продажах",
+        "report_expenses": "Отчёт о расходах",
+        "report_recommended_orders": "Рекомендуемые заказы",
+        "report_suppliers": "Поставщики",
+        "report_debtors": "Должники",
+        "finances": "Финансы",
+        "finances_income": "Приходы",
+        "finances_write_off": "Списания",
+        "finances_sales": "Продажа",
+        "finances_expenses": "Расходы",
+        "expenses": "Расходы",
+        "expenses_list": "Список расходов",
+        "expenses_write_off": "Список списания",
+        "settings": "Настройки",
+        "settings_print_types": "Типы печати",
+        "settings_payment_types": "Типы оплаты",
+        "settings_expense_types": "Типы расходов"
+    },
+    "table": {
+        
+    }
+}

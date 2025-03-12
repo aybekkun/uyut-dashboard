@@ -4,10 +4,11 @@ import { useResponsive } from "antd-style"
 import { type FC } from "react"
 import { useMenuStore } from "src/store/use-menu-store"
 import { useThemeStore } from "src/store/use-theme-store"
-import { menu } from "./menu.data"
+import { useMenu } from "./menu.data"
 
 const MenuBar: FC = () => {
 	const router = useRouter()
+	const menu = useMenu()
 	const { theme: mode } = useThemeStore()
 	const { collapsed } = useMenuStore()
 	const { pathname } = useLocation()

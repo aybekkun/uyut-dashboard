@@ -1,0 +1,30 @@
+{
+    "menu": {
+        "store": "Омбор",
+        "store_list": "Киришлар рўйхати",
+        "sales": "Сотувлар",
+        "sales_list": "Сотувлар рўйхати",
+        "employees": "Ходимлар",
+        "employees_list": "Ходимлар рўйхати",
+        "reports": "Ҳисоботлар",
+        "report_income": "Кирим ҳисоботи",
+        "report_write_off": "Списания рўйхати",
+        "report_sales": "Сотув ҳисоботи",
+        "report_expenses": "Харажатлар ҳисоботи",
+        "report_recommended_orders": "Тавсия этилган буюртмалар",
+        "report_suppliers": "Етказиб берувчилар",
+        "report_debtors": "Қарздорлар",
+        "finances": "Молия",
+        "finances_income": "Киримлар",
+        "finances_write_off": "Чиқимлар",
+        "finances_sales": "Савдо",
+        "finances_expenses": "Харажатлар",
+        "expenses": "Харажатлар",
+        "expenses_list": "Харажатлар",
+        "expenses_write_off": "Списания рўйхати",
+        "settings": "Созламалар",
+        "settings_print_types": "Босиб чиқариш турлари",
+        "settings_payment_types": "Тўлов турлари",
+        "settings_expense_types": "Харажат турлари"
+    }
+}

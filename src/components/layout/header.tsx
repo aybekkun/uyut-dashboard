@@ -6,6 +6,7 @@ import { Logo } from "src/components/shared/logo"
 import { useMenuStore } from "src/store/use-menu-store"
 import { ProfileAvatar } from "./header/profile-avatar"
 import { ThemeButton } from "./header/theme-button"
+import { LanguageButton } from "./header/language-button"
 
 const Header: FC<PropsWithChildren> = () => {
 	const toggleCollapsed = useMenuStore((state) => state.toggleCollapsed)
@@ -44,6 +45,7 @@ const Header: FC<PropsWithChildren> = () => {
 						/>
 					</Space>
 					<Space>
+						<LanguageButton />
 						<ThemeButton />
 						<ProfileAvatar />
 					</Space>
