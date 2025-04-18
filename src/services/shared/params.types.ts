@@ -1,6 +1,7 @@
 import type { FinancePriceType, FinanceType } from "src/services/finances"
 
 type GetParams = {
+	id?: number | string
 	page?: number
 	limit?: number
 	search?: string

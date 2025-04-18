@@ -40,9 +40,7 @@ import { Route as LayoutExpensesWriteOffProductsImport } from './routes/_layout/
 import { Route as LayoutExpensesListImport } from './routes/_layout/expenses/list'
 import { Route as LayoutEmployeesUsersImport } from './routes/_layout/employees/users'
 import { Route as LayoutStoreProductsIndexImport } from './routes/_layout/store/products/index'
-import { Route as LayoutReportsProductsIndexImport } from './routes/_layout/reports/products/index'
 import { Route as LayoutStoreProductsIdImport } from './routes/_layout/store/products/$id'
-import { Route as LayoutReportsProductsIdImport } from './routes/_layout/reports/products/$id'
 
 // Create/Update Routes
 
@@ -231,23 +229,9 @@ const LayoutStoreProductsIndexRoute = LayoutStoreProductsIndexImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
-const LayoutReportsProductsIndexRoute = LayoutReportsProductsIndexImport.update(
-  {
-    id: '/reports/products/',
-    path: '/reports/products/',
-    getParentRoute: () => LayoutRoute,
-  } as any,
-)
-
 const LayoutStoreProductsIdRoute = LayoutStoreProductsIdImport.update({
   id: '/store/products/$id',
   path: '/store/products/$id',
-  getParentRoute: () => LayoutRoute,
-} as any)
-
-const LayoutReportsProductsIdRoute = LayoutReportsProductsIdImport.update({
-  id: '/reports/products/$id',
-  path: '/reports/products/$id',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -451,25 +435,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutStoreIndexImport
       parentRoute: typeof LayoutImport
     }
-    '/_layout/reports/products/$id': {
-      id: '/_layout/reports/products/$id'
-      path: '/reports/products/$id'
-      fullPath: '/reports/products/$id'
-      preLoaderRoute: typeof LayoutReportsProductsIdImport
-      parentRoute: typeof LayoutImport
-    }
     '/_layout/store/products/$id': {
       id: '/_layout/store/products/$id'
       path: '/store/products/$id'
       fullPath: '/store/products/$id'
       preLoaderRoute: typeof LayoutStoreProductsIdImport
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/reports/products/': {
-      id: '/_layout/reports/products/'
-      path: '/reports/products'
-      fullPath: '/reports/products'
-      preLoaderRoute: typeof LayoutReportsProductsIndexImport
       parentRoute: typeof LayoutImport
     }
     '/_layout/store/products/': {
@@ -511,9 +481,7 @@ interface LayoutRouteChildren {
   LayoutSalesIndexRoute: typeof LayoutSalesIndexRoute
   LayoutSettingsIndexRoute: typeof LayoutSettingsIndexRoute
   LayoutStoreIndexRoute: typeof LayoutStoreIndexRoute
-  LayoutReportsProductsIdRoute: typeof LayoutReportsProductsIdRoute
   LayoutStoreProductsIdRoute: typeof LayoutStoreProductsIdRoute
-  LayoutReportsProductsIndexRoute: typeof LayoutReportsProductsIndexRoute
   LayoutStoreProductsIndexRoute: typeof LayoutStoreProductsIndexRoute
 }
 
@@ -544,9 +512,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutSalesIndexRoute: LayoutSalesIndexRoute,
   LayoutSettingsIndexRoute: LayoutSettingsIndexRoute,
   LayoutStoreIndexRoute: LayoutStoreIndexRoute,
-  LayoutReportsProductsIdRoute: LayoutReportsProductsIdRoute,
   LayoutStoreProductsIdRoute: LayoutStoreProductsIdRoute,
-  LayoutReportsProductsIndexRoute: LayoutReportsProductsIndexRoute,
   LayoutStoreProductsIndexRoute: LayoutStoreProductsIndexRoute,
 }
 
@@ -582,9 +548,7 @@ export interface FileRoutesByFullPath {
   '/sales': typeof LayoutSalesIndexRoute
   '/settings': typeof LayoutSettingsIndexRoute
   '/store': typeof LayoutStoreIndexRoute
-  '/reports/products/$id': typeof LayoutReportsProductsIdRoute
   '/store/products/$id': typeof LayoutStoreProductsIdRoute
-  '/reports/products': typeof LayoutReportsProductsIndexRoute
   '/store/products': typeof LayoutStoreProductsIndexRoute
 }
 
@@ -616,9 +580,7 @@ export interface FileRoutesByTo {
   '/sales': typeof LayoutSalesIndexRoute
   '/settings': typeof LayoutSettingsIndexRoute
   '/store': typeof LayoutStoreIndexRoute
-  '/reports/products/$id': typeof LayoutReportsProductsIdRoute
   '/store/products/$id': typeof LayoutStoreProductsIdRoute
-  '/reports/products': typeof LayoutReportsProductsIndexRoute
   '/store/products': typeof LayoutStoreProductsIndexRoute
 }
 
@@ -652,9 +614,7 @@ export interface FileRoutesById {
   '/_layout/sales/': typeof LayoutSalesIndexRoute
   '/_layout/settings/': typeof LayoutSettingsIndexRoute
   '/_layout/store/': typeof LayoutStoreIndexRoute
-  '/_layout/reports/products/$id': typeof LayoutReportsProductsIdRoute
   '/_layout/store/products/$id': typeof LayoutStoreProductsIdRoute
-  '/_layout/reports/products/': typeof LayoutReportsProductsIndexRoute
   '/_layout/store/products/': typeof LayoutStoreProductsIndexRoute
 }
 
@@ -689,9 +649,7 @@ export interface FileRouteTypes {
     | '/sales'
     | '/settings'
     | '/store'
-    | '/reports/products/$id'
     | '/store/products/$id'
-    | '/reports/products'
     | '/store/products'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -722,9 +680,7 @@ export interface FileRouteTypes {
     | '/sales'
     | '/settings'
     | '/store'
-    | '/reports/products/$id'
     | '/store/products/$id'
-    | '/reports/products'
     | '/store/products'
   id:
     | '__root__'
@@ -756,9 +712,7 @@ export interface FileRouteTypes {
     | '/_layout/sales/'
     | '/_layout/settings/'
     | '/_layout/store/'
-    | '/_layout/reports/products/$id'
     | '/_layout/store/products/$id'
-    | '/_layout/reports/products/'
     | '/_layout/store/products/'
   fileRoutesById: FileRoutesById
 }
@@ -816,9 +770,7 @@ export const routeTree = rootRoute
         "/_layout/sales/",
         "/_layout/settings/",
         "/_layout/store/",
-        "/_layout/reports/products/$id",
         "/_layout/store/products/$id",
-        "/_layout/reports/products/",
         "/_layout/store/products/"
       ]
     },
@@ -929,16 +881,8 @@ export const routeTree = rootRoute
       "filePath": "_layout/store/index.tsx",
       "parent": "/_layout"
     },
-    "/_layout/reports/products/$id": {
-      "filePath": "_layout/reports/products/$id.tsx",
-      "parent": "/_layout"
-    },
     "/_layout/store/products/$id": {
       "filePath": "_layout/store/products/$id.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/reports/products/": {
-      "filePath": "_layout/reports/products/index.tsx",
       "parent": "/_layout"
     },
     "/_layout/store/products/": {

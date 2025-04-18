@@ -1,4 +1,4 @@
-      import { createFileRoute, Navigate, redirect } from "@tanstack/react-router"
+import { createFileRoute, Navigate, redirect } from "@tanstack/react-router"
 import { ROUTES } from "src/config/routes.config"
 
 export const Route = createFileRoute("/_layout/finances/")({

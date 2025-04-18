@@ -2,7 +2,7 @@ import { PlusOutlined } from "@ant-design/icons"
 import { FC } from "react"
 import { Button } from "src/components/ui/button"
 import { Table } from "src/components/ui/table"
-import { type Product, useGetProductsQuery } from "src/services/products"
+import { type ProductItem, useGetProductsQuery } from "src/services/products"
 import { GetParams } from "src/services/shared"
 import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { useProductsColumns } from "../hooks/use-products-columns"
@@ -33,7 +33,7 @@ const ProductsTable: FC<ProductsTableProps> = ({
 	const columns = useProductsColumns()
 	return (
 		<>
-			<Table<Product>
+			<Table<ProductItem>
 				rowKey={(record) => record.id}
 				title={"Товары"}
 				extra={

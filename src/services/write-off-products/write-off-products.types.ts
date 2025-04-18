@@ -1,12 +1,12 @@
 import { Dayjs } from "dayjs"
-import type { Product } from "../products"
+import type { ProductItem } from "../products"
 
 type WriteOffProduct = {
 	id: number
-	product: Product
+	product: ProductItem
 	date: string
 	name: string
-	length: number
+	meter: number
 	amount: string | number
 	meter_square: number
 	created_at: string
@@ -18,7 +18,7 @@ type WriteOffProductForm = {
 	product_id: number
 	date: string | Dayjs
 	name: string
-	length: number
+	meter: number
 	amount: string | number
 }
 

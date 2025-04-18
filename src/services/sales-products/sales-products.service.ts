@@ -19,26 +19,9 @@ class SalesProductsService {
 	}
 
 	create = async (
-		form: SalesProductForm | FormData
-	): Promise<ResponseSingleData<SalesProduct>> => {
-		const response = await api.post(`/sales-products`, form)
-		return response.data
-	}
-
-	edit = async (
 		form: SalesProductForm
 	): Promise<ResponseSingleData<SalesProduct>> => {
-		const response = await api.put(
-			`/sales-products/${form.id}`,
-			form?.formData || form,
-			{
-				headers: {
-					"Content-Type": form?.formData
-						? "multipart/form-data"
-						: "application/json"
-				}
-			}
-		)
+		const response = await api.post(`/sales-products`, form)
 		return response.data
 	}
 

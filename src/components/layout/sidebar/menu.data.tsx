@@ -14,7 +14,7 @@ import {
 	UnorderedListOutlined,
 	UsergroupAddOutlined,
 	UsergroupDeleteOutlined,
-	VerticalAlignBottomOutlined,
+	/* VerticalAlignBottomOutlined, */
 	VerticalAlignMiddleOutlined,
 	VerticalAlignTopOutlined
 } from "@ant-design/icons"
@@ -46,11 +46,11 @@ export const useMenu = (): MenuProps["items"] => {
 		},
 
 		{ key: ROUTES.REPORT_GROUP, type: "group", label: t("menu.reports") },
-		{
+	/* 	{
 			key: ROUTES.REPORT_PRODUCTS,
 			icon: <VerticalAlignBottomOutlined />,
 			label: t("menu.report_income")
-		},
+		}, */
 		{
 			key: ROUTES.REPORT_WRITE_OFF_PRODUCTS,
 			icon: <VerticalAlignMiddleOutlined />,

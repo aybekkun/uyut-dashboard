@@ -24,7 +24,7 @@ const FormItemProducts: FC = () => {
 				loading={isLoading || isFetching}
 				options={products?.data?.map((product) => ({
 					value: product.id,
-					label: product.name
+					label: product.name.name
 				}))}
 			/>
 		</Form.Item>

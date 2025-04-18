@@ -1,11 +1,6 @@
-import {
-	EyeOutlined,
-	FileImageOutlined,
-	QuestionCircleOutlined
-} from "@ant-design/icons"
-import { Avatar, Image, Popover, Space } from "antd"
+import { EyeOutlined, FileImageOutlined } from "@ant-design/icons"
+import { Avatar, Image } from "antd"
 import { ColumnsType } from "antd/es/table"
-import { PrintDetailTable } from "src/components/shared/print-detail"
 import type { SalesProduct } from "src/services/sales-products"
 import {
 	formatDate,
@@ -33,23 +28,23 @@ export const useDebtorsColumns = () => {
 			key: "length",
 			render: formatEmpty
 		},
-		{
-			title: "Тип печати",
-			dataIndex: "print_detail",
-			key: "length",
-			render: (value?: SalesProduct["print_detail"]) => {
-				const [printDetail] = value || []
-				if (!printDetail) return "-"
-				return (
-					<Space>
-						{formatEmpty(printDetail?.print_type?.name)}
-						<Popover content={<PrintDetailTable data={value} />}>
-							<QuestionCircleOutlined style={{ cursor: "pointer" }} />
-						</Popover>
-					</Space>
-				)
-			}
-		},
+		// {
+		// 	title: "Тип печати",
+		// 	dataIndex: "print_detail",
+		// 	key: "length",
+		// 	render: (value?: SalesProduct[""]) => {
+		// 		const [printDetail] = value || []
+		// 		if (!printDetail) return "-"
+		// 		return (
+		// 			<Space>
+		// 				{formatEmpty(printDetail?.print_type?.name)}
+		// 				<Popover content={<PrintDetailTable data={value} />}>
+		// 					<QuestionCircleOutlined style={{ cursor: "pointer" }} />
+		// 				</Popover>
+		// 			</Space>
+		// 		)
+		// 	}
+		// },
 		{
 			title: "Общая стоимость",
 			dataIndex: "total_cost",

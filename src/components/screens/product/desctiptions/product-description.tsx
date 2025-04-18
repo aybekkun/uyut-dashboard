@@ -4,23 +4,28 @@ import { Card, Descriptions, Spin } from "antd"
 import { type FC } from "react"
 import { useProductItems } from "src/components/screens/product"
 import { Button } from "src/components/ui"
-import { useGetProductsByIdQuery } from "src/services/products"
+import { ProductItem } from "src/services/products"
 
 interface ProductDescriptionProps {
 	id?: number | string
+	data: ProductItem | undefined
+	isLoading?: boolean
+	isFetching?: boolean
 }
 
-const ProductDescription: FC<ProductDescriptionProps> = ({ id }) => {
+const ProductDescription: FC<ProductDescriptionProps> = ({
+	data: product,
+	isFetching,
+	isLoading
+}) => {
 	const router = useRouter()
 
-	const { data: product, isLoading, isFetching } = useGetProductsByIdQuery(id)
-
-	const items = useProductItems(product?.data)
+	const items = useProductItems(product)
 
 	return (
 		<Card
 			bordered={false}
-			title={`Товар: ${product?.data?.name}`}
+			title={`Товар: ${product?.name?.name}`}
 			extra={
 				<Button
 					icon={<ArrowLeftOutlined />}

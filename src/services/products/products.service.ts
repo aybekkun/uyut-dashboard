@@ -7,15 +7,20 @@ import type {
 	ResponseSingleData
 } from "../shared"
 import { PrintDetail, PrintDetailForm } from "./print-details"
-import type { Product, ProductForm } from "./products.types"
+import type {
+	ProductResponse,
+	ProductForm,
+	ProductItem
+} from "./products.types"
 
 class ProductsService {
-	get = async (params: GetParams): Promise<Response<Product>> => {
+	get = async (params: GetParams): Promise<Response<ProductItem>> => {
 		const response = await api.get("/products", { params })
 		return response.data
 	}
-	getById = async (id: ParamId): Promise<ResponseSingleData<Product>> => {
-		const response = await api.get(`/products/${id}`)
+	getById = async (params: GetParams): Promise<ProductResponse> => {
+		const { id, ...param } = params
+		const response = await api.get(`/products/${id}`, { params: param })
 		return response.data
 	}
 	getPrintDetailsById = async (

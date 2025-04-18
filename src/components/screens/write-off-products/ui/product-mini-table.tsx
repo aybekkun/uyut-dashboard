@@ -63,7 +63,7 @@ const ProductMiniTable: FC<ProductMiniTableProps> = ({ data }) => {
 	return (
 		<>
 			<Table<Product>
-				title={data && data?.name ? data.name : "Товар"}
+				title={"Товар"}
 				columns={columns}
 				dataSource={data ? [data] : []}
 				pagination={false}

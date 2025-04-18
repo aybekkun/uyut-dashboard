@@ -77,7 +77,7 @@ const WriteOffProductsForm: FC = () => {
 				</Form.Item>
 				<FormItemProducts />
 				<Form.Item<WriteOffProductForm>
-					name={"length"}
+					name={"meter"}
 					label={"Длина"}
 					rules={[{ required: true }]}>
 					<InputNumber placeholder={INPUT_PLACEHOLDER} />

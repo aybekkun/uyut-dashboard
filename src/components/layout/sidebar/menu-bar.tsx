@@ -5,14 +5,32 @@ import { type FC } from "react"
 import { useMenuStore } from "src/store/use-menu-store"
 import { useThemeStore } from "src/store/use-theme-store"
 import { useMenu } from "./menu.data"
+import { useGetProfileQuery } from "src/services/login"
+import { useTranslation } from "react-i18next"
+import { ROUTES } from "src/config/routes.config"
+import { ExportOutlined } from "@ant-design/icons"
+import { MenuProps } from "antd/lib"
 
 const MenuBar: FC = () => {
 	const router = useRouter()
 	const menu = useMenu()
+	const { data: profile } = useGetProfileQuery()
+	const { t } = useTranslation()
 	const { theme: mode } = useThemeStore()
 	const { collapsed } = useMenuStore()
 	const { pathname } = useLocation()
 	const { xl } = useResponsive()
+	const newMenu =
+		profile?.data.role.name === "peshatnik"
+			? [
+					{ key: ROUTES.SALES_GROUP, type: "group", label: t("menu.sales") },
+					{
+						key: ROUTES.SALES_PRODUCTS,
+						icon: <ExportOutlined />,
+						label: t("menu.sales_list")
+					}
+				]
+			: (menu as MenuProps["items"])
 
 	const onSelectMenu = (key: string) => {
 		router.navigate({
@@ -21,6 +39,7 @@ const MenuBar: FC = () => {
 	}
 
 	const { token } = theme.useToken()
+
 	return (
 		<>
 			<ConfigProvider
@@ -41,9 +60,11 @@ const MenuBar: FC = () => {
 						borderRight: 0,
 						background: token.colorBgContainer
 					}}
-					items={menu?.filter((el) =>
-						collapsed && xl ? el?.type !== "group" : el
-					)}
+					items={
+						newMenu?.filter((el) =>
+							collapsed && xl ? el?.type !== "group" : el
+						) as MenuProps["items"]
+					}
 				/>
 			</ConfigProvider>
 		</>

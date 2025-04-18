@@ -25,13 +25,13 @@ const useGetProductsQuery = (params: GetParams) => {
 	})
 }
 
-const useGetProductsByIdQuery = (id: ParamId) => {
+const useGetProductsByIdQuery = (params: GetParams) => {
 	const { message } = useMessage()
 	return useQuery({
-		queryFn: () => productsService.getById(id),
-		queryKey: ["products", id],
+		queryFn: () => productsService.getById(params),
+		queryKey: ["products by id", ...Object.values(params)],
 		placeholderData: keepPreviousData,
-		enabled: !!id,
+		enabled: !!params.id,
 		throwOnError: (error: ResponseError) => {
 			message.error({
 				message: error?.message,

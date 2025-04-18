@@ -64,29 +64,6 @@ const useCreateSalesProductsMutation = () => {
 	})
 }
 
-const useEditSalesProductsMutation = () => {
-	const { message } = useMessage()
-	const queryClient = useQueryClient()
-	return useMutation({
-		mutationFn: salesProductsService.edit,
-		onSuccess: async () => {
-			await queryClient.invalidateQueries({
-				queryKey: ["sales-products"]
-			})
-			message.success({
-				message: "Success",
-				description: "Product edited successfully"
-			})
-		},
-		onError: (error: ResponseError) => {
-			message.error({
-				message: error.message,
-				description: error?.response?.data?.message
-			})
-		}
-	})
-}
-
 const useDeleteSalesProductsMutation = () => {
 	const { message } = useMessage()
 	const queryClient = useQueryClient()
@@ -114,6 +91,5 @@ export {
 	useGetSalesProductsQuery,
 	useGetSalesProductsByIdQuery,
 	useCreateSalesProductsMutation,
-	useEditSalesProductsMutation,
 	useDeleteSalesProductsMutation
 }

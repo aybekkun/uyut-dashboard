@@ -1,20 +1,24 @@
-import { Col, Form, type FormProps, Input, Row } from "antd"
-import { type FC, useEffect } from "react"
+import { Form, type FormProps /* Input */ /* Select */ } from "antd"
+import { type FC, useEffect, useState } from "react"
 import { FormDrawer } from "src/components/shared/form-drawer"
-import { InputNumber, InputPrice } from "src/components/ui"
-import { FORM_DEFAULT, INPUT_PLACEHOLDER } from "src/constants/form.constants"
+import { InputNumber /* InputPrice */ } from "src/components/ui"
+import {
+	FORM_DEFAULT /* INPUT_PLACEHOLDER */
+} from "src/constants/form.constants"
 import {
 	type ProductForm,
 	useCreateProductsMutation
 } from "src/services/products"
 import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { FormItemPrice, FormItemSuppliers } from "./form-items"
+import FormItemColors from "./form-items/form-item-colors"
+
+import FormItemName from "./form-items/form-item-name"
 
 const ProductsForm: FC = () => {
 	const [form] = Form.useForm<ProductForm>()
-	const metreWidth = Form.useWatch("width", form) || 0
-	const metreLength = Form.useWatch("length", form) || 0
-
+	const [productsNameId, setProductsNameId] = useState(0)
+	const isColor = ![2, 4].includes(productsNameId)
 	const { params, resetParams } = useFormDevtoolsStore()
 
 	const { mutate: addProduct, isPending: addLoading } =
@@ -30,50 +34,35 @@ const ProductsForm: FC = () => {
 	}
 
 	useEffect(() => {
-		form.setFieldValue("meter_square", metreWidth * metreLength)
-	}, [form, metreLength, metreWidth])
-
-	useEffect(() => {
 		if (params) {
 			form.setFieldsValue({
 				...params
 			})
 		}
 	}, [form, params])
+
 	return (
 		<FormDrawer width={400} form={form} isLoading={addLoading}>
 			<Form
 				{...FORM_DEFAULT}
+				initialValues={{ length: 100 }}
 				name={"product-form"}
 				form={form}
 				onFinish={onFinish}>
-				<Form.Item<ProductForm>
+				{/* 	<Form.Item<ProductForm>
 					name={"name"}
 					label={"Название"}
 					rules={[{ required: true }]}>
 					<Input placeholder={INPUT_PLACEHOLDER} />
-				</Form.Item>
-				<Row gutter={20} style={{ rowGap: 20 }}>
-					<Col span={12}>
-						<Form.Item<ProductForm>
-							name={"width"}
-							label={"Ширина"}
-							rules={[{ required: true }]}>
-							<InputPrice />
-						</Form.Item>
-					</Col>
-					<Col span={12}>
-						<Form.Item<ProductForm>
-							name={"length"}
-							label={"Длина"}
-							rules={[{ required: true }]}>
-							<InputNumber />
-						</Form.Item>
-					</Col>
-				</Row>
+				</Form.Item> */}
+				<FormItemName
+					onChangeProductsName={(val) => setProductsNameId(Number(val))}
+				/>
+				{isColor && <FormItemColors />}
+
 				<Form.Item<ProductForm>
-					name={"meter_square"}
-					label={"Плошадь"}
+					name={"rolls"}
+					label={"Количество Роллов"}
 					rules={[{ required: true }]}>
 					<InputNumber />
 				</Form.Item>

@@ -1,60 +1,36 @@
-import {
-	DeleteFilled,
-	EditFilled,
-	EyeOutlined,
-	FileImageOutlined,
-	QuestionCircleOutlined
-} from "@ant-design/icons"
-import { Avatar, Image, Popover, Space } from "antd"
+import { DeleteFilled, QuestionCircleOutlined } from "@ant-design/icons"
+import { Popover, Space } from "antd"
 import type { ColumnsType } from "antd/es/table"
 import { ClientTable } from "src/components/shared/client"
-import { PrintDetailTable } from "src/components/shared/print-detail"
+
 import { Button } from "src/components/ui/button"
 import {
 	type SalesProduct,
 	useDeleteSalesProductsMutation
 } from "src/services/sales-products"
-import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
+
 import {
 	formatDate,
 	formatEmpty,
 	formatPriceUZS
 } from "src/utils/formatter.utils"
+import { SalesProductsTableList } from "../tables/sales-products-table-list"
 
 export const useSalesProductsColumns = () => {
 	const { mutate: deleteSalesProduct } = useDeleteSalesProductsMutation()
 
-	const editSalesProduct = useFormDevtoolsStore((state) => state.setParams)
-
 	const columns: ColumnsType<SalesProduct> = [
 		{
-			title: "Товар",
-			dataIndex: ["product", "name"],
-			key: "product",
+			title: "Общая площадь",
+			dataIndex: "total_meter_square",
+			key: "total_meter_square",
 			render: formatEmpty
 		},
 		{
-			title: "Длина",
-			dataIndex: "length",
-			key: "length",
+			title: "Общая Длина",
+			dataIndex: "total_meter",
+			key: "total_meter",
 			render: formatEmpty
-		},
-		{
-			title: "Тип печати",
-			dataIndex: "print_detail",
-			key: "length",
-			render: (value?: SalesProduct["print_detail"]) => {
-				const [printDetail] = value || []
-				if (!printDetail) return "-"
-				return (
-					<Space>
-						{formatEmpty(printDetail?.print_type?.name)}
-						<Popover content={<PrintDetailTable data={value} />}>
-							<QuestionCircleOutlined style={{ cursor: "pointer" }} />
-						</Popover>
-					</Space>
-				)
-			}
 		},
 		{
 			title: "Общая стоимость",
@@ -63,16 +39,24 @@ export const useSalesProductsColumns = () => {
 			render: formatPriceUZS
 		},
 		{
-			title: "Общая площадь",
-			dataIndex: "total_meter_square",
-			key: "total_meter_square",
-			render: formatEmpty
-		},
-		{
 			title: "Способ оплаты",
 			dataIndex: ["payment_type", "name"],
 			key: "payment_type",
 			render: formatEmpty
+		},
+		{
+			title: "Товары",
+			key: "products",
+			dataIndex: "products",
+			render: (value?: SalesProduct["products"][]) => {
+				return (
+					<Space>
+						<Popover content={<SalesProductsTableList data={value || []} />}>
+							<QuestionCircleOutlined style={{ cursor: "pointer" }} />
+						</Popover>
+					</Space>
+				)
+			}
 		},
 		{
 			title: "Клиент",
@@ -90,28 +74,7 @@ export const useSalesProductsColumns = () => {
 				)
 			}
 		},
-		{
-			title: "Файл",
-			dataIndex: "file",
-			key: "file",
-			render: (value: string) => (
-				<Avatar
-					shape={"square"}
-					src={
-						<Image
-							preview={{
-								mask: <EyeOutlined />
-							}}
-							loading={"lazy"}
-							src={value}
-							alt={""}
-						/>
-					}
-					icon={<FileImageOutlined />}
-					alt={""}
-				/>
-			)
-		},
+
 		{
 			title: "Создано",
 			dataIndex: "created_at",
@@ -125,14 +88,14 @@ export const useSalesProductsColumns = () => {
 			key: "actions",
 			render: (_v, record) => (
 				<Space>
-					<Button
+					{/* 	<Button
 						onClick={() => editSalesProduct(record)}
 						tooltip={"Изменить"}
 						icon={<EditFilled />}
-					/>
+					/> */}
 					<Button
 						confirm={{
-							title: record?.product?.name,
+							title: "Вы действительно хотите удалить?",
 							onConfirm: () => deleteSalesProduct(record?.id)
 						}}
 						tooltip={"Удалить"}

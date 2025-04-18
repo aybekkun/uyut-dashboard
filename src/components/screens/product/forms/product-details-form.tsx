@@ -55,6 +55,8 @@ const ProductDetailsForm: FC<ProductDetailsFormProps> = ({ id }) => {
 		})
 	}
 
+	
+
 	useEffect(() => {
 		if (isParamsFormValidate<PrintDetail>(params)) {
 			form.setFieldsValue({

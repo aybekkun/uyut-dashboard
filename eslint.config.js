@@ -33,11 +33,17 @@ export default tsEslint.config(
 					argsIgnorePattern: "^_"
 				}
 			],
-			"react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-			"react/jsx-curly-brace-presence": ["error", { props: "always", children: "ignore" }],
+			"react-refresh/only-export-components": [
+				"warn",
+				{ allowConstantExport: true }
+			],
+
 			"no-tabs": 0,
 			"no-console": "warn",
-			"@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+			"@typescript-eslint/no-unused-vars": [
+				"error",
+				{ argsIgnorePattern: "^_" }
+			],
 			// "react/no-array-index-key": ["error"],
 			"react/jsx-key": ["error"],
 			"react/jsx-boolean-value": ["error", "always"],
@@ -46,4 +52,3 @@ export default tsEslint.config(
 		}
 	}
 )
-
