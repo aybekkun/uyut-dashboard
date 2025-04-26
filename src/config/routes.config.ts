@@ -33,7 +33,8 @@ class Routes {
 	EXPENSES_GROUP = "/expenses"
 	EXPENSES_LIST = "/expenses/list"
 	EXPENSES_WRITE_OFF_PRODUCTS = "/expenses/write-off-products"
-
+	CASH_FLOW = "/expenses/cash-flow"
+	PROFIT_LOSE = "/expenses/profit-lose"
 	SETTINGS_GROUP = "/settings"
 	SETTINGS_PRINT_TYPES = "/settings/print-types"
 	SETTINGS_PAYMENT_TYPES = "/settings/payment-types"

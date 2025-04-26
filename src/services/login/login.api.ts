@@ -9,18 +9,18 @@ import { loginService } from "src/services/login/login.service"
 import type { ResponseError } from "src/services/shared"
 
 const useGetProfileQuery = () => {
-	const { message } = useMessage()
+	// const { message } = useMessage()
 	return useQuery({
 		queryFn: () => loginService.profile(),
 		queryKey: ["login"],
 		placeholderData: keepPreviousData,
-		throwOnError: (error: ResponseError) => {
-			message.error({
-				message: error.message,
-				description: error?.response?.data?.message
-			})
-			throw error
-		}
+		// throwOnError: (error: ResponseError) => {
+		// 	message.error({
+		// 		message: error.message,
+		// 		description: error?.response?.data?.message
+		// 	})
+		// 	throw error
+		// }
 	})
 }
 

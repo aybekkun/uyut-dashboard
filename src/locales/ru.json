@@ -25,9 +25,9 @@
         "settings": "Настройки",
         "settings_print_types": "Типы печати",
         "settings_payment_types": "Типы оплаты",
-        "settings_expense_types": "Типы расходов"
+        "settings_expense_types": "Типы расходов",
+        "cash_flow": "Денежный поток",
+        "profit_lost": "Прибыль/убыток"
     },
-    "table": {
-        
-    }
+    "table": {}
 }

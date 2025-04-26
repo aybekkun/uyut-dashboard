@@ -37,7 +37,9 @@ import { Route as LayoutFinancesSaleProductsImport } from './routes/_layout/fina
 import { Route as LayoutFinancesExpensesImport } from './routes/_layout/finances/expenses'
 import { Route as LayoutFinancesComingProductsImport } from './routes/_layout/finances/coming-products'
 import { Route as LayoutExpensesWriteOffProductsImport } from './routes/_layout/expenses/write-off-products'
+import { Route as LayoutExpensesProfitLoseImport } from './routes/_layout/expenses/profit-lose'
 import { Route as LayoutExpensesListImport } from './routes/_layout/expenses/list'
+import { Route as LayoutExpensesCashFlowImport } from './routes/_layout/expenses/cash-flow'
 import { Route as LayoutEmployeesUsersImport } from './routes/_layout/employees/users'
 import { Route as LayoutStoreProductsIndexImport } from './routes/_layout/store/products/index'
 import { Route as LayoutStoreProductsIdImport } from './routes/_layout/store/products/$id'
@@ -211,9 +213,21 @@ const LayoutExpensesWriteOffProductsRoute =
     getParentRoute: () => LayoutRoute,
   } as any)
 
+const LayoutExpensesProfitLoseRoute = LayoutExpensesProfitLoseImport.update({
+  id: '/expenses/profit-lose',
+  path: '/expenses/profit-lose',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
 const LayoutExpensesListRoute = LayoutExpensesListImport.update({
   id: '/expenses/list',
   path: '/expenses/list',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutExpensesCashFlowRoute = LayoutExpensesCashFlowImport.update({
+  id: '/expenses/cash-flow',
+  path: '/expenses/cash-flow',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -281,11 +295,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutEmployeesUsersImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/expenses/cash-flow': {
+      id: '/_layout/expenses/cash-flow'
+      path: '/expenses/cash-flow'
+      fullPath: '/expenses/cash-flow'
+      preLoaderRoute: typeof LayoutExpensesCashFlowImport
+      parentRoute: typeof LayoutImport
+    }
     '/_layout/expenses/list': {
       id: '/_layout/expenses/list'
       path: '/expenses/list'
       fullPath: '/expenses/list'
       preLoaderRoute: typeof LayoutExpensesListImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/expenses/profit-lose': {
+      id: '/_layout/expenses/profit-lose'
+      path: '/expenses/profit-lose'
+      fullPath: '/expenses/profit-lose'
+      preLoaderRoute: typeof LayoutExpensesProfitLoseImport
       parentRoute: typeof LayoutImport
     }
     '/_layout/expenses/write-off-products': {
@@ -459,7 +487,9 @@ interface LayoutRouteChildren {
   LayoutProfileRoute: typeof LayoutProfileRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
   LayoutEmployeesUsersRoute: typeof LayoutEmployeesUsersRoute
+  LayoutExpensesCashFlowRoute: typeof LayoutExpensesCashFlowRoute
   LayoutExpensesListRoute: typeof LayoutExpensesListRoute
+  LayoutExpensesProfitLoseRoute: typeof LayoutExpensesProfitLoseRoute
   LayoutExpensesWriteOffProductsRoute: typeof LayoutExpensesWriteOffProductsRoute
   LayoutFinancesComingProductsRoute: typeof LayoutFinancesComingProductsRoute
   LayoutFinancesExpensesRoute: typeof LayoutFinancesExpensesRoute
@@ -490,7 +520,9 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutProfileRoute: LayoutProfileRoute,
   LayoutIndexRoute: LayoutIndexRoute,
   LayoutEmployeesUsersRoute: LayoutEmployeesUsersRoute,
+  LayoutExpensesCashFlowRoute: LayoutExpensesCashFlowRoute,
   LayoutExpensesListRoute: LayoutExpensesListRoute,
+  LayoutExpensesProfitLoseRoute: LayoutExpensesProfitLoseRoute,
   LayoutExpensesWriteOffProductsRoute: LayoutExpensesWriteOffProductsRoute,
   LayoutFinancesComingProductsRoute: LayoutFinancesComingProductsRoute,
   LayoutFinancesExpensesRoute: LayoutFinancesExpensesRoute,
@@ -526,7 +558,9 @@ export interface FileRoutesByFullPath {
   '/profile': typeof LayoutProfileRoute
   '/': typeof LayoutIndexRoute
   '/employees/users': typeof LayoutEmployeesUsersRoute
+  '/expenses/cash-flow': typeof LayoutExpensesCashFlowRoute
   '/expenses/list': typeof LayoutExpensesListRoute
+  '/expenses/profit-lose': typeof LayoutExpensesProfitLoseRoute
   '/expenses/write-off-products': typeof LayoutExpensesWriteOffProductsRoute
   '/finances/coming-products': typeof LayoutFinancesComingProductsRoute
   '/finances/expenses': typeof LayoutFinancesExpensesRoute
@@ -558,7 +592,9 @@ export interface FileRoutesByTo {
   '/profile': typeof LayoutProfileRoute
   '/': typeof LayoutIndexRoute
   '/employees/users': typeof LayoutEmployeesUsersRoute
+  '/expenses/cash-flow': typeof LayoutExpensesCashFlowRoute
   '/expenses/list': typeof LayoutExpensesListRoute
+  '/expenses/profit-lose': typeof LayoutExpensesProfitLoseRoute
   '/expenses/write-off-products': typeof LayoutExpensesWriteOffProductsRoute
   '/finances/coming-products': typeof LayoutFinancesComingProductsRoute
   '/finances/expenses': typeof LayoutFinancesExpensesRoute
@@ -592,7 +628,9 @@ export interface FileRoutesById {
   '/_layout/profile': typeof LayoutProfileRoute
   '/_layout/': typeof LayoutIndexRoute
   '/_layout/employees/users': typeof LayoutEmployeesUsersRoute
+  '/_layout/expenses/cash-flow': typeof LayoutExpensesCashFlowRoute
   '/_layout/expenses/list': typeof LayoutExpensesListRoute
+  '/_layout/expenses/profit-lose': typeof LayoutExpensesProfitLoseRoute
   '/_layout/expenses/write-off-products': typeof LayoutExpensesWriteOffProductsRoute
   '/_layout/finances/coming-products': typeof LayoutFinancesComingProductsRoute
   '/_layout/finances/expenses': typeof LayoutFinancesExpensesRoute
@@ -627,7 +665,9 @@ export interface FileRouteTypes {
     | '/profile'
     | '/'
     | '/employees/users'
+    | '/expenses/cash-flow'
     | '/expenses/list'
+    | '/expenses/profit-lose'
     | '/expenses/write-off-products'
     | '/finances/coming-products'
     | '/finances/expenses'
@@ -658,7 +698,9 @@ export interface FileRouteTypes {
     | '/profile'
     | '/'
     | '/employees/users'
+    | '/expenses/cash-flow'
     | '/expenses/list'
+    | '/expenses/profit-lose'
     | '/expenses/write-off-products'
     | '/finances/coming-products'
     | '/finances/expenses'
@@ -690,7 +732,9 @@ export interface FileRouteTypes {
     | '/_layout/profile'
     | '/_layout/'
     | '/_layout/employees/users'
+    | '/_layout/expenses/cash-flow'
     | '/_layout/expenses/list'
+    | '/_layout/expenses/profit-lose'
     | '/_layout/expenses/write-off-products'
     | '/_layout/finances/coming-products'
     | '/_layout/finances/expenses'
@@ -748,7 +792,9 @@ export const routeTree = rootRoute
         "/_layout/profile",
         "/_layout/",
         "/_layout/employees/users",
+        "/_layout/expenses/cash-flow",
         "/_layout/expenses/list",
+        "/_layout/expenses/profit-lose",
         "/_layout/expenses/write-off-products",
         "/_layout/finances/coming-products",
         "/_layout/finances/expenses",
@@ -793,8 +839,16 @@ export const routeTree = rootRoute
       "filePath": "_layout/employees/users.tsx",
       "parent": "/_layout"
     },
+    "/_layout/expenses/cash-flow": {
+      "filePath": "_layout/expenses/cash-flow.tsx",
+      "parent": "/_layout"
+    },
     "/_layout/expenses/list": {
       "filePath": "_layout/expenses/list.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/expenses/profit-lose": {
+      "filePath": "_layout/expenses/profit-lose.tsx",
       "parent": "/_layout"
     },
     "/_layout/expenses/write-off-products": {

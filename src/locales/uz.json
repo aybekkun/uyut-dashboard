@@ -25,6 +25,8 @@
         "settings": "Созламалар",
         "settings_print_types": "Босиб чиқариш турлари",
         "settings_payment_types": "Тўлов турлари",
-        "settings_expense_types": "Харажат турлари"
+        "settings_expense_types": "Харажат турлари",
+        "cash_flow": "Касcа ҳисоби",
+        "profit_lost": "Foyda/zarar"
     }
 }
