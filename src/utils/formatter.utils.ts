@@ -49,6 +49,12 @@ export const formatPriceUSD = <T>(value?: T): string => {
 export const formatDate = <T extends dayjs.ConfigType>(value?: T): string =>
 	dayjs(value).format("DD.MM.YYYY")
 
+export const formateHHDate = <T extends dayjs.ConfigType>(
+	value?: T
+): string => {
+	const date = dayjs(value)
+	return date.isValid() ? date.format("DD.MM.YYYY HH:mm") : "-"
+}
 export const formatFormDate = <T extends dayjs.ConfigType>(value?: T): string =>
 	dayjs(value).format("YYYY-MM-DD")
 

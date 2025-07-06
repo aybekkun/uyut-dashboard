@@ -1,6 +1,9 @@
 import { DescriptionsProps } from "antd"
 import { ProductItem } from "src/services/products"
-import { formatDate, formatEmpty, formatPrice } from "src/utils/formatter.utils"
+import {
+	formatEmpty,
+	formatPrice
+} from "src/utils/formatter.utils"
 
 const useProductItems = (data?: ProductItem) => {
 	const items: DescriptionsProps["items"] = [
@@ -33,12 +36,6 @@ const useProductItems = (data?: ProductItem) => {
 			key: "price_usd",
 			label: "Цена USD",
 			children: formatPrice(data?.total_price_usd)
-		},
-
-		{
-			key: "created_at",
-			label: "Создан",
-			children: formatDate(data?.created_at)
 		}
 	]
 

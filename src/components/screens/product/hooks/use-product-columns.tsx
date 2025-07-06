@@ -3,7 +3,7 @@ import type { ColumnsType } from "antd/es/table"
 
 import type { ProductTransactions } from "src/services/products"
 import {
-	formatDate,
+	formateHHDate,
 	formatEmpty,
 	formatPriceUSD,
 	formatPriceUZS
@@ -49,9 +49,9 @@ export const useProductColumns = () => {
 
 		{
 			title: "Создан",
-			dataIndex: "created_at",
-			key: "created_at",
-			render: formatDate
+			dataIndex: "imported_at",
+			key: "imported_at",
+			render:formateHHDate
 		}
 	]
 

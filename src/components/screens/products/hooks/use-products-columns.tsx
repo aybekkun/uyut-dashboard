@@ -5,7 +5,6 @@ import type { ColumnsType } from "antd/es/table"
 import { Button } from "src/components/ui/button"
 import type { ProductItem } from "src/services/products"
 import {
-	formatDate,
 	formatEmpty,
 	formatPriceUSD,
 	formatPriceUZS
@@ -72,12 +71,12 @@ export const useProductsColumns = () => {
 			key: "total_meter_square",
 			render: formatEmpty
 		},
-		{
+	/* 	{
 			title: "Создан",
 			dataIndex: "created_at",
 			key: "created_at",
 			render: formatDate
-		},
+		}, */
 		{
 			fixed: "right",
 			width: 50,

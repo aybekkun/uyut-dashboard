@@ -14,6 +14,7 @@ import { FormItemPrice, FormItemSuppliers } from "./form-items"
 import FormItemColors from "./form-items/form-item-colors"
 
 import FormItemName from "./form-items/form-item-name"
+import dayjs from "dayjs"
 
 const ProductsForm: FC = () => {
 	const [form] = Form.useForm<ProductForm>()
@@ -25,12 +26,19 @@ const ProductsForm: FC = () => {
 		useCreateProductsMutation()
 
 	const onFinish: FormProps<ProductForm>["onFinish"] = (values) => {
-		addProduct(values, {
-			onSuccess: () => {
-				resetParams()
-				form.resetFields()
+		addProduct(
+			{
+				...values,
+				imported_at: dayjs(values.imported_at).format("YYYY-MM-DDTHH:mm:ssZ")
+			},
+			{
+				onSuccess: () => {
+					resetParams()
+					form.resetFields()
+				}
 			}
-		})
+		)
+	
 	}
 
 	useEffect(() => {

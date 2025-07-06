@@ -21,6 +21,7 @@ export type ProductItem = {
 		meter_square: null | number
 		meter: null | number
 	}
+	imported_at: null | Date
 	created_at: Date
 	updated_at: Date
 }
@@ -45,6 +46,7 @@ export type ProductTransactions = {
 		id: number
 		name: string
 	}
+	imported_at: null | Date
 	created_at: Date
 	updated_at: Date
 }
@@ -77,7 +79,7 @@ type ProductForm = {
 	count: number | null
 	rolls: number | null
 	supplier_id: number
-	imported_at: Date
+	imported_at: string
 }
 
 // type ProductForm = {
