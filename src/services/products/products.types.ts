@@ -20,7 +20,7 @@ export type ProductItem = {
 	remainder: {
 		meter_square: null | number
 		meter: null | number
-	}[]
+	}
 	created_at: Date
 	updated_at: Date
 }

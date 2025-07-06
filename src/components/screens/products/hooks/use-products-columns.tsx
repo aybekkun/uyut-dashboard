@@ -27,13 +27,6 @@ export const useProductsColumns = () => {
 			key: "collar"
 		},
 
-		{
-			align: "center",
-			title: "Общая Площадь",
-			dataIndex: "total_meter_square",
-			key: "total_meter_square",
-			render: formatEmpty
-		},
 		/* 	{
 			align: "center",
 			title: "Остаток площади",
@@ -59,7 +52,26 @@ export const useProductsColumns = () => {
 			key: "total_meter",
 			render: formatEmpty
 		},
+		{
+			align: "center",
+			title: "Общая Площадь",
+			dataIndex: "total_meter_square",
+			key: "total_meter_square"
+		},
 
+		{
+			title: "Остаток длина",
+			dataIndex: ["remainder", "meter"],
+			key: "total_meter",
+			render: formatEmpty
+		},
+		{
+			align: "center",
+			title: "Общая Площадь",
+			dataIndex: ["remainder", "meter_square"],
+			key: "total_meter_square",
+			render: formatEmpty
+		},
 		{
 			title: "Создан",
 			dataIndex: "created_at",
