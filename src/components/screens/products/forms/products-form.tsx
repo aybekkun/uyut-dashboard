@@ -81,7 +81,7 @@ const ProductsForm: FC = () => {
 				<FormItemPrice form={form} />
 				<FormItemSuppliers />
 				<Form.Item
-					name="date"
+					name="imported_at"
 					label="Дата и время"
 					rules={[{ required: true, message: "Выберите дату и время" }]}>
 					<DatePicker showTime={true} style={{ width: "100%" }} />
