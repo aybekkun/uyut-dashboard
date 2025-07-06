@@ -11,7 +11,7 @@ const Logo: FC = () => {
 				fallback={"/public/apple-touch-icon.png"}
 				alt={""}
 			/>
-			<Typography.Title level={3}>UYUT</Typography.Title>
+			<Typography.Title level={3}>SHIFT</Typography.Title>
 		</Space>
 	)
 }

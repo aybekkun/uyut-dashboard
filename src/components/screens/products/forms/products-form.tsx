@@ -42,6 +42,13 @@ const ProductsForm: FC = () => {
 		}
 	}, [form, params])
 	const rolls = Form.useWatch("rolls", form)
+	const calculateMeters = () => {
+		if (typeof rolls !== "number") return null
+
+		if (productsNameId === 2) return rolls * 250
+		if (productsNameId === 4) return rolls * 2.5
+		return rolls * 100
+	}
 	return (
 		<FormDrawer width={400} form={form} isLoading={addLoading}>
 			<Form
@@ -69,7 +76,9 @@ const ProductsForm: FC = () => {
 					<InputNumber />
 				</Form.Item>
 				{typeof rolls === "number" && (
-					<div style={{ marginBottom: "16px" }}>{formatPrice(rolls * 100)} м</div>
+					<div style={{ marginBottom: "16px" }}>
+						{calculateMeters()}
+					</div>
 				)}
 				<FormItemPrice form={form} />
 				<FormItemSuppliers />
