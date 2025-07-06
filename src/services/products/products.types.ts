@@ -77,6 +77,7 @@ type ProductForm = {
 	count: number | null
 	rolls: number | null
 	supplier_id: number
+	imported_at: Date
 }
 
 // type ProductForm = {

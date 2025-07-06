@@ -67,7 +67,7 @@ export const useProductsColumns = () => {
 		},
 		{
 			align: "center",
-			title: "Общая Площадь",
+			title: "Остаток Площадь",
 			dataIndex: ["remainder", "meter_square"],
 			key: "total_meter_square",
 			render: formatEmpty

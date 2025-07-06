@@ -1,4 +1,4 @@
-import { Form, type FormProps /* Input */ /* Select */ } from "antd"
+import { DatePicker, Form, type FormProps /* Input */ /* Select */ } from "antd"
 import { type FC, useEffect, useState } from "react"
 import { FormDrawer } from "src/components/shared/form-drawer"
 import { InputNumber /* InputPrice */ } from "src/components/ui"
@@ -14,7 +14,6 @@ import { FormItemPrice, FormItemSuppliers } from "./form-items"
 import FormItemColors from "./form-items/form-item-colors"
 
 import FormItemName from "./form-items/form-item-name"
-import { formatPrice } from "src/utils/formatter.utils"
 
 const ProductsForm: FC = () => {
 	const [form] = Form.useForm<ProductForm>()
@@ -76,12 +75,17 @@ const ProductsForm: FC = () => {
 					<InputNumber />
 				</Form.Item>
 				{typeof rolls === "number" && (
-					<div style={{ marginBottom: "16px" }}>
-						{calculateMeters()}
-					</div>
+					<div style={{ marginBottom: "16px" }}>{calculateMeters()}</div>
 				)}
+
 				<FormItemPrice form={form} />
 				<FormItemSuppliers />
+				<Form.Item
+					name="date"
+					label="Дата и время"
+					rules={[{ required: true, message: "Выберите дату и время" }]}>
+					<DatePicker showTime={true} style={{ width: "100%" }} />
+				</Form.Item>
 			</Form>
 		</FormDrawer>
 	)
