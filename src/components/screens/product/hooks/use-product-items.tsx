@@ -7,12 +7,12 @@ const useProductItems = (data?: ProductItem) => {
 		{
 			key: "Остаток длины",
 			label: "Длина",
-			children: formatEmpty(data?.remainder.meter)
+			children: formatEmpty(data?.remainder[0].meter)
 		},
 		{
 			key: "remainder_square_meter",
 			label: "Остаток площади",
-			children: formatEmpty(data?.remainder.meter_square)
+			children: formatEmpty(data?.remainder[0].meter_square)
 		},
 		{
 			key: "collar",
