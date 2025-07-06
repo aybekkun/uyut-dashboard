@@ -14,6 +14,7 @@ import { FormItemPrice, FormItemSuppliers } from "./form-items"
 import FormItemColors from "./form-items/form-item-colors"
 
 import FormItemName from "./form-items/form-item-name"
+import { formatPrice } from "src/utils/formatter.utils"
 
 const ProductsForm: FC = () => {
 	const [form] = Form.useForm<ProductForm>()
@@ -40,7 +41,7 @@ const ProductsForm: FC = () => {
 			})
 		}
 	}, [form, params])
-
+	const rolls = Form.useWatch("rolls", form)
 	return (
 		<FormDrawer width={400} form={form} isLoading={addLoading}>
 			<Form
@@ -58,6 +59,7 @@ const ProductsForm: FC = () => {
 				<FormItemName
 					onChangeProductsName={(val) => setProductsNameId(Number(val))}
 				/>
+
 				{isColor && <FormItemColors />}
 
 				<Form.Item<ProductForm>
@@ -66,6 +68,9 @@ const ProductsForm: FC = () => {
 					rules={[{ required: true }]}>
 					<InputNumber />
 				</Form.Item>
+				{typeof rolls === "number" && (
+					<div style={{ marginBottom: "16px" }}>{formatPrice(rolls * 100)} м</div>
+				)}
 				<FormItemPrice form={form} />
 				<FormItemSuppliers />
 			</Form>

@@ -14,7 +14,7 @@ function SaleProductsComponent() {
 		<>
 			<FinancesByTodayStatistic onlyUZS={true} url={"sales-products"} />
 			<Row gutter={20} style={{ rowGap: 20 }}>
-				<Col xs={24} md={8}>
+			<Col xs={24} md={8}>
 					<FinancesByDateChart
 						onlyUZS={true}
 						title={"Продажа по годам"}
