@@ -6,7 +6,12 @@ const Logo: FC = () => {
 		<Space align={"center"} size={12}>
 			<Image
 				preview={false}
-				style={{ width: 38, height: 38 }}
+				style={{
+					width: 46,
+					height: 46,
+					borderRadius: "50%",
+					border: "1px solid #fff"
+				}}
 				src={"/logo.png"}
 				fallback={"/public/apple-touch-icon.png"}
 				alt={""}

@@ -25,7 +25,6 @@ const ProfileAvatar: FC = () => {
 		<ProfileMenuContainer>
 			<Space style={{ cursor: "pointer", userSelect: "none" }} align={"center"}>
 				<Avatar
-					src={"/logo-alt.png"}
 					alt={""}
 					draggable={false}
 					style={{ backgroundColor: token.colorPrimary, padding: 3 }}
