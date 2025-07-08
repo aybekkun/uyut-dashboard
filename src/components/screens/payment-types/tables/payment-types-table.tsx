@@ -8,8 +8,10 @@ import {
 } from "src/services/shared/payment-types"
 import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { usePaymentTypesColumns } from "../hooks/use-payment-types-columns"
+import { useTranslation } from "react-i18next"
 
 const PaymentTypesTable: FC = () => {
+	const { t } = useTranslation()
 	const {
 		data: printTypes,
 		isLoading,
@@ -23,10 +25,10 @@ const PaymentTypesTable: FC = () => {
 		<>
 			<Table<PaymentType>
 				rowKey={(record) => record.id}
-				title={"Типы оплаты"}
+				title={t("menu.settings_payment_types")}
 				extra={
 					<Button icon={<PlusOutlined />} onClick={toggleForm}>
-						Добавить
+						{t("add")}
 					</Button>
 				}
 				loading={isLoading || isFetching}

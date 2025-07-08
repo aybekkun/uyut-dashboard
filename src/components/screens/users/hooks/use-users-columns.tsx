@@ -1,6 +1,7 @@
 import { DeleteFilled, EditFilled } from "@ant-design/icons"
 import { Space } from "antd"
 import type { ColumnsType } from "antd/es/table"
+import { useTranslation } from "react-i18next"
 import { Button } from "src/components/ui/button"
 import { Tag } from "src/components/ui/tag"
 import { useDeleteUsersMutation, User } from "src/services/users"
@@ -8,25 +9,26 @@ import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { formatEmpty, formatPhone } from "src/utils/formatter.utils"
 
 export const useUsersColumns = () => {
+	const {t} = useTranslation()
 	const { mutate: deleteUser } = useDeleteUsersMutation()
 
 	const editUser = useFormDevtoolsStore((state) => state.setParams)
 
-	const columns: ColumnsType<User> = [
+		const columns: ColumnsType<User> = [
 		{
-			title: "ФИО",
+			title: t("fio"),
 			dataIndex: "name",
 			key: "name",
 			render: formatEmpty
 		},
 		{
-			title: "Телефон номер",
+			title: t("phone_number"),
 			dataIndex: "phone",
 			key: "phone",
 			render: formatPhone
 		},
 		{
-			title: "Роль",
+			title: t("role"),
 			dataIndex: "role",
 			key: "role",
 			render: (role: User["role"]) => (
@@ -44,7 +46,7 @@ export const useUsersColumns = () => {
 				<Space>
 					<Button
 						onClick={() => editUser(record)}
-						tooltip={"Изменить"}
+						tooltip={t("edit")}
 						icon={<EditFilled />}
 					/>
 					<Button
@@ -52,7 +54,7 @@ export const useUsersColumns = () => {
 							title: record?.name,
 							onConfirm: () => deleteUser(record?.id)
 						}}
-						tooltip={"Удалить"}
+						tooltip={t("delete")}
 						danger={true}
 						icon={<DeleteFilled />}
 					/>
@@ -60,5 +62,6 @@ export const useUsersColumns = () => {
 			)
 		}
 	]
+
 	return columns
 }

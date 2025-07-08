@@ -1,5 +1,6 @@
 import { Form, FormProps } from "antd"
 import { type FC, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { FormDrawer } from "src/components/shared/form-drawer"
 import { Input } from "src/components/ui/input"
 import { FORM_DEFAULT } from "src/constants/form.constants"
@@ -13,6 +14,7 @@ import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { isParamsFormValidate } from "src/utils/validate.utils"
 
 const SuppliersForm: FC = () => {
+	const {t}  = useTranslation()
 	const [form] = Form.useForm<SupplierForm>()
 
 	const { params, resetParams } = useFormDevtoolsStore()
@@ -62,7 +64,7 @@ const SuppliersForm: FC = () => {
 				onFinish={onFinish}>
 				<Form.Item<SupplierForm>
 					name={"name"}
-					label={"Название"}
+					label={t("name")}
 					rules={[{ required: true }]}>
 					<Input />
 				</Form.Item>

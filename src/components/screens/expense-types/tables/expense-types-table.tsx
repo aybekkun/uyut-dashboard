@@ -8,8 +8,10 @@ import {
 } from "src/services/shared/expense-types"
 import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { useExpenseTypesColumns } from "../hooks/use-expense-types-columns"
+import { useTranslation } from "react-i18next"
 
 const ExpenseTypesTable: FC = () => {
+	const { t } = useTranslation()
 	const {
 		data: printTypes,
 		isLoading,
@@ -23,10 +25,10 @@ const ExpenseTypesTable: FC = () => {
 		<>
 			<Table<ExpenseType>
 				rowKey={(record) => record.id}
-				title={"Типы расходов"}
+				title={t("menu.settings_expense_types")}
 				extra={
 					<Button icon={<PlusOutlined />} onClick={toggleForm}>
-						Добавить
+						{t("add")}
 					</Button>
 				}
 				loading={isLoading || isFetching}

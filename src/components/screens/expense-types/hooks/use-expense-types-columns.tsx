@@ -1,6 +1,7 @@
 import { DeleteFilled, EditFilled } from "@ant-design/icons"
 import { Space } from "antd"
 import type { ColumnsType } from "antd/es/table"
+import { useTranslation } from "react-i18next"
 import { Button } from "src/components/ui/button"
 import {
 	ExpenseType,
@@ -12,7 +13,7 @@ import { formatEmpty } from "src/utils/formatter.utils"
 const useExpenseTypesColumns = () => {
 	const { mutate: deleteExpenseType } = useDeleteExpenseTypesMutation()
 	const editExpenseType = useFormDevtoolsStore((state) => state.setParams)
-
+	const { t } = useTranslation()
 	const columns: ColumnsType<ExpenseType> = [
 		{
 			width: 50,
@@ -22,7 +23,7 @@ const useExpenseTypesColumns = () => {
 			render: (_v, _r, index) => index + 1
 		},
 		{
-			title: "Название",
+			title: t("name"),
 			dataIndex: "name",
 			key: "name",
 			render: formatEmpty
@@ -36,7 +37,7 @@ const useExpenseTypesColumns = () => {
 				<Space>
 					<Button
 						onClick={() => editExpenseType(record)}
-						tooltip={"Изменить"}
+						tooltip={t("edit")}
 						icon={<EditFilled />}
 					/>
 					<Button
@@ -44,7 +45,7 @@ const useExpenseTypesColumns = () => {
 							title: record?.name,
 							onConfirm: () => deleteExpenseType(record?.id)
 						}}
-						tooltip={"Удалить"}
+						tooltip={t("delete")}
 						danger={true}
 						icon={<DeleteFilled />}
 					/>

@@ -15,33 +15,34 @@ import {
 	formatPriceUZS
 } from "src/utils/formatter.utils"
 import { CashierMiniTable } from "../ui/cashier-mini-table"
+import { useTranslation } from "react-i18next"
 
 export const useExpensesColumns = () => {
 	const { mutate: deleteExpenseType } = useDeleteExpenseTypesMutation()
-
+	const { t } = useTranslation()
 	const editExpenseType = useFormDevtoolsStore((state) => state.setParams)
 
 	const columns: ColumnsType<Expense> = [
 		{
-			title: "Название",
+			title: t("name"),
 			dataIndex: "name",
 			key: "name",
 			render: formatEmpty
 		},
 		{
-			title: "Тип расхода",
+			title: t("expense_type"),
 			dataIndex: ["expense_type", "name"],
 			key: "expense_type",
 			render: formatEmpty
 		},
 		{
-			title: "Сумма",
+			title: t("amount"),
 			dataIndex: "amount",
 			key: "amount",
 			render: formatPriceUZS
 		},
 		{
-			title: "Кассир",
+			title: t("cashier"),
 			dataIndex: "cashier",
 			key: "cashier",
 			render: (value?: Expense["cashier"]) => (
@@ -54,7 +55,7 @@ export const useExpensesColumns = () => {
 			)
 		},
 		{
-			title: "Создан",
+			title: t("created"),
 			dataIndex: "created_at",
 			key: "created_at",
 			render: formatDate
@@ -68,7 +69,7 @@ export const useExpensesColumns = () => {
 				<Space>
 					<Button
 						onClick={() => editExpenseType(record)}
-						tooltip={"Изменить"}
+						tooltip={t("edit")}
 						icon={<EditFilled />}
 					/>
 					<Button
@@ -76,7 +77,7 @@ export const useExpensesColumns = () => {
 							title: record?.name,
 							onConfirm: () => deleteExpenseType(record?.id)
 						}}
-						tooltip={"Удалить"}
+						tooltip={t("delete")}
 						danger={true}
 						icon={<DeleteFilled />}
 					/>

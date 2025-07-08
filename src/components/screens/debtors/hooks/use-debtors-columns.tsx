@@ -1,6 +1,7 @@
 import { EyeOutlined, FileImageOutlined } from "@ant-design/icons"
 import { Avatar, Image } from "antd"
 import { ColumnsType } from "antd/es/table"
+import { useTranslation } from "react-i18next"
 import type { SalesProduct } from "src/services/sales-products"
 import {
 	formatDate,
@@ -9,30 +10,31 @@ import {
 } from "src/utils/formatter.utils"
 
 export const useDebtorsColumns = () => {
+	const { t } = useTranslation()
 	const columns: ColumnsType<SalesProduct> = [
 		{
-			title: "Клиент",
+			title: t("client"),
 			dataIndex: ["client", "full_name"],
 			key: "client",
 			render: formatEmpty
 		},
 		{
-			title: "Товар",
+			title: t("product"),
 			dataIndex: ["product", "name"],
 			key: "product",
 			render: formatEmpty
 		},
 		{
-			title: "Длина",
+			title: t("length"),
 			dataIndex: "length",
 			key: "length",
 			render: formatEmpty
 		},
 		// {
-		// 	title: "Тип печати",
+		// 	title: t("print_type"),
 		// 	dataIndex: "print_detail",
-		// 	key: "length",
-		// 	render: (value?: SalesProduct[""]) => {
+		// 	key: "print_detail",
+		// 	render: (value?: SalesProduct["print_detail"]) => {
 		// 		const [printDetail] = value || []
 		// 		if (!printDetail) return "-"
 		// 		return (
@@ -46,26 +48,25 @@ export const useDebtorsColumns = () => {
 		// 	}
 		// },
 		{
-			title: "Общая стоимость",
+			title: t("total_cost"),
 			dataIndex: "total_cost",
 			key: "total_cost",
 			render: formatPriceUZS
 		},
 		{
-			title: "Общая площадь",
+			title: t("total_area"),
 			dataIndex: "total_meter_square",
 			key: "total_meter_square",
 			render: formatEmpty
 		},
 		{
-			title: "Способ оплаты",
+			title: t("payment_method"),
 			dataIndex: ["payment_type", "name"],
 			key: "payment_type",
 			render: formatEmpty
 		},
-
 		{
-			title: "Файл",
+			title: t("file"),
 			dataIndex: "file",
 			key: "file",
 			render: (value: string) => (
@@ -73,9 +74,7 @@ export const useDebtorsColumns = () => {
 					shape={"square"}
 					src={
 						<Image
-							preview={{
-								mask: <EyeOutlined />
-							}}
+							preview={{ mask: <EyeOutlined /> }}
 							loading={"lazy"}
 							src={value}
 							alt={""}
@@ -87,12 +86,11 @@ export const useDebtorsColumns = () => {
 			)
 		},
 		{
-			title: "Создано",
+			title: t("created"),
 			dataIndex: "created_at",
 			key: "created_at",
 			render: formatDate
 		}
 	]
-
 	return columns
 }

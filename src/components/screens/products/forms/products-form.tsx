@@ -15,8 +15,10 @@ import FormItemColors from "./form-items/form-item-colors"
 
 import FormItemName from "./form-items/form-item-name"
 import dayjs from "dayjs"
+import { useTranslation } from "react-i18next"
 
 const ProductsForm: FC = () => {
+	const { t } = useTranslation()
 	const [form] = Form.useForm<ProductForm>()
 	const [productsNameId, setProductsNameId] = useState(0)
 	const isColor = ![2, 4].includes(productsNameId)
@@ -38,7 +40,6 @@ const ProductsForm: FC = () => {
 				}
 			}
 		)
-	
 	}
 
 	useEffect(() => {
@@ -78,7 +79,7 @@ const ProductsForm: FC = () => {
 
 				<Form.Item<ProductForm>
 					name={"rolls"}
-					label={"Количество Роллов"}
+					label={t("number_of_rolls")}
 					rules={[{ required: true }]}>
 					<InputNumber />
 				</Form.Item>
@@ -90,7 +91,7 @@ const ProductsForm: FC = () => {
 				<FormItemSuppliers />
 				<Form.Item
 					name="imported_at"
-					label="Дата и время"
+					label={t("date")}
 					rules={[{ required: true, message: "Выберите дату и время" }]}>
 					<DatePicker showTime={true} style={{ width: "100%" }} />
 				</Form.Item>

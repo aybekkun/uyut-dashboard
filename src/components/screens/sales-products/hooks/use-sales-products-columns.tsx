@@ -15,37 +15,38 @@ import {
 	formatPriceUZS
 } from "src/utils/formatter.utils"
 import { SalesProductsTableList } from "../tables/sales-products-table-list"
+import { useTranslation } from "react-i18next"
 
 export const useSalesProductsColumns = () => {
 	const { mutate: deleteSalesProduct } = useDeleteSalesProductsMutation()
-
+	const { t } = useTranslation()
 	const columns: ColumnsType<SalesProduct> = [
 		{
-			title: "Общая площадь",
+			title: t("total_area"),
 			dataIndex: "total_meter_square",
 			key: "total_meter_square",
 			render: formatEmpty
 		},
 		{
-			title: "Общая Длина",
+			title: t("total_length"),
 			dataIndex: "total_meter",
 			key: "total_meter",
 			render: formatEmpty
 		},
 		{
-			title: "Общая стоимость",
+			title: t("total_cost"),
 			dataIndex: "total_cost",
 			key: "total_cost",
 			render: formatPriceUZS
 		},
 		{
-			title: "Способ оплаты",
+			title: t("payment_method"),
 			dataIndex: ["payment_type", "name"],
 			key: "payment_type",
 			render: formatEmpty
 		},
 		{
-			title: "Товары",
+			title: t("products"),
 			key: "products",
 			dataIndex: "products",
 			render: (value?: SalesProduct["products"][]) => {
@@ -59,10 +60,9 @@ export const useSalesProductsColumns = () => {
 			}
 		},
 		{
-			title: "Клиент",
+			title: t("client"),
 			dataIndex: ["client"],
 			key: "client",
-			// render: formatEmpty
 			render: (value?: SalesProduct["client"]) => {
 				return (
 					<Space>
@@ -74,9 +74,8 @@ export const useSalesProductsColumns = () => {
 				)
 			}
 		},
-
 		{
-			title: "Создано",
+			title: t("created"),
 			dataIndex: "created_at",
 			key: "created_at",
 			render: formatDate
@@ -88,17 +87,12 @@ export const useSalesProductsColumns = () => {
 			key: "actions",
 			render: (_v, record) => (
 				<Space>
-					{/* 	<Button
-						onClick={() => editSalesProduct(record)}
-						tooltip={"Изменить"}
-						icon={<EditFilled />}
-					/> */}
 					<Button
 						confirm={{
-							title: "Вы действительно хотите удалить?",
+							title: t("delete_confirm"),
 							onConfirm: () => deleteSalesProduct(record?.id)
 						}}
-						tooltip={"Удалить"}
+						tooltip={t("delete")}
 						danger={true}
 						icon={<DeleteFilled />}
 					/>

@@ -1,5 +1,6 @@
 import { Form, FormProps, Input } from "antd"
 import { type FC, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { FormDrawer } from "src/components/shared/form-drawer"
 import { FORM_DEFAULT, INPUT_PLACEHOLDER } from "src/constants/form.constants"
 import {
@@ -12,6 +13,7 @@ import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { isParamsFormValidate } from "src/utils/validate.utils"
 
 const PrintTypesForm: FC = () => {
+	const {t} = useTranslation()
 	const [form] = Form.useForm<PrintTypeForm>()
 
 	const { params, resetParams } = useFormDevtoolsStore()
@@ -62,7 +64,7 @@ const PrintTypesForm: FC = () => {
 				onFinish={onFinish}>
 				<Form.Item<PrintTypeForm>
 					name={"name"}
-					label={"Название"}
+					label={t("name")}
 					rules={[{ required: true }]}>
 					<Input placeholder={INPUT_PLACEHOLDER} />
 				</Form.Item>

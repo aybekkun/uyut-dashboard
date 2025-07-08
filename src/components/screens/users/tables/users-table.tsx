@@ -6,8 +6,10 @@ import { Route } from "src/routes/_layout/employees/users"
 import { useGetUsersQuery, User } from "src/services/users"
 import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { useUsersColumns } from "../hooks/use-users-columns"
+import { useTranslation } from "react-i18next"
 
 const UsersTable: FC = () => {
+	const { t } = useTranslation()
 	const { page, limit } = Route.useSearch()
 	const routeNavigate = Route.useNavigate()
 
@@ -27,10 +29,10 @@ const UsersTable: FC = () => {
 		<>
 			<Table<User>
 				rowKey={(record) => record.id}
-				title={"Сотрудники"}
+				title={t("menu.employees")}
 				extra={
 					<Button icon={<PlusOutlined />} onClick={toggleForm}>
-						Добавить
+						{t("add")}
 					</Button>
 				}
 				columns={columns}

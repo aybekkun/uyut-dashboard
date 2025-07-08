@@ -25,10 +25,11 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons"
 import { useGetProductsQuery } from "src/services/products"
 import { useGetPrintTypesQuery } from "src/services/shared/print-types"
 import { InputPrice } from "src/components/ui"
+import { useTranslation } from "react-i18next"
 
 const SalesProductsForm: FC = () => {
 	const [form] = Form.useForm<SalesProductForm>()
-
+	const { t } = useTranslation()
 	const { resetParams } = useFormDevtoolsStore()
 	const { data: products } = useGetProductsQuery({})
 	const { data: printTypes } = useGetPrintTypesQuery({})
@@ -56,7 +57,7 @@ const SalesProductsForm: FC = () => {
 					<Col span={12}>
 						<Form.Item<SalesProductForm>
 							name={"full_name"}
-							label={"ФИО"}
+							label={t("fio")}
 							rules={[{ required: true }]}>
 							<Input />
 						</Form.Item>
@@ -64,7 +65,7 @@ const SalesProductsForm: FC = () => {
 					<Col span={12}>
 						<Form.Item<SalesProductForm>
 							name={"phone"}
-							label={"Телефон номер"}
+							label={t("phone_number")}
 							rules={[{ required: true }]}>
 							<PatternFormat format={"+998 ## ### ## ##"} customInput={Input} />
 						</Form.Item>
@@ -83,7 +84,7 @@ const SalesProductsForm: FC = () => {
 									align="start">
 									<Form.Item
 										{...restField}
-										label="Товар"
+										label={t("product")}
 										name={[name, "product_id"]}
 										rules={[{ required: true, message: "Выберите товар" }]}>
 										<Select
@@ -101,7 +102,7 @@ const SalesProductsForm: FC = () => {
 
 									<Form.Item
 										{...restField}
-										label="Принт тип"
+										label={t("print_type")}
 										name={[name, "print_type_id"]}
 										rules={[{ required: true, message: "Введите принт тип" }]}>
 										<Select
@@ -119,7 +120,7 @@ const SalesProductsForm: FC = () => {
 
 									<Form.Item
 										{...restField}
-										label={"Цена печати"}
+										label={t("print_cost")}
 										name={[name, "print_cost"]}
 										rules={[{ required: true, message: "Введите цену" }]}>
 										<InputPrice placeholder="Цена печати" />
@@ -127,7 +128,7 @@ const SalesProductsForm: FC = () => {
 
 									<Form.Item
 										{...restField}
-										label={"Цена материала"}
+										label={t("material_cost")}
 										name={[name, "material_cost"]}
 										rules={[{ required: true, message: "Введите цену" }]}>
 										<InputPrice placeholder="Цена материала" />
@@ -135,7 +136,7 @@ const SalesProductsForm: FC = () => {
 
 									<Form.Item
 										{...restField}
-										label={"Длина"}
+										label={t("length")}
 										name={[name, "length"]}
 										rules={[{ required: true, message: "Введите длину" }]}>
 										<InputNumber placeholder="length" />
@@ -150,7 +151,7 @@ const SalesProductsForm: FC = () => {
 									onClick={() => add()}
 									block={true}
 									icon={<PlusOutlined />}>
-									Добавить товар
+									{t("add")}
 								</Button>
 							</Form.Item>
 						</>

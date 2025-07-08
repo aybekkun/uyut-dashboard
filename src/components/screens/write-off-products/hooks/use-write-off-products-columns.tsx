@@ -1,6 +1,7 @@
 import { DeleteFilled } from "@ant-design/icons"
 import { Space } from "antd"
 import { ColumnsType } from "antd/es/table"
+import { useTranslation } from "react-i18next"
 import { Button } from "src/components/ui/button"
 import {
 	useDeleteWriteOffProductsMutation,
@@ -13,43 +14,42 @@ import {
 	formatPriceUZS
 } from "src/utils/formatter.utils"
 
-export const useWriteOffProductsColumns = () => {
+export const useWriteOffProductsColumns = (): ColumnsType<WriteOffProduct> => {
+	const { t } = useTranslation()
 	const { mutate: deleteWriteOffProduct } = useDeleteWriteOffProductsMutation()
 
-/* 	const editWriteOffProduct = useFormDevtoolsStore((state) => state.setParams)
- */
 	const columns: ColumnsType<WriteOffProduct> = [
 		{
-			title: "Название",
+			title: t("name"),
 			dataIndex: "name",
 			key: "name",
 			render: formatEmpty
 		},
 		{
-			title: "Товар",
+			title: t("product"),
 			dataIndex: ["product", "name", "name"],
 			key: "product"
 		},
 		{
-			title: "Длина",
+			title: t("length"),
 			dataIndex: "meter",
 			key: "meter",
 			render: formatEmpty
 		},
 		{
-			title: "Площадь",
+			title: t("total_area"),
 			dataIndex: "meter_square",
 			key: "meter_square",
 			render: formatEmpty
 		},
 		{
-			title: "Сумма",
+			title: t("amount"),
 			dataIndex: "amount",
 			key: "amount",
 			render: formatPriceUZS
 		},
 		{
-			title: "Дата",
+			title: t("date"),
 			dataIndex: "date",
 			key: "date",
 			render: formatDate
@@ -61,9 +61,9 @@ export const useWriteOffProductsColumns = () => {
 			key: "actions",
 			render: (_v, record) => (
 				<Space>
-				{/* 	<Button
+					{/* <Button
 						onClick={() => editWriteOffProduct(record)}
-						tooltip={"Изменить"}
+						tooltip={t("edit")}
 						icon={<EditFilled />}
 					/> */}
 					<Button
@@ -71,7 +71,7 @@ export const useWriteOffProductsColumns = () => {
 							title: record?.name,
 							onConfirm: () => deleteWriteOffProduct(record?.id)
 						}}
-						tooltip={"Удалить"}
+						tooltip={t("delete")}
 						danger={true}
 						icon={<DeleteFilled />}
 					/>

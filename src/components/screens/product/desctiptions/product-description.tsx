@@ -2,6 +2,7 @@ import { ArrowLeftOutlined } from "@ant-design/icons"
 import { useRouter } from "@tanstack/react-router"
 import { Card, Descriptions, Spin } from "antd"
 import { type FC } from "react"
+import { useTranslation } from "react-i18next"
 import { useProductItems } from "src/components/screens/product"
 import { Button } from "src/components/ui"
 import { ProductItem } from "src/services/products"
@@ -18,6 +19,7 @@ const ProductDescription: FC<ProductDescriptionProps> = ({
 	isFetching,
 	isLoading
 }) => {
+	const { t } = useTranslation()
 	const router = useRouter()
 
 	const items = useProductItems(product)
@@ -25,12 +27,12 @@ const ProductDescription: FC<ProductDescriptionProps> = ({
 	return (
 		<Card
 			bordered={false}
-			title={`Товар: ${product?.name?.name}`}
+			title={`${t("product")}: ${product?.name?.name}`}
 			extra={
 				<Button
 					icon={<ArrowLeftOutlined />}
 					onClick={() => router.history.back()}>
-					Назад
+					{t("back")}
 				</Button>
 			}>
 			<Spin spinning={isLoading || isFetching}>

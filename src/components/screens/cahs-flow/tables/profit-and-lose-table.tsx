@@ -8,35 +8,37 @@ import { Expense } from "src/services/expenses"
 import { formatPrice } from "src/utils/formatter.utils"
 import { ExpensesTable } from "./expenses-table"
 import { Popover, Space } from "antd"
+import { useTranslation } from "react-i18next"
 
 interface Props {
 	className?: string
 }
 
-const columns: ColumnsType<ProfitLose> = [
-	{
-		title: "Месяц",
-		dataIndex: "month",
-		key: "month"
-	},
-	{
-		title: "Общая продожа",
-		dataIndex: "sell_amount",
-		key: "sell_amount",
-		render: formatPrice
-	},
-	{
-		title: "Прибыль",
-		dataIndex: "profit",
-		key: "end_remainder_amount",
-		render: formatPrice
-	},
-	{
-		title: "Расходы",
-		dataIndex: "expenses",
-		key: "expenses",
-		render: (value?: Expense[]) => {
-			return (
+const useProfitLoseColumns = () => {
+	const { t } = useTranslation()
+	const columns: ColumnsType<ProfitLose> = [
+		{
+			title: t("month"),
+			dataIndex: "month",
+			key: "month"
+		},
+		{
+			title: t("total_sell"),
+			dataIndex: "sell_amount",
+			key: "sell_amount",
+			render: formatPrice
+		},
+		{
+			title: t("profit"),
+			dataIndex: "profit",
+			key: "profit",
+			render: formatPrice
+		},
+		{
+			title: t("expenses"),
+			dataIndex: "expenses",
+			key: "expenses",
+			render: (value?: Expense[]) => (
 				<Space>
 					<Popover content={<ExpensesTable data={value || []} />}>
 						<QuestionCircleOutlined style={{ cursor: "pointer" }} />
@@ -44,14 +46,18 @@ const columns: ColumnsType<ProfitLose> = [
 				</Space>
 			)
 		}
-	}
-]
+	]
+
+	return columns
+}
 
 export const ProfitLostTable: FC<Props> = () => {
+	const { t } = useTranslation()
+	const columns = useProfitLoseColumns()
 	const { data: profitLose, isFetching, isLoading } = useGetProfitLoseQuery()
 	return (
 		<Table<ProfitLose>
-			title={"Денежный поток"}
+			title={t("menu.profit_lost")}
 			loading={isLoading || isFetching}
 			columns={columns}
 			dataSource={profitLose?.data}

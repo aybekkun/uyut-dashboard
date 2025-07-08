@@ -1,5 +1,6 @@
 import { Divider, Space } from "antd"
 import type { ColumnsType } from "antd/es/table"
+import { useTranslation } from "react-i18next"
 
 import type { ProductTransactions } from "src/services/products"
 import {
@@ -10,20 +11,21 @@ import {
 } from "src/utils/formatter.utils"
 
 export const useProductColumns = () => {
+	const { t } = useTranslation()
 	const columns: ColumnsType<ProductTransactions> = [
 		{
-			title: "Длина",
+			title: t("length"),
 			dataIndex: "meter",
 			key: "meter"
 		},
 		{
-			title: "Площад",
+			title: t("area"),
 			dataIndex: "meter_square",
 			key: "meter_square",
 			render: formatEmpty
 		},
 		{
-			title: "Количество роллов",
+			title: t("number_of_rolls"),
 			dataIndex: "rolls",
 			key: "rolls",
 			render: formatEmpty
@@ -37,7 +39,7 @@ export const useProductColumns = () => {
 		}, */
 		{
 			align: "center",
-			title: "Цена",
+			title: t("price"),
 			key: "price",
 			render: (_v, record) => (
 				<Space split={<Divider type={"vertical"} />}>
@@ -48,10 +50,10 @@ export const useProductColumns = () => {
 		},
 
 		{
-			title: "Создан",
+			title: t("created"),
 			dataIndex: "imported_at",
 			key: "imported_at",
-			render:formateHHDate
+			render: formateHHDate
 		}
 	]
 

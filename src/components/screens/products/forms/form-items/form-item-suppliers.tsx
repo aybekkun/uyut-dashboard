@@ -1,11 +1,13 @@
 import { Form, Select } from "antd"
 import { type FC, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { useDebounce } from "react-use"
 import { SELECT_PLACEHOLDER } from "src/constants/form.constants"
 import { ProductForm } from "src/services/products"
 import { useGetSuppliersQuery } from "src/services/suppliers"
 
 const FormItemSuppliers: FC = () => {
+	const { t } = useTranslation()
 	const [searchValue, setSearchValue] = useState("")
 	const [search, setSearch] = useState("")
 	useDebounce(
@@ -27,7 +29,7 @@ const FormItemSuppliers: FC = () => {
 	return (
 		<Form.Item<ProductForm>
 			name={"supplier_id"}
-			label={"Поставщик"}
+			label={t("supplier")}
 			rules={[{ required: true }]}>
 			<Select
 				placeholder={SELECT_PLACEHOLDER}

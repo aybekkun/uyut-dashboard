@@ -15,6 +15,7 @@ import {
 	Typography
 } from "antd"
 import { type FC, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { financePriceTypesData } from "src/constants/data.constants"
 import {
 	FinancePriceType,
@@ -32,6 +33,7 @@ const FinancesByTodayStatistic: FC<FinancesByTodayStatisticProps> = ({
 	url,
 	onlyUZS
 }) => {
+	const {t }= useTranslation()
 	const [priceType, setPriceType] = useState<FinancePriceType>("uzs")
 
 	const { data: financesByToday, isLoading } = useGetFinancesByTodayQuery(url, {
@@ -40,7 +42,7 @@ const FinancesByTodayStatistic: FC<FinancesByTodayStatisticProps> = ({
 
 	const data = [
 		{
-			title: "Общая сумма",
+			title: t("total_amount"),
 			Icon: DollarOutlined,
 			value: isLoading ? (
 				<Skeleton.Input style={{ height: 20 }} />
@@ -69,7 +71,7 @@ const FinancesByTodayStatistic: FC<FinancesByTodayStatisticProps> = ({
 			)
 		},
 		{
-			title: "Общее количество",
+			title:t("total_count"),
 			Icon: ShoppingCartOutlined,
 			value: isLoading ? (
 				<Skeleton.Input style={{ height: 20 }} />

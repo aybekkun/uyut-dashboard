@@ -1,6 +1,7 @@
 import { Form, type FormProps } from "antd"
 import dayjs from "dayjs"
 import { type FC, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { FormDrawer } from "src/components/shared"
 import { FormItemProducts } from "src/components/shared/form-items"
 import { DatePicker, Input, InputNumber, InputPrice } from "src/components/ui"
@@ -17,7 +18,7 @@ import { isParamsFormValidate } from "src/utils/validate.utils"
 
 const WriteOffProductsForm: FC = () => {
 	const [form] = Form.useForm<WriteOffProductForm>()
-
+	const { t } = useTranslation()
 	const { params, resetParams } = useFormDevtoolsStore()
 
 	const { mutate: addWriteOffProduct, isPending: addLoading } =
@@ -71,26 +72,26 @@ const WriteOffProductsForm: FC = () => {
 				onFinish={onFinish}>
 				<Form.Item<WriteOffProductForm>
 					name={"name"}
-					label={"Название"}
+					label={t("name")}
 					rules={[{ required: true }]}>
 					<Input />
 				</Form.Item>
 				<FormItemProducts />
 				<Form.Item<WriteOffProductForm>
 					name={"meter"}
-					label={"Длина"}
+					label={t("length")}
 					rules={[{ required: true }]}>
 					<InputNumber placeholder={INPUT_PLACEHOLDER} />
 				</Form.Item>
 				<Form.Item<WriteOffProductForm>
 					name={"amount"}
-					label={"Сумма"}
+					label={t("amount")}
 					rules={[{ required: true }]}>
 					<InputPrice />
 				</Form.Item>
 				<Form.Item<WriteOffProductForm>
 					name={"date"}
-					label={"Дата"}
+					label={t("date")}
 					rules={[{ required: true }]}>
 					<DatePicker />
 				</Form.Item>

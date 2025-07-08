@@ -8,8 +8,10 @@ import {
 } from "src/services/shared/print-types"
 import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { usePrintTypesColumns } from "../hooks/use-print-types-columns"
+import { useTranslation } from "react-i18next"
 
 const PrintTypesTable: FC = () => {
+	const {t} = useTranslation()
 	const { data: printTypes, isLoading, isFetching } = useGetPrintTypesQuery({})
 
 	const toggleForm = useFormDevtoolsStore((state) => state.toggleForm)
@@ -19,10 +21,10 @@ const PrintTypesTable: FC = () => {
 		<>
 			<Table<PrintType>
 				rowKey={(record) => record.id}
-				title={"Типы печати"}
+				title={t("menu.settings_print_types")}
 				extra={
 					<Button icon={<PlusOutlined />} onClick={toggleForm}>
-						Добавить
+						{t("add")}
 					</Button>
 				}
 				loading={isLoading || isFetching}

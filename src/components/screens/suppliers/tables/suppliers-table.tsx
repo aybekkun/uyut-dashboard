@@ -6,8 +6,10 @@ import { Route } from "src/routes/_layout/reports/suppliers"
 import { type Supplier, useGetSuppliersQuery } from "src/services/suppliers"
 import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { useSuppliersColumns } from "../hooks/use-suppliers-columns"
+import { useTranslation } from "react-i18next"
 
 const SuppliersStable: FC = () => {
+	const {t} = useTranslation()
 	const { page, limit } = Route.useSearch()
 	const routeNavigate = Route.useNavigate()
 
@@ -27,10 +29,10 @@ const SuppliersStable: FC = () => {
 		<>
 			<Table<Supplier>
 				rowKey={(record) => record.id}
-				title={"Поставщики"}
+				title={t("menu.report_suppliers")}
 				extra={
 					<Button icon={<PlusOutlined />} onClick={toggleForm}>
-						Добавить
+						{t("add")}
 					</Button>
 				}
 				columns={columns}

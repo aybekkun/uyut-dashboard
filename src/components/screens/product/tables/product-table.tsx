@@ -9,6 +9,7 @@ import { GetParams } from "src/services/shared"
 
 import { useProductColumns } from "../hooks/use-product-columns"
 import { ProductDescription } from "../desctiptions/product-description"
+import { useTranslation } from "react-i18next"
 
 interface ProductTableProps {
 	id?: number | string
@@ -21,6 +22,7 @@ const ProductTable: FC<ProductTableProps> = ({
 	params,
 	onChangeParams
 }) => {
+	const { t } = useTranslation()
 	const { page, limit } = params
 	const {
 		data: products,
@@ -42,7 +44,7 @@ const ProductTable: FC<ProductTableProps> = ({
 			/>
 			<Table<ProductTransactions>
 				rowKey={(record) => record.id}
-				title={"Товары"}
+				title={t("products")}
 				loading={isLoading || isFetching}
 				columns={columns}
 				dataSource={products?.transactions}

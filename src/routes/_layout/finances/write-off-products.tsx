@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { Col, Row } from "antd"
+import { useTranslation } from "react-i18next"
 import {
 	FinancesByDateChart,
 	FinancesByTodayStatistic
@@ -10,6 +11,8 @@ export const Route = createFileRoute("/_layout/finances/write-off-products")({
 })
 
 function WriteOffProductsComponent() {
+	const { t } = useTranslation()
+
 	return (
 		<>
 			<FinancesByTodayStatistic onlyUZS={true} url={"write-off-reports"} />
@@ -17,7 +20,7 @@ function WriteOffProductsComponent() {
 				<Col xs={24} md={8}>
 					<FinancesByDateChart
 						onlyUZS={true}
-						title={"Списания по годам"}
+						title={t("write_off_by_years")}
 						url={"write-off-reports"}
 						type={"year"}
 					/>
@@ -25,7 +28,7 @@ function WriteOffProductsComponent() {
 				<Col xs={24} md={16}>
 					<FinancesByDateChart
 						onlyUZS={true}
-						title={"Списания по месяцам"}
+						title={t("write_off_by_months")}
 						url={"write-off-reports"}
 						type={"month"}
 					/>
@@ -33,7 +36,7 @@ function WriteOffProductsComponent() {
 				<Col span={24}>
 					<FinancesByDateChart
 						onlyUZS={true}
-						title={"Списания по дням"}
+						title={t("write_off_by_days")}
 						url={"write-off-reports"}
 						type={"days"}
 					/>

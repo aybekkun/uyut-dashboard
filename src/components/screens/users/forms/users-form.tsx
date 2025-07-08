@@ -1,5 +1,6 @@
 import { Form, type FormProps, Select } from "antd"
 import { type FC, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { PatternFormat } from "react-number-format"
 import { FormDrawer } from "src/components/shared/form-drawer"
 import { Input } from "src/components/ui/input"
@@ -17,6 +18,7 @@ import { formatPhoneForm, formatPhoneReverse } from "src/utils/formatter.utils"
 import { isParamsFormValidate } from "src/utils/validate.utils"
 
 const UsersForm: FC = () => {
+	const { t } = useTranslation()
 	const [form] = Form.useForm<UserForm>()
 
 	const { params, resetParams } = useFormDevtoolsStore()
@@ -80,14 +82,14 @@ const UsersForm: FC = () => {
 				</Form.Item>
 				<Form.Item<UserForm>
 					name={"phone"}
-					label={"Телефон номер"}
+					label={t("phone_number")}
 					rules={[{ required: true }]}
 					initialValue={""}>
 					<PatternFormat format={"+998 ## ### ## ##"} customInput={Input} />
 				</Form.Item>
 				<Form.Item<UserForm>
 					name={"role_id"}
-					label={"Роль"}
+					label={t("role")}
 					rules={[{ required: true }]}>
 					<Select
 						placeholder={SELECT_PLACEHOLDER}

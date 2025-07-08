@@ -1,40 +1,39 @@
 import { DescriptionsProps } from "antd"
+import { useTranslation } from "react-i18next"
 import { ProductItem } from "src/services/products"
-import {
-	formatEmpty,
-	formatPrice
-} from "src/utils/formatter.utils"
+import { formatEmpty, formatPrice } from "src/utils/formatter.utils"
 
 const useProductItems = (data?: ProductItem) => {
+	const { t } = useTranslation()
 	const items: DescriptionsProps["items"] = [
 		{
-			key: "Остаток длины",
-			label: "Длина",
+			key: "remainder_length",
+			label: t("length"),
 			children: formatEmpty(data?.remainder.meter)
 		},
 		{
-			key: "remainder_square_meter",
-			label: "Остаток площади",
+			key: "remainder_area",
+			label: t("remainder_area"),
 			children: formatEmpty(data?.remainder.meter_square)
 		},
 		{
-			key: "collar",
-			label: "Цвет",
+			key: "color",
+			label: t("color"),
 			children: formatEmpty(data?.collar?.name)
 		},
 		{
-			key: "rolls",
-			label: "Количество рулонов",
+			key: "number_of_rolls",
+			label: t("number_of_rolls"),
 			children: formatEmpty(data?.total_rolls)
 		},
 		{
 			key: "price_uzs",
-			label: "Цена UZS",
+			label: t("price_uzs"),
 			children: formatPrice(data?.total_price_uzs)
 		},
 		{
 			key: "price_usd",
-			label: "Цена USD",
+			label: t("price_usd"),
 			children: formatPrice(data?.total_price_usd)
 		}
 	]

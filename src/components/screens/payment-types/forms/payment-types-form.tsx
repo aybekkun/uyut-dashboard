@@ -1,5 +1,6 @@
 import { Form, FormProps, Input } from "antd"
 import { type FC, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { FormDrawer } from "src/components/shared/form-drawer"
 import { FORM_DEFAULT, INPUT_PLACEHOLDER } from "src/constants/form.constants"
 import {
@@ -12,6 +13,7 @@ import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { isParamsFormValidate } from "src/utils/validate.utils"
 
 const PaymentTypesForm: FC = () => {
+	const {t} = useTranslation()
 	const [form] = Form.useForm<PaymentTypeForm>()
 
 	const { params, resetParams } = useFormDevtoolsStore()
@@ -61,7 +63,7 @@ const PaymentTypesForm: FC = () => {
 				onFinish={onFinish}>
 				<Form.Item<PaymentTypeForm>
 					name={"name"}
-					label={"Название"}
+					label={t("name")}
 					rules={[{ required: true }]}>
 					<Input placeholder={INPUT_PLACEHOLDER} />
 				</Form.Item>

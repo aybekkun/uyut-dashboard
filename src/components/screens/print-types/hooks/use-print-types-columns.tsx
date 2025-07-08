@@ -1,6 +1,7 @@
 import { DeleteFilled, EditFilled } from "@ant-design/icons"
 import { Space } from "antd"
 import type { ColumnsType } from "antd/es/table"
+import { useTranslation } from "react-i18next"
 import { Button } from "src/components/ui/button"
 import {
 	PrintType,
@@ -10,6 +11,7 @@ import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { formatEmpty } from "src/utils/formatter.utils"
 
 const usePrintTypesColumns = () => {
+	const { t } = useTranslation()
 	const { mutate: deletePrintType } = useDeletePrintTypesMutation()
 
 	const editPrintType = useFormDevtoolsStore((state) => state.setParams)
@@ -23,7 +25,7 @@ const usePrintTypesColumns = () => {
 			render: (_v, _r, index) => index + 1
 		},
 		{
-			title: "Название",
+			title: t("name"),
 			dataIndex: "name",
 			key: "name",
 			render: formatEmpty

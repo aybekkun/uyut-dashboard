@@ -6,6 +6,7 @@ import { type Expense, useGetExpensesQuery } from "src/services/expenses"
 import { GetParams } from "src/services/shared"
 import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { useExpensesColumns } from "../hooks/use-expenses-columns"
+import { useTranslation } from "react-i18next"
 
 interface ExpensesTableProps {
 	params: GetParams
@@ -18,6 +19,7 @@ const ExpensesTable: FC<ExpensesTableProps> = ({
 	params,
 	onChangeParams
 }) => {
+	const {t} = useTranslation()
 	const { page, limit } = params
 
 	const {
@@ -36,11 +38,11 @@ const ExpensesTable: FC<ExpensesTableProps> = ({
 		<>
 			<Table<Expense>
 				rowKey={(record) => record.id}
-				title={"Расходы"}
+				title={t("menu.expenses")}
 				extra={
 					readonly ? null : (
 						<Button icon={<PlusOutlined />} onClick={toggleForm}>
-							Добавить
+							{t("add")}
 						</Button>
 					)
 				}

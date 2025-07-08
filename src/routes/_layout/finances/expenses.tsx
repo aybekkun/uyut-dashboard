@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { Col, Row } from "antd"
+import { useTranslation } from "react-i18next"
 import {
 	FinancesByDateChart,
 	FinancesByTodayStatistic
@@ -10,6 +11,7 @@ export const Route = createFileRoute("/_layout/finances/expenses")({
 })
 
 function ExpensesComponent() {
+	const { t } = useTranslation()
 	return (
 		<>
 			<FinancesByTodayStatistic onlyUZS={true} url={"expenses"} />
@@ -17,7 +19,7 @@ function ExpensesComponent() {
 				<Col xs={24} md={8}>
 					<FinancesByDateChart
 						onlyUZS={true}
-						title={"Расходы по годам"}
+						title={t("expenses_by_years")}
 						url={"expenses"}
 						type={"year"}
 					/>
@@ -25,7 +27,7 @@ function ExpensesComponent() {
 				<Col xs={24} md={16}>
 					<FinancesByDateChart
 						onlyUZS={true}
-						title={"Расходы по месяцам"}
+						title={t("expenses_by_months")}
 						url={"expenses"}
 						type={"month"}
 					/>
@@ -33,7 +35,7 @@ function ExpensesComponent() {
 				<Col span={24}>
 					<FinancesByDateChart
 						onlyUZS={true}
-						title={"Расходы по дням"}
+						title={t("expenses_by_days")}
 						url={"expenses"}
 						type={"days"}
 					/>

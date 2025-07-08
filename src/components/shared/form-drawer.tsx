@@ -1,6 +1,7 @@
-import { DeleteFilled } from "@ant-design/icons"
+import { PlusCircleOutlined } from "@ant-design/icons"
 import { Drawer, DrawerProps, Flex, FormInstance, Space } from "antd"
 import { type FC } from "react"
+import { useTranslation } from "react-i18next"
 import { Button } from "src/components/ui/button"
 import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { useShallow } from "zustand/react/shallow"
@@ -16,6 +17,7 @@ const FormDrawer: FC<FormDrawerProps> = ({
 	children,
 	...rest
 }) => {
+	const { t } = useTranslation()
 	const { isForm, resetParams, params } = useFormDevtoolsStore(
 		useShallow((state) => state)
 	)
@@ -29,9 +31,9 @@ const FormDrawer: FC<FormDrawerProps> = ({
 		<>
 			<Drawer
 				keyboard={false}
-				closeIcon={<DeleteFilled />}
+				closeIcon={<PlusCircleOutlined />}
 				open={isForm}
-				title={params ? "Изменить" : "Добавить"}
+				title={params ? t("edit") : t("add")}
 				onClose={onCloseDrawer}
 				placement={"right"}
 				width={300}
@@ -40,10 +42,10 @@ const FormDrawer: FC<FormDrawerProps> = ({
 					<Flex justify={"end"}>
 						<Space>
 							<Button danger={true} onClick={onCloseDrawer}>
-								Отмена
+								{t("cancel")}
 							</Button>
 							<Button loading={isLoading} onClick={form.submit}>
-								Сохранить
+								{t("save")}
 							</Button>
 						</Space>
 					</Flex>

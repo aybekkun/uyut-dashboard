@@ -9,6 +9,7 @@ import {
 import { GetParams } from "src/services/shared"
 import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { useSalesProductsColumns } from "../hooks/use-sales-products-columns"
+import { useTranslation } from "react-i18next"
 
 interface SalesProductsTableProps {
 	params: GetParams
@@ -21,6 +22,7 @@ const SalesProductsTable: FC<SalesProductsTableProps> = ({
 	onChangeParams,
 	readonly
 }) => {
+	const { t } = useTranslation()
 	const { page, limit } = params
 
 	const {
@@ -39,11 +41,11 @@ const SalesProductsTable: FC<SalesProductsTableProps> = ({
 		<>
 			<Table<SalesProduct>
 				rowKey={(record) => record.id}
-				title={"Проданные товары"}
+				title={t("sale_product")}
 				extra={
 					readonly ? null : (
 						<Button icon={<PlusOutlined />} onClick={toggleForm}>
-							Добавить
+							{t("add")}
 						</Button>
 					)
 				}

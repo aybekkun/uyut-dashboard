@@ -9,6 +9,7 @@ import {
 } from "src/services/write-off-products"
 import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { useWriteOffProductsColumns } from "../hooks/use-write-off-products-columns"
+import { useTranslation } from "react-i18next"
 
 interface WriteOffProductsTableProps {
 	params: GetParams
@@ -21,6 +22,7 @@ const WriteOffProductsTable: FC<WriteOffProductsTableProps> = ({
 	params,
 	onChangeParams
 }) => {
+	const { t } = useTranslation()
 	const { page, limit } = params
 
 	const {
@@ -38,12 +40,12 @@ const WriteOffProductsTable: FC<WriteOffProductsTableProps> = ({
 	return (
 		<>
 			<Table<WriteOffProduct>
-				title={"Списания товаров"}
+				title={`${t("menu.finances_write_off")} ${t("products")}`}
 				rowKey={(record) => record.id}
 				extra={
 					readonly ? null : (
 						<Button icon={<PlusOutlined />} onClick={toggleForm}>
-							Добавить
+							{t("add")}
 						</Button>
 					)
 				}

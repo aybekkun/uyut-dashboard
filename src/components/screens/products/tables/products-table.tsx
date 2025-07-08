@@ -6,6 +6,7 @@ import { type ProductItem, useGetProductsQuery } from "src/services/products"
 import { GetParams } from "src/services/shared"
 import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { useProductsColumns } from "../hooks/use-products-columns"
+import { useTranslation } from "react-i18next"
 
 interface ProductsTableProps {
 	params: GetParams
@@ -18,6 +19,7 @@ const ProductsTable: FC<ProductsTableProps> = ({
 	params,
 	onChangeParams
 }) => {
+	const { t } = useTranslation()
 	const { page, limit } = params
 	const {
 		data: products,
@@ -35,11 +37,11 @@ const ProductsTable: FC<ProductsTableProps> = ({
 		<>
 			<Table<ProductItem>
 				rowKey={(record) => record.id}
-				title={"Товары"}
+				title={t("products")}
 				extra={
 					readonly ? null : (
 						<Button icon={<PlusOutlined />} onClick={toggleForm}>
-							Добавить
+							{t("add")}
 						</Button>
 					)
 				}
