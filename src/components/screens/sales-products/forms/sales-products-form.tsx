@@ -16,22 +16,51 @@ import { PatternFormat } from "react-number-format"
 
 import { FormDrawer } from "src/components/shared/form-drawer"
 
+import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons"
+import { useTranslation } from "react-i18next"
+import { InputPrice } from "src/components/ui"
 import { FORM_DEFAULT, SELECT_PLACEHOLDER } from "src/constants/form.constants"
+import { useGetProductsQuery } from "src/services/products"
 import {
 	type SalesProductForm,
 	useCreateSalesProductsMutation
 } from "src/services/sales-products"
-import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
-import { FormItemPaymentType } from "./form-items"
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons"
-import { useGetProductsQuery } from "src/services/products"
-import { useGetPrintTypesQuery } from "src/services/shared/print-types"
-import { InputPrice } from "src/components/ui"
-import { useTranslation } from "react-i18next"
 import { useGetClientsQuery } from "src/services/shared/clients"
+import { useGetPrintTypesQuery } from "src/services/shared/print-types"
+import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
+import { formatPhone, formatPhoneReverse } from "src/utils/formatter.utils"
+import { FormItemPaymentType } from "./form-items"
 
 const { Text } = Typography
-
+/* const clients = {
+	data: [
+		{
+			id: 8,
+			full_name: "f",
+			phone: "+998 13 121 23 12"
+		},
+		{
+			id: 9,
+			full_name: "13",
+			phone: "+998123123422"
+		},
+		{
+			id: 10,
+			full_name: "234",
+			phone: "+998324242342"
+		},
+		{
+			id: 11,
+			full_name: "test",
+			phone: "+998999999999"
+		},
+		{
+			id: 12,
+			full_name: "fwert",
+			phone: "+998995995959"
+		}
+	]
+} */
 const SalesProductsForm: FC = () => {
 	const [form] = Form.useForm<SalesProductForm>()
 	const { t } = useTranslation()
@@ -45,7 +74,15 @@ const SalesProductsForm: FC = () => {
 	// Watch form values for calculations
 	const watchedValues = Form.useWatch([], form)
 	const productsList = watchedValues?.products || []
+	const handleClientSelect = (selectedName: string) => {
+		const selectedClient = clients?.data?.find(
+			(client) => client.full_name === selectedName
+		)
 
+		if (selectedClient) {
+			form.setFieldValue("phone", formatPhone(selectedClient.phone))
+		}
+	}
 	// Calculate total cost for each product
 	const calculateProductTotal = (product: any) => {
 		if (!product) return 0
@@ -85,12 +122,15 @@ const SalesProductsForm: FC = () => {
 	}
 
 	const onFinish: FormProps<SalesProductForm>["onFinish"] = async (values) => {
-		await addSalesProduct(values, {
-			onSuccess: () => {
-				resetParams()
-				form.resetFields()
+		await addSalesProduct(
+			{ ...values, phone: formatPhoneReverse(values.phone) },
+			{
+				onSuccess: () => {
+					resetParams()
+					form.resetFields()
+				}
 			}
-		})
+		)
 	}
 
 	return (
@@ -111,6 +151,7 @@ const SalesProductsForm: FC = () => {
 								showSearch={true}
 								notFoundContent={null}
 								placeholder={SELECT_PLACEHOLDER}
+								onSelect={(value) => handleClientSelect(value)}
 								options={clients?.data?.map((item) => ({
 									value: item.full_name,
 									label: item.full_name
