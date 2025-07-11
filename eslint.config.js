@@ -44,6 +44,7 @@ export default tsEslint.config(
 				"error",
 				{ argsIgnorePattern: "^_" }
 			],
+			"@typescript-eslint/no-explicit-any": "warn",
 			// "react/no-array-index-key": ["error"],
 			"react/jsx-key": ["error"],
 			"react/jsx-boolean-value": ["error", "always"],

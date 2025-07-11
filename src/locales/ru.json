@@ -95,5 +95,7 @@
     "sales_by_days": "Продажа по дням",
     "write_off_by_years": "Списания по годам",
     "write_off_by_months": "Списания по месяцам",
-    "write_off_by_days": "Списания по дням"
+    "write_off_by_days": "Списания по дням",
+    "meter_square": "Площадь",
+    "width": "Ширина"
 }

@@ -9,8 +9,8 @@ export type ProductItem = {
 	}
 	collar: {
 		id: number
-		name: string
-	}
+		collar: string
+	} | null
 	total_length: number
 	total_price_uzs: number
 	total_price_usd: number

@@ -38,8 +38,8 @@ type SalesProductForm = {
 	products: [
 		{
 			product_id: number
-			print_type_id: number
-			print_cost: number
+			print_type_id?: number
+			print_cost?: number
 			material_cost: number
 			length: number
 		}

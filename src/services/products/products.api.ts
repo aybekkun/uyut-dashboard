@@ -31,6 +31,7 @@ const useGetProductsByIdQuery = (params: GetParams) => {
 		queryFn: () => productsService.getById(params),
 		queryKey: ["products by id", ...Object.values(params)],
 		placeholderData: keepPreviousData,
+		refetchInterval: 1500,
 		enabled: !!params.id,
 		throwOnError: (error: ResponseError) => {
 			message.error({
@@ -91,6 +92,9 @@ const useCreateProductsMutation = () => {
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({
 				queryKey: ["products"]
+			})
+			await queryClient.invalidateQueries({
+				queryKey: ["products by id"]
 			})
 			message.success({
 				message: "Success",
