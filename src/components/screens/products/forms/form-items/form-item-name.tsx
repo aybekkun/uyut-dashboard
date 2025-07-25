@@ -24,7 +24,7 @@ const FormItemName = ({
 				onChange={onChangeProductsName}
 				placeholder={SELECT_PLACEHOLDER}
 				loading={isLoading || isFetching}
-				/* showSearch={true} */
+				 showSearch={true}
 				optionFilterProp={"label"}
 				/* onSearch={setSearchValue} */
 				options={productsname?.data?.map((item) => ({

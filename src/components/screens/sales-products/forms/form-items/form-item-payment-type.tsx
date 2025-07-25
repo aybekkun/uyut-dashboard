@@ -18,6 +18,8 @@ const FormItemPaymentType: FC = () => {
 			label={t("payment_method")}
 			rules={[{ required: true }]}>
 			<Select
+				showSearch={true}
+				optionFilterProp={"label"}
 				placeholder={SELECT_PLACEHOLDER}
 				loading={isLoading || isFetching}
 				options={paymentTypes?.data?.map((paymentType) => ({

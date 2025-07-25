@@ -20,6 +20,8 @@ const FormItemProducts: FC = () => {
 			rules={[{ required: true }]}>
 			<Select
 				disabled={isLoading}
+				showSearch={true}
+				optionFilterProp={"label"}
 				placeholder={SELECT_PLACEHOLDER}
 				loading={isLoading || isFetching}
 				options={products?.data?.map((product) => ({

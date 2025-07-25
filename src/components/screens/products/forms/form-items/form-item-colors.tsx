@@ -18,7 +18,7 @@ const FormItemColors: FC = () => {
 				<Select
 					placeholder={SELECT_PLACEHOLDER}
 					loading={isLoading || isFetching}
-					/* showSearch={true} */
+					showSearch={true}
 					optionFilterProp={"label"}
 					/* onSearch={setSearchValue} */
 					options={colors?.data?.map((color) => ({
