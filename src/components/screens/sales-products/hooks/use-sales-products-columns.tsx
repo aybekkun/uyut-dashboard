@@ -16,9 +16,11 @@ import {
 } from "src/utils/formatter.utils"
 import { SalesProductsTableList } from "../tables/sales-products-table-list"
 import { useTranslation } from "react-i18next"
+import { useGetProfileQuery } from "src/services/login"
 
 export const useSalesProductsColumns = () => {
 	const { mutate: deleteSalesProduct } = useDeleteSalesProductsMutation()
+	const { data: profile } = useGetProfileQuery()
 	const { t } = useTranslation()
 	const columns: ColumnsType<SalesProduct> = [
 		{
@@ -87,15 +89,17 @@ export const useSalesProductsColumns = () => {
 			key: "actions",
 			render: (_v, record) => (
 				<Space>
-					<Button
-						confirm={{
-							title: t("delete_confirm"),
-							onConfirm: () => deleteSalesProduct(record?.id)
-						}}
-						tooltip={t("delete")}
-						danger={true}
-						icon={<DeleteFilled />}
-					/>
+					{profile?.data.role.name === "direktor" && (
+						<Button
+							confirm={{
+								title: t("delete_confirm"),
+								onConfirm: () => deleteSalesProduct(record?.id)
+							}}
+							tooltip={t("delete")}
+							danger={true}
+							icon={<DeleteFilled />}
+						/>
+					)}
 				</Space>
 			)
 		}
