@@ -41,7 +41,7 @@ const SalesProductsTable: FC<SalesProductsTableProps> = ({
 		<>
 			<Table<SalesProduct>
 				rowKey={(record) => record.id}
-				title={t("sale_product")}
+				title={t("menu.sales_list")}
 				extra={
 					readonly ? null : (
 						<Button icon={<PlusOutlined />} onClick={toggleForm}>

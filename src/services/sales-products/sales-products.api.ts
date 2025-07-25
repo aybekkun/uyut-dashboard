@@ -58,7 +58,9 @@ const useCreateSalesProductsMutation = () => {
 		onError: (error: ResponseError) => {
 			message.error({
 				message: error.message,
-				description: error?.response?.data?.message
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				//@ts-ignore
+				description: JSON.stringify(error?.response?.data?.errors || [])
 			})
 		}
 	})
