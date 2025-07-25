@@ -238,7 +238,13 @@ const SalesProductsForm: FC = () => {
 												{...restField}
 												label={`${t("length")} (м)`}
 												name={[name, "length"]}
-												rules={[{ required: true, message: "Введите длину" }]}>
+												rules={[
+													{ required: true, message: "Введите длину" },
+													{
+														pattern: /^\d+(,\d+)?$/,
+														message: "Введите число с запятой, например 1,5"
+													}
+												]}>
 												<InputNumber
 													placeholder="Длина в метрах"
 													min={0}
