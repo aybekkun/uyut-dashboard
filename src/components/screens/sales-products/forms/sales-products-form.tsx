@@ -304,7 +304,7 @@ const SalesProductsForm: FC = () => {
 							textAlign: "right"
 						}}>
 						<Text style={{ fontSize: "20px", color: "#1890ff" }}>
-							{t("total_cost")}: {grandTotal.toLocaleString()} USZ
+							{t("total_cost")}: {grandTotal.toLocaleString()} UZS
 						</Text>
 					</div>
 				)}
