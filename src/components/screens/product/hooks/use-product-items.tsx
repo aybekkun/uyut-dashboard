@@ -19,7 +19,7 @@ const useProductItems = (data?: ProductItem) => {
 		{
 			key: "color",
 			label: t("color"),
-			children: formatEmpty(data?.collar?.name)
+			children: formatEmpty(data?.collar?.collar)
 		},
 		{
 			key: "number_of_rolls",
