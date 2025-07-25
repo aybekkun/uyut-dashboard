@@ -104,15 +104,23 @@ const SalesProductsForm: FC = () => {
 	// Get product info and calculate area
 	const getProductInfo = (productId: number) => {
 		const product = products?.data?.find((p) => p.id === productId)
-		if (!product) return { hasWidth: false, width: 0, unitOfMeasurement: "м", shouldShowPrintType: true }
+		if (!product)
+			return {
+				hasWidth: false,
+				width: 0,
+				unitOfMeasurement: "м",
+				shouldShowPrintType: true
+			}
 
 		const productName = product.name.name
 		const widthMatch = productName.match(/\d+\.?\d*/)
 		const hasWidth = !!widthMatch
 		const width = hasWidth ? parseFloat(widthMatch[0]) : 0
-		
+
 		// Проверяем, нужно ли показывать print_type
-		const shouldShowPrintType = !(product.name.id === 2 || product.name.id === 4)
+		const shouldShowPrintType = !(
+			product.name.id === 2 || product.name.id === 4
+		)
 
 		return {
 			hasWidth,
@@ -183,7 +191,12 @@ const SalesProductsForm: FC = () => {
 								const productId = currentProduct?.product_id
 								const productInfo = productId
 									? getProductInfo(productId)
-									: { hasWidth: false, width: 0, unitOfMeasurement: "м", shouldShowPrintType: true }
+									: {
+											hasWidth: false,
+											width: 0,
+											unitOfMeasurement: "м",
+											shouldShowPrintType: true
+										}
 								const productTotal = calculateProductTotal(currentProduct)
 								const length = currentProduct?.length || 0
 								const area = calculateArea(productId, length)
@@ -234,38 +247,41 @@ const SalesProductsForm: FC = () => {
 													}
 												/>
 											</Form.Item>
-											
+
 											{/* Условно рендерим поле print_type */}
 											{productInfo.shouldShowPrintType && (
-												<Form.Item
-													{...restField}
-													label={t("print_type")}
-													name={[name, "print_type_id"]}
-													rules={[
-														{ required: true, message: "Введите принт тип" }
-													]}>
-													<Select
-														placeholder={SELECT_PLACEHOLDER}
-														optionFilterProp={"label"}
-														style={{ width: 120 }}
-														onChange={(value) =>
-															handlePrintTypeChange(value, name)
-														}
-														options={printTypes?.data?.map((item) => ({
-															value: item.id,
-															label: item.name
-														}))}
-													/>
-												</Form.Item>
+												<>
+													<Form.Item
+														{...restField}
+														label={t("print_type")}
+														name={[name, "print_type_id"]}
+														rules={[
+															{ required: true, message: "Введите принт тип" }
+														]}>
+														<Select
+															placeholder={SELECT_PLACEHOLDER}
+															optionFilterProp={"label"}
+															style={{ width: 120 }}
+															onChange={(value) =>
+																handlePrintTypeChange(value, name)
+															}
+															options={printTypes?.data?.map((item) => ({
+																value: item.id,
+																label: item.name
+															}))}
+														/>
+													</Form.Item>
+													<Form.Item
+														{...restField}
+														label={t("print_cost")}
+														name={[name, "print_cost"]}
+														rules={[
+															{ required: true, message: "Введите цену" }
+														]}>
+														<InputPrice placeholder="Цена печати" />
+													</Form.Item>
+												</>
 											)}
-
-											<Form.Item
-												{...restField}
-												label={t("print_cost")}
-												name={[name, "print_cost"]}
-												rules={[{ required: true, message: "Введите цену" }]}>
-												<InputPrice placeholder="Цена печати" />
-											</Form.Item>
 
 											<Form.Item
 												{...restField}
