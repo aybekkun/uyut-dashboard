@@ -1,6 +1,5 @@
 import {
 	AppstoreAddOutlined,
-	CheckSquareOutlined,
 	ClockCircleOutlined,
 	DollarCircleOutlined,
 	ExportOutlined,
@@ -52,9 +51,9 @@ export const useMenu = (): MenuProps["items"] => {
 			label: t("menu.report_income")
 		}, */
 		{
-			key: ROUTES.REPORT_WRITE_OFF_PRODUCTS,
-			icon: <VerticalAlignMiddleOutlined />,
-			label: t("menu.report_write_off")
+			key: ROUTES.REPORT_SUPPLIERS,
+			icon: <UsergroupAddOutlined />,
+			label: t("menu.report_suppliers")
 		},
 		{
 			key: ROUTES.REPORT_SALES_PRODUCTS,
@@ -66,16 +65,17 @@ export const useMenu = (): MenuProps["items"] => {
 			icon: <MinusSquareOutlined />,
 			label: t("menu.report_expenses")
 		},
-		{
+		/* {
 			key: ROUTES.REPORT_RECOMMENDED_ORDERS,
 			icon: <CheckSquareOutlined />,
 			label: t("menu.report_recommended_orders"),
 			disabled: true
-		},
+		}, */
+
 		{
-			key: ROUTES.REPORT_SUPPLIERS,
-			icon: <UsergroupAddOutlined />,
-			label: t("menu.report_suppliers")
+			key: ROUTES.REPORT_WRITE_OFF_PRODUCTS,
+			icon: <VerticalAlignMiddleOutlined />,
+			label: t("menu.report_write_off")
 		},
 		{
 			key: ROUTES.REPORT_DEBTORS,
@@ -111,16 +111,16 @@ export const useMenu = (): MenuProps["items"] => {
 			icon: <UnorderedListOutlined />,
 			label: t("menu.expenses_list")
 		},
-		{
+		/* 	{
 			key: ROUTES.CASH_FLOW,
 			icon: <UnorderedListOutlined />,
 			label: t("menu.cash_flow")
-		},
-		{
+		}, */
+		/* 	{
 			key: ROUTES.PROFIT_LOSE,
 			icon: <UnorderedListOutlined />,
 			label: t("menu.profit_lost")
-		},
+		}, */
 		{
 			key: ROUTES.EXPENSES_WRITE_OFF_PRODUCTS,
 			icon: <UnorderedListOutlined />,
