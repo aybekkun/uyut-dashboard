@@ -55,7 +55,7 @@ const ProductsForm: FC = () => {
 
 		if (productsNameId === 2) return rolls * 250
 		if (productsNameId === 4) return rolls * 2.5
-		return rolls * 100
+		return rolls * 200
 	}
 	return (
 		<FormDrawer width={400} form={form} isLoading={addLoading}>
