@@ -32,35 +32,7 @@ import { formatPhone, formatPhoneReverse } from "src/utils/formatter.utils"
 import { FormItemPaymentType } from "./form-items"
 
 const { Text } = Typography
-/* const clients = {
-	data: [
-		{
-			id: 8,
-			full_name: "f",
-			phone: "+998 13 121 23 12"
-		},
-		{
-			id: 9,
-			full_name: "13",
-			phone: "+998123123422"
-		},
-		{
-			id: 10,
-			full_name: "234",
-			phone: "+998324242342"
-		},
-		{
-			id: 11,
-			full_name: "test",
-			phone: "+998999999999"
-		},
-		{
-			id: 12,
-			full_name: "fwert",
-			phone: "+998995995959"
-		}
-	]
-} */
+
 const SalesProductsForm: FC = () => {
 	const [form] = Form.useForm<SalesProductForm>()
 	const { t } = useTranslation()
@@ -74,6 +46,14 @@ const SalesProductsForm: FC = () => {
 	// Watch form values for calculations
 	const watchedValues = Form.useWatch([], form)
 	const productsList = watchedValues?.products || []
+
+	// Define print type prices
+	const printTypePrices: Record<number, number> = {
+		1: 30000, // Darra
+		3: 20000  // polniyi
+		// id: 2 (Adnatonny) не указан, остается 0
+	}
+
 	const handleClientSelect = (selectedName: string) => {
 		const selectedClient = clients?.data?.find(
 			(client) => client.full_name === selectedName
@@ -83,6 +63,13 @@ const SalesProductsForm: FC = () => {
 			form.setFieldValue("phone", formatPhone(selectedClient.phone))
 		}
 	}
+
+	// Handle print type selection and update print_cost
+	const handlePrintTypeChange = (printTypeId: number, productIndex: number) => {
+		const newPrice = printTypePrices[printTypeId] || 0
+		form.setFieldValue(["products", productIndex, "print_cost"], newPrice)
+	}
+
 	// Calculate total cost for each product
 	const calculateProductTotal = (product: any) => {
 		if (!product) return 0
@@ -231,6 +218,7 @@ const SalesProductsForm: FC = () => {
 													placeholder={SELECT_PLACEHOLDER}
 													optionFilterProp={"label"}
 													style={{ width: 120 }}
+													onChange={(value) => handlePrintTypeChange(value, name)}
 													options={printTypes?.data?.map((item) => ({
 														value: item.id,
 														label: item.name
