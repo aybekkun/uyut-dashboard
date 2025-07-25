@@ -20,9 +20,11 @@ const MenuBar: FC = () => {
 	const { collapsed } = useMenuStore()
 	const { pathname } = useLocation()
 	const { xl } = useResponsive()
+
 	const newMenu =
-		profile?.data.role.name === "peshatnik"
-			? [
+		profile?.data.role.name === "director"
+			? (menu as MenuProps["items"]) // Директору доступно все меню
+			: [
 					{ key: ROUTES.SALES_GROUP, type: "group", label: t("menu.sales") },
 					{
 						key: ROUTES.SALES_PRODUCTS,
@@ -30,8 +32,6 @@ const MenuBar: FC = () => {
 						label: t("menu.sales_list")
 					}
 				]
-			: (menu as MenuProps["items"])
-
 	const onSelectMenu = (key: string) => {
 		router.navigate({
 			href: key
