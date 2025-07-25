@@ -66,8 +66,20 @@ const SalesProductsForm: FC = () => {
 
 	// Handle print type selection and update print_cost
 	const handlePrintTypeChange = (printTypeId: number, productIndex: number) => {
-		const newPrice = printTypePrices[printTypeId] || 0
+		const basePrice = printTypePrices[printTypeId] || 0
+		const length = form.getFieldValue(["products", productIndex, "length"]) || 0
+		const newPrice = basePrice * length
 		form.setFieldValue(["products", productIndex, "print_cost"], newPrice)
+	}
+
+	// Handle length change and update print_cost if print_type is selected
+	const handleLengthChange = (length: number, productIndex: number) => {
+		const printTypeId = form.getFieldValue(["products", productIndex, "print_type_id"])
+		if (printTypeId) {
+			const basePrice = printTypePrices[printTypeId] || 0
+			const newPrice = basePrice * (length || 0)
+			form.setFieldValue(["products", productIndex, "print_cost"], newPrice)
+		}
 	}
 
 	// Calculate total cost for each product
@@ -205,7 +217,11 @@ const SalesProductsForm: FC = () => {
 												label={`${t("length")} (м)`}
 												name={[name, "length"]}
 												rules={[{ required: true, message: "Введите длину" }]}>
-												<InputNumber placeholder="Длина в метрах" min={0} />
+												<InputNumber 
+													placeholder="Длина в метрах" 
+													min={0} 
+													onChange={(value) => handleLengthChange(value || 0, name)}
+												/>
 											</Form.Item>
 											<Form.Item
 												{...restField}
