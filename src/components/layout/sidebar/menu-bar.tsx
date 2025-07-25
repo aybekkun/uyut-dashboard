@@ -22,7 +22,7 @@ const MenuBar: FC = () => {
 	const { xl } = useResponsive()
 
 	const newMenu =
-		profile?.data.role.name === "director"
+		profile?.data.role.name === "direktor"
 			? (menu as MenuProps["items"]) // Директору доступно все меню
 			: [
 					{ key: ROUTES.SALES_GROUP, type: "group", label: t("menu.sales") },
