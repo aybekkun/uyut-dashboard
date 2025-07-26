@@ -241,8 +241,8 @@ const SalesProductsForm: FC = () => {
 												rules={[
 													{ required: true, message: "Введите длину" },
 													{
-														pattern: /^\d+(,\d+)?$/,
-														message: "Введите число с запятой, например 1,5"
+														pattern: /^\d+(\.\d+)?$/,
+														message: "Введите число с точкой, например: 1.5"
 													}
 												]}>
 												<InputNumber
