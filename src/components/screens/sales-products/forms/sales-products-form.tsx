@@ -46,10 +46,12 @@ const SalesProductsForm: FC = () => {
 	// Watch form values for calculations
 	const watchedValues = Form.useWatch([], form)
 	const productsList = watchedValues?.products || []
+	console.log(products)
 
 	// Define print type prices
 	const printTypePrices: Record<number, number> = {
 		1: 30000, // Darra
+		2: 16000,
 		3: 20000 // polniyi
 		// id: 2 (Adnatonny) не указан, остается 0
 	}
@@ -68,7 +70,17 @@ const SalesProductsForm: FC = () => {
 	const handlePrintTypeChange = (printTypeId: number, productIndex: number) => {
 		const basePrice = printTypePrices[printTypeId] || 0
 		const length = form.getFieldValue(["products", productIndex, "length"]) || 0
-		const newPrice = basePrice * length
+		const productId = form.getFieldValue([
+			"products",
+			productIndex,
+			"product_id"
+		])
+
+		// Get width from product name
+		const { width } = getProductInfo(productId)
+
+		// Calculate: basePrice * length * width (from product.name.name)
+		const newPrice = basePrice * length * width
 		form.setFieldValue(["products", productIndex, "print_cost"], newPrice)
 	}
 
@@ -79,13 +91,42 @@ const SalesProductsForm: FC = () => {
 			productIndex,
 			"print_type_id"
 		])
+		const productId = form.getFieldValue([
+			"products",
+			productIndex,
+			"product_id"
+		])
+
 		if (printTypeId) {
 			const basePrice = printTypePrices[printTypeId] || 0
-			const newPrice = basePrice * (length || 0)
+
+			// Get width from product name
+			const { width } = getProductInfo(productId)
+
+			// Calculate: basePrice * length * width (from product.name.name)
+			const newPrice = basePrice * (length || 0) * width
 			form.setFieldValue(["products", productIndex, "print_cost"], newPrice)
 		}
 	}
+	const handleProductChange = (productId: number, productIndex: number) => {
+		const printTypeId = form.getFieldValue([
+			"products",
+			productIndex,
+			"print_type_id"
+		])
+		const length = form.getFieldValue(["products", productIndex, "length"]) || 0
 
+		if (printTypeId) {
+			const basePrice = printTypePrices[printTypeId] || 0
+
+			// Get width from product name
+			const { width } = getProductInfo(productId)
+
+			// Calculate: basePrice * length * width (from product.name.name)
+			const newPrice = basePrice * length * width
+			form.setFieldValue(["products", productIndex, "print_cost"], newPrice)
+		}
+	}
 	// Calculate total cost for each product
 	const calculateProductTotal = (product: any) => {
 		if (!product) return 0
@@ -227,6 +268,7 @@ const SalesProductsForm: FC = () => {
 													showSearch={true}
 													style={{ width: 180 }}
 													optionFilterProp={"label"}
+													onChange={(value) => handleProductChange(value, name)}
 													getPopupContainer={(trigger) => trigger.parentElement}
 													options={products?.data?.map((item) => ({
 														value: item.id,

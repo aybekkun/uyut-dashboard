@@ -28,7 +28,8 @@
         "settings_expense_types": "Харажат турлари",
         "cash_flow": "Касcа ҳисоби",
         "profit_lost": "Foyda/zarar"
-    },  "total_area": "Умумий майдон",
+    },
+    "total_area": "Умумий майдон",
     "total_length": "Умумий узунлик",
     "total_cost": "Умумий нарх",
     "payment_method": "Тўлов усули",
@@ -69,5 +70,6 @@
     "enter_length": "Узунликни киритинг",
     "sum": "Жами",
     "date": "Сана",
-    "workspace": "Иш жойи"
+    "workspace": "Иш жойи",
+    "meter_square": "майдон"
 }
