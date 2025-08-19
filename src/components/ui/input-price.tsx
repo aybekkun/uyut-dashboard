@@ -12,6 +12,7 @@ const InputPrice = forwardRef<HTMLInputElement, InputNumberProps>(
 					placeholder={INPUT_PLACEHOLDER}
 					formatter={formatInputPrice}
 					min={0}
+				
 					style={{ width: "100%", ...style }}
 					{...rest}
 				/>

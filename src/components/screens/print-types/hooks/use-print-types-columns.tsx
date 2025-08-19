@@ -8,7 +8,7 @@ import {
 	useDeletePrintTypesMutation
 } from "src/services/shared/print-types"
 import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
-import { formatEmpty } from "src/utils/formatter.utils"
+import { formatEmpty, formatPriceUZS } from "src/utils/formatter.utils"
 
 const usePrintTypesColumns = () => {
 	const { t } = useTranslation()
@@ -29,6 +29,12 @@ const usePrintTypesColumns = () => {
 			dataIndex: "name",
 			key: "name",
 			render: formatEmpty
+		},
+		{
+			title: "Сотув нархи",
+			dataIndex: "amount",
+			key: "amount",
+			render: formatPriceUZS
 		},
 		{
 			fixed: "right",

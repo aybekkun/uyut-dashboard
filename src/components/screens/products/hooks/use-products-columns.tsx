@@ -27,13 +27,6 @@ export const useProductsColumns = () => {
 			key: "collar"
 		},
 
-		/* 	{
-			align: "center",
-			title: "Остаток площади",
-			dataIndex: "remainder_square_meter",
-			key: "remainder_square_meter",
-			render: formatEmpty
-		}, */
 		{
 			align: "center",
 			title: t("price"),
@@ -45,7 +38,16 @@ export const useProductsColumns = () => {
 				</Space>
 			)
 		},
-
+		{
+			title: "Цена продажи",
+			dataIndex: "sell_price",
+			key: "sell_price",
+			render: (_v, record) => (
+				<Space split={<Divider type={"vertical"} />}>
+					{formatPriceUZS(record.sell_price)}
+				</Space>
+			)
+		},
 		{
 			title: t("total_length"),
 			dataIndex: "total_meter",

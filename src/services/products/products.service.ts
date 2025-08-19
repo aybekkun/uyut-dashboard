@@ -33,6 +33,15 @@ class ProductsService {
 		const response = await api.post(`/products`, form)
 		return response.data
 	}
+	updatePrice = async (
+		id: ParamId,
+		sell_price: string
+	): Promise<ResponseSingleData<ProductItem>> => {
+		const response = await api.patch(`/products/${id}`, {
+			sell_price: sell_price
+		})
+		return response.data
+	}
 	createPrintDetailsById = async (
 		id: ParamId,
 		form: PrintDetailForm

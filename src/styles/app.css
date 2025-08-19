@@ -10,9 +10,9 @@
 	outline: none;
 	text-decoration: none;
 	list-style: none;
-
+	/* 
 	scroll-behavior: smooth;
-	scrollbar-width: thin;
+	scrollbar-width: thin; */
 	/*scrollbar-color: #eaeaea transparent;*/
 	/* scrollbar-color: #2a2a2a transparent; */
 }
@@ -27,10 +27,11 @@ h6 {
 }
 
 html {
-	scroll-behavior: smooth;
-	scrollbar-width: thin;
+	/* 	scroll-behavior: smooth;
+	scrollbar-width: thin; */
 	/*scrollbar-color: #eaeaea transparent;*/
 	/* scrollbar-color: #2a2a2a transparent; */
+	scroll-behavior: auto !important;
 }
 
 body {

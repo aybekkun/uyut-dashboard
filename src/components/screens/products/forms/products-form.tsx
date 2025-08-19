@@ -13,9 +13,9 @@ import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { FormItemPrice, FormItemSuppliers } from "./form-items"
 import FormItemColors from "./form-items/form-item-colors"
 
-import FormItemName from "./form-items/form-item-name"
 import dayjs from "dayjs"
 import { useTranslation } from "react-i18next"
+import FormItemName from "./form-items/form-item-name"
 
 const ProductsForm: FC = () => {
 	const { t } = useTranslation()
@@ -88,7 +88,9 @@ const ProductsForm: FC = () => {
 				)}
 
 				<FormItemPrice form={form} />
+
 				<FormItemSuppliers />
+
 				<Form.Item
 					name="imported_at"
 					label={t("date")}

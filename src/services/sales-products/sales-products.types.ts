@@ -35,15 +35,15 @@ type SalesProductForm = {
 	payment_type_id: number
 	full_name: string
 	phone: string
-	products: [
-		{
-			product_id: number
-			print_type_id?: number
-			print_cost?: number
-			material_cost: number
-			length: number
-		}
-	]
+	products: {
+		product_id: number
+		print_type_id?: number
+		print_cost?: number
+		material_cost?: number
+		length?: number
+		print_meter_square?: number
+		full_cost?: number
+	}[]
 }
 
 export type { SalesProduct, SalesProductForm }

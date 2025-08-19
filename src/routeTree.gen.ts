@@ -26,6 +26,7 @@ import { Route as LayoutEmployeesIndexImport } from './routes/_layout/employees/
 import { Route as LayoutSettingsPrintTypesImport } from './routes/_layout/settings/print-types'
 import { Route as LayoutSettingsPaymentTypesImport } from './routes/_layout/settings/payment-types'
 import { Route as LayoutSettingsExpenseTypesImport } from './routes/_layout/settings/expense-types'
+import { Route as LayoutSalesSalesProductImport } from './routes/_layout/sales/sales-product'
 import { Route as LayoutSalesProductsImport } from './routes/_layout/sales/products'
 import { Route as LayoutReportsWriteOffProductsImport } from './routes/_layout/reports/write-off-products'
 import { Route as LayoutReportsSuppliersImport } from './routes/_layout/reports/suppliers'
@@ -138,6 +139,12 @@ const LayoutSettingsExpenseTypesRoute = LayoutSettingsExpenseTypesImport.update(
     getParentRoute: () => LayoutRoute,
   } as any,
 )
+
+const LayoutSalesSalesProductRoute = LayoutSalesSalesProductImport.update({
+  id: '/sales/sales-product',
+  path: '/sales/sales-product',
+  getParentRoute: () => LayoutRoute,
+} as any)
 
 const LayoutSalesProductsRoute = LayoutSalesProductsImport.update({
   id: '/sales/products',
@@ -393,6 +400,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutSalesProductsImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/sales/sales-product': {
+      id: '/_layout/sales/sales-product'
+      path: '/sales/sales-product'
+      fullPath: '/sales/sales-product'
+      preLoaderRoute: typeof LayoutSalesSalesProductImport
+      parentRoute: typeof LayoutImport
+    }
     '/_layout/settings/expense-types': {
       id: '/_layout/settings/expense-types'
       path: '/settings/expense-types'
@@ -501,6 +515,7 @@ interface LayoutRouteChildren {
   LayoutReportsSuppliersRoute: typeof LayoutReportsSuppliersRoute
   LayoutReportsWriteOffProductsRoute: typeof LayoutReportsWriteOffProductsRoute
   LayoutSalesProductsRoute: typeof LayoutSalesProductsRoute
+  LayoutSalesSalesProductRoute: typeof LayoutSalesSalesProductRoute
   LayoutSettingsExpenseTypesRoute: typeof LayoutSettingsExpenseTypesRoute
   LayoutSettingsPaymentTypesRoute: typeof LayoutSettingsPaymentTypesRoute
   LayoutSettingsPrintTypesRoute: typeof LayoutSettingsPrintTypesRoute
@@ -534,6 +549,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutReportsSuppliersRoute: LayoutReportsSuppliersRoute,
   LayoutReportsWriteOffProductsRoute: LayoutReportsWriteOffProductsRoute,
   LayoutSalesProductsRoute: LayoutSalesProductsRoute,
+  LayoutSalesSalesProductRoute: LayoutSalesSalesProductRoute,
   LayoutSettingsExpenseTypesRoute: LayoutSettingsExpenseTypesRoute,
   LayoutSettingsPaymentTypesRoute: LayoutSettingsPaymentTypesRoute,
   LayoutSettingsPrintTypesRoute: LayoutSettingsPrintTypesRoute,
@@ -572,6 +588,7 @@ export interface FileRoutesByFullPath {
   '/reports/suppliers': typeof LayoutReportsSuppliersRoute
   '/reports/write-off-products': typeof LayoutReportsWriteOffProductsRoute
   '/sales/products': typeof LayoutSalesProductsRoute
+  '/sales/sales-product': typeof LayoutSalesSalesProductRoute
   '/settings/expense-types': typeof LayoutSettingsExpenseTypesRoute
   '/settings/payment-types': typeof LayoutSettingsPaymentTypesRoute
   '/settings/print-types': typeof LayoutSettingsPrintTypesRoute
@@ -606,6 +623,7 @@ export interface FileRoutesByTo {
   '/reports/suppliers': typeof LayoutReportsSuppliersRoute
   '/reports/write-off-products': typeof LayoutReportsWriteOffProductsRoute
   '/sales/products': typeof LayoutSalesProductsRoute
+  '/sales/sales-product': typeof LayoutSalesSalesProductRoute
   '/settings/expense-types': typeof LayoutSettingsExpenseTypesRoute
   '/settings/payment-types': typeof LayoutSettingsPaymentTypesRoute
   '/settings/print-types': typeof LayoutSettingsPrintTypesRoute
@@ -642,6 +660,7 @@ export interface FileRoutesById {
   '/_layout/reports/suppliers': typeof LayoutReportsSuppliersRoute
   '/_layout/reports/write-off-products': typeof LayoutReportsWriteOffProductsRoute
   '/_layout/sales/products': typeof LayoutSalesProductsRoute
+  '/_layout/sales/sales-product': typeof LayoutSalesSalesProductRoute
   '/_layout/settings/expense-types': typeof LayoutSettingsExpenseTypesRoute
   '/_layout/settings/payment-types': typeof LayoutSettingsPaymentTypesRoute
   '/_layout/settings/print-types': typeof LayoutSettingsPrintTypesRoute
@@ -679,6 +698,7 @@ export interface FileRouteTypes {
     | '/reports/suppliers'
     | '/reports/write-off-products'
     | '/sales/products'
+    | '/sales/sales-product'
     | '/settings/expense-types'
     | '/settings/payment-types'
     | '/settings/print-types'
@@ -712,6 +732,7 @@ export interface FileRouteTypes {
     | '/reports/suppliers'
     | '/reports/write-off-products'
     | '/sales/products'
+    | '/sales/sales-product'
     | '/settings/expense-types'
     | '/settings/payment-types'
     | '/settings/print-types'
@@ -746,6 +767,7 @@ export interface FileRouteTypes {
     | '/_layout/reports/suppliers'
     | '/_layout/reports/write-off-products'
     | '/_layout/sales/products'
+    | '/_layout/sales/sales-product'
     | '/_layout/settings/expense-types'
     | '/_layout/settings/payment-types'
     | '/_layout/settings/print-types'
@@ -806,6 +828,7 @@ export const routeTree = rootRoute
         "/_layout/reports/suppliers",
         "/_layout/reports/write-off-products",
         "/_layout/sales/products",
+        "/_layout/sales/sales-product",
         "/_layout/settings/expense-types",
         "/_layout/settings/payment-types",
         "/_layout/settings/print-types",
@@ -893,6 +916,10 @@ export const routeTree = rootRoute
     },
     "/_layout/sales/products": {
       "filePath": "_layout/sales/products.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/sales/sales-product": {
+      "filePath": "_layout/sales/sales-product.tsx",
       "parent": "/_layout"
     },
     "/_layout/settings/expense-types": {

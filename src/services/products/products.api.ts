@@ -110,6 +110,33 @@ const useCreateProductsMutation = () => {
 	})
 }
 
+export const useUpdateProductPrice = () => {
+	const queryClient = useQueryClient()
+	const { message } = useMessage()
+	return useMutation({
+		mutationFn: ({ id, sell_price }: { id: number; sell_price: string }) =>
+			productsService.updatePrice(id, sell_price),
+		onSuccess: async (_, variables) => {
+			// Обновляем кэш для конкретного продукта
+			await queryClient.invalidateQueries({
+				queryKey: ["products by id", variables.id]
+			})
+			await queryClient.invalidateQueries({
+				queryKey: ["products"]
+			})
+			message.success({
+				message: "Success",
+				description: "Product price updated successfully"
+			})
+		},
+		onError: (error: ResponseError) => {
+			message.error({
+				message: error?.message,
+				description: error?.response?.data?.message
+			})
+		}
+	})
+}
 export {
 	useGetProductsQuery,
 	useGetProductsByIdQuery,

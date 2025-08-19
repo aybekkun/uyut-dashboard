@@ -1,5 +1,7 @@
 import { PlusOutlined } from "@ant-design/icons"
+import { useNavigate } from "@tanstack/react-router"
 import { FC } from "react"
+import { useTranslation } from "react-i18next"
 import { Button } from "src/components/ui/button"
 import { Table } from "src/components/ui/table"
 import {
@@ -7,9 +9,7 @@ import {
 	useGetSalesProductsQuery
 } from "src/services/sales-products"
 import { GetParams } from "src/services/shared"
-import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { useSalesProductsColumns } from "../hooks/use-sales-products-columns"
-import { useTranslation } from "react-i18next"
 
 interface SalesProductsTableProps {
 	params: GetParams
@@ -24,7 +24,7 @@ const SalesProductsTable: FC<SalesProductsTableProps> = ({
 }) => {
 	const { t } = useTranslation()
 	const { page, limit } = params
-
+	const navigate = useNavigate()
 	const {
 		data: salesProducts,
 		isLoading,
@@ -34,8 +34,13 @@ const SalesProductsTable: FC<SalesProductsTableProps> = ({
 		limit: limit || 10
 	})
 
-	const toggleForm = useFormDevtoolsStore((state) => state.toggleForm)
-
+	/* const toggleForm = useFormDevtoolsStore(state=>state.toggleForm)
+ */
+	const onClickButton = () => {
+		navigate({
+			to: "/sales/sales-product"
+		})
+	}
 	const columns = useSalesProductsColumns()
 	return (
 		<>
@@ -44,9 +49,14 @@ const SalesProductsTable: FC<SalesProductsTableProps> = ({
 				title={t("menu.sales_list")}
 				extra={
 					readonly ? null : (
-						<Button icon={<PlusOutlined />} onClick={toggleForm}>
-							{t("add")}
-						</Button>
+						<div>
+							<Button icon={<PlusOutlined />} onClick={onClickButton}>
+								{t("add")}
+							</Button>
+					{/* 		<Button icon={<PlusOutlined />} onClick={toggleForm}>
+								{t("add")}
+							</Button> */}
+						</div>
 					)
 				}
 				columns={columns.filter((el) => (readonly ? el.key !== "actions" : el))}

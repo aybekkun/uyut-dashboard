@@ -11,6 +11,7 @@ export type ProductItem = {
 		id: number
 		collar: string
 	} | null
+	width: number | null
 	total_length: number
 	total_price_uzs: number
 	total_price_usd: number
@@ -21,6 +22,7 @@ export type ProductItem = {
 		meter_square: null | number
 		meter: null | number
 	}
+	sell_price: string
 	imported_at: null | Date
 	created_at: Date
 	updated_at: Date
@@ -80,6 +82,7 @@ type ProductForm = {
 	rolls: number | null
 	supplier_id: number
 	imported_at: string
+	sell_price: string | number
 }
 
 // type ProductForm = {

@@ -1,7 +1,12 @@
-import { DescriptionsProps } from "antd"
+import { Button, DescriptionsProps, Form } from "antd"
 import { useTranslation } from "react-i18next"
-import { ProductItem } from "src/services/products"
-import { formatEmpty, formatPrice } from "src/utils/formatter.utils"
+import { InputPrice } from "src/components/ui"
+import { ProductItem, useUpdateProductPrice } from "src/services/products"
+import {
+	formatEmpty,
+	formatPriceUSD,
+	formatPriceUZS
+} from "src/utils/formatter.utils"
 
 const useProductItems = (data?: ProductItem) => {
 	const { t } = useTranslation()
@@ -28,17 +33,58 @@ const useProductItems = (data?: ProductItem) => {
 		},
 		{
 			key: "price_uzs",
-			label: t("price_uzs"),
-			children: formatPrice(data?.total_price_uzs)
+			label: "UZS",
+			children: formatPriceUZS(data?.total_price_uzs)
 		},
 		{
 			key: "price_usd",
-			label: t("price_usd"),
-			children: formatPrice(data?.total_price_usd)
+			label: "USD",
+			children: formatPriceUSD(data?.total_price_usd)
+		},
+		{
+			key: "sell_price",
+			label: "Сотув нархи",
+			children: (
+				<UpdatePriceForm productId={data?.id} initialPrice={data?.sell_price} />
+			)
 		}
 	]
 
 	return items
+}
+
+export const UpdatePriceForm = ({
+	productId,
+	initialPrice
+}: {
+	productId?: number
+	initialPrice?: string
+}) => {
+	const [form] = Form.useForm()
+	const { mutate, isPending } = useUpdateProductPrice()
+
+	const onFinish = (values: { price: string }) => {
+		if (productId) mutate({ id: productId, sell_price: values.price })
+	}
+
+	return (
+		<Form
+			form={form}
+			layout="inline"
+			initialValues={{ price: initialPrice }}
+			onFinish={onFinish}>
+			<Form.Item
+				name="price"
+				rules={[{ required: true, message: "Введите цену" }]}>
+				<InputPrice />
+			</Form.Item>
+			<Form.Item>
+				<Button type="primary" htmlType="submit" loading={isPending}>
+					Изменить
+				</Button>
+			</Form.Item>
+		</Form>
+	)
 }
 
 export { useProductItems }

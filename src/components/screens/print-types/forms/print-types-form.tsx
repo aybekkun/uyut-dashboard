@@ -1,4 +1,4 @@
-import { Form, FormProps, Input } from "antd"
+import { Form, FormProps, Input, InputNumber } from "antd"
 import { type FC, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { FormDrawer } from "src/components/shared/form-drawer"
@@ -10,10 +10,11 @@ import {
 	useEditPrintTypesMutation
 } from "src/services/shared/print-types"
 import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
+import { formatInputPrice } from "src/utils/formatter.utils"
 import { isParamsFormValidate } from "src/utils/validate.utils"
 
 const PrintTypesForm: FC = () => {
-	const {t} = useTranslation()
+	const { t } = useTranslation()
 	const [form] = Form.useForm<PrintTypeForm>()
 
 	const { params, resetParams } = useFormDevtoolsStore()
@@ -67,6 +68,16 @@ const PrintTypesForm: FC = () => {
 					label={t("name")}
 					rules={[{ required: true }]}>
 					<Input placeholder={INPUT_PLACEHOLDER} />
+				</Form.Item>
+				<Form.Item<PrintTypeForm>
+					name={"amount"}
+					label={"Сотув нархи"}
+					rules={[{ required: true }]}>
+					<InputNumber
+						formatter={formatInputPrice}
+						style={{ width: "100%" }}
+						placeholder={INPUT_PLACEHOLDER}
+					/>
 				</Form.Item>
 			</Form>
 		</FormDrawer>
