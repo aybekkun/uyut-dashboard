@@ -220,6 +220,18 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 		}
 	}
 
+	const onAddGarfon = (index: number, productId: number) => {
+		const length = form.getFieldValue(["products", index, "length"]) ?? 0
+		const product = getProductInfo(productId)
+		const garfon = getProductInfo(93)
+
+		const perimetr = 2 * (length + product.width)
+		const price = perimetr * garfon.sellPrice
+		form.setFieldValue(["products", index + 1, "length"], perimetr)
+		form.setFieldValue(["products", index + 1, "product_id"], 93)
+		form.setFieldValue(["products", index + 1, "material_cost"], price)
+	}
+
 	const calculateRowPrice = (index: number) => {
 		const materialCost =
 			form.getFieldValue(["products", index, "material_cost"]) ?? 0
@@ -401,6 +413,17 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 													}
 												/>
 											</Form.Item>
+											{productInfo.hasWidth && (
+												<Button
+													style={{ marginTop: 30 }}
+													icon={<PlusOutlined />}
+													onClick={async () => {
+														await add()
+														onAddGarfon(name, productId)
+													}}>
+													Гарфон
+												</Button>
+											)}
 											<Button
 												type="text"
 												danger={true}

@@ -1,4 +1,5 @@
 import { Button, DescriptionsProps, Form } from "antd"
+import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { InputPrice } from "src/components/ui"
 import { ProductItem, useUpdateProductPrice } from "src/services/products"
@@ -62,17 +63,15 @@ export const UpdatePriceForm = ({
 }) => {
 	const [form] = Form.useForm()
 	const { mutate, isPending } = useUpdateProductPrice()
-
+	useEffect(() => {
+		if (initialPrice) form.setFieldValue("price", initialPrice)
+	}, [initialPrice, productId])
 	const onFinish = (values: { price: string }) => {
 		if (productId) mutate({ id: productId, sell_price: values.price })
 	}
 
 	return (
-		<Form
-			form={form}
-			layout="inline"
-			initialValues={{ price: initialPrice }}
-			onFinish={onFinish}>
+		<Form form={form} layout="inline" onFinish={onFinish}>
 			<Form.Item
 				name="price"
 				rules={[{ required: true, message: "Введите цену" }]}>
