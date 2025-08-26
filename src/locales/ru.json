@@ -90,5 +90,12 @@
     "profit": "Прибыль",
     "expenses": "Расходы",
     "start_remainder_amount": "Начальная сумма остатка",
-    "end_remainder_amount": "Конечная сумма остатка"
+    "end_remainder_amount": "Конечная сумма остатка",
+    "unitOfMeasurement": "Ед.измерение",
+    "pricePerMeter": "Цена за метр",
+    "area": "Площадь",
+
+    "maxValue": "Максимальная",
+    "printPrice": "Цена принта",
+    "totalPrice": "Общая цена"
 }

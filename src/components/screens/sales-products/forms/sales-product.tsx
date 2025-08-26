@@ -309,7 +309,7 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 											{/* Выбор продукта */}
 											<Form.Item
 												{...restField}
-												label="Товары"
+												label={t("products")}
 												name={[name, "product_id"]}
 												rules={[{ required: true, message: "Выберите товар" }]}>
 												<Select
@@ -435,40 +435,44 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 										<Row>
 											<Col span={3}>
 												<Text strong style={{ display: "block" }}>
-													Ед.измерение:
+													{t("unitOfMeasurement")}:
 												</Text>
 												<Text>{productInfo.unitOfMeasurement}</Text>
 											</Col>
+
 											<Col span={3}>
 												<Text strong style={{ display: "block" }}>
-													Цена за метр:
+													{t("pricePerMeter")}:
 												</Text>
 												<Text>{formatPriceUZS(productInfo.sellPrice)}</Text>
 											</Col>
+
 											<Col span={3}>
 												<Text strong style={{ display: "block" }}>
-													{productInfo.hasWidth ? "Площадь" : "Длина"}:
+													{productInfo.hasWidth ? t("area") : t("length")}:
 												</Text>
 												<Text strong style={{ display: "block" }}>
 													{area.toFixed(2)} {productInfo.unitOfMeasurement}
 												</Text>
 												{area > productInfo.maxValue && (
 													<Text strong style={{ color: "red" }}>
-														Максимальная {productInfo.maxValue}{" "}
+														{t("maxValue")} {productInfo.maxValue}
 													</Text>
 												)}
 											</Col>
+
 											<Col span={3}>
 												<Text strong style={{ display: "block" }}>
-													Цена принта:
+													{t("printPrice")}:
 												</Text>
 												<Text>{formatPriceUZS(printCost)}</Text>
 											</Col>
+
 											<Col span={3}>
 												<Text
 													strong
 													style={{ display: "block", color: "blue" }}>
-													Общая цена:
+													{t("totalPrice")}:
 												</Text>
 												<Text>{formatPriceUZS(price)}</Text>
 											</Col>
@@ -497,7 +501,7 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 						htmlType="submit"
 						block={true}
 						loading={addLoading}>
-						Сохранить
+						{t("save")}
 					</Button>
 				</Form.Item>
 			</Form>

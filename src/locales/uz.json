@@ -90,5 +90,11 @@
     "profit": "Фойда",
     "expenses": "Харажатлар",
     "start_remainder_amount": "Бошланғич қолдиқ сумма",
-    "end_remainder_amount": "Якунги қолдиқ сумма"
+    "end_remainder_amount": "Якунги қолдиқ сумма",
+    "unitOfMeasurement": "Ўлчов бирлиги",
+    "pricePerMeter": "Метрининг нархи",
+    "area": "Майдон",
+    "maxValue": "Энг кўпи",
+    "printPrice": "Принт нархи",
+    "totalPrice": "Жами нархи"
 }
