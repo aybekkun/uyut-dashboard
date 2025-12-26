@@ -4,9 +4,10 @@ import { useResponsive } from "antd-style"
 import { type FC, PropsWithChildren } from "react"
 import { Logo } from "src/components/shared/logo"
 import { useMenuStore } from "src/store/use-menu-store"
+import { LanguageButton } from "./header/language-button"
+import { DebtorsBell } from "./header/notifications-button"
 import { ProfileAvatar } from "./header/profile-avatar"
 import { ThemeButton } from "./header/theme-button"
-import { LanguageButton } from "./header/language-button"
 
 const Header: FC<PropsWithChildren> = () => {
 	const toggleCollapsed = useMenuStore((state) => state.toggleCollapsed)
@@ -46,6 +47,8 @@ const Header: FC<PropsWithChildren> = () => {
 					</Space>
 					<Space>
 						<LanguageButton />
+						{/* <NotificationsButton /> */}
+						<DebtorsBell/>
 						<ThemeButton />
 						<ProfileAvatar />
 					</Space>
@@ -56,3 +59,4 @@ const Header: FC<PropsWithChildren> = () => {
 }
 
 export { Header }
+

@@ -1,6 +1,6 @@
 import { Form, Select } from "antd"
 import { type FC, useState } from "react"
-import { SELECT_PLACEHOLDER } from "src/constants/form.constants"
+import { useTranslation } from "react-i18next"
 import { useGetProductsQuery } from "src/services/products"
 
 const FormItemProducts: FC = () => {
@@ -8,6 +8,8 @@ const FormItemProducts: FC = () => {
 		page: 1,
 		limit: 1000
 	})
+
+	const { t } = useTranslation()
 
 	const { data: products, isLoading, isFetching } = useGetProductsQuery(params)
 
@@ -22,7 +24,7 @@ const FormItemProducts: FC = () => {
 				disabled={isLoading}
 				showSearch={true}
 				optionFilterProp={"label"}
-				placeholder={SELECT_PLACEHOLDER}
+				placeholder={t("select_placeholder")}
 				loading={isLoading || isFetching}
 				options={products?.data?.map((product) => ({
 					value: product.id,

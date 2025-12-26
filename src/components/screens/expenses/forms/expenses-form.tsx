@@ -1,9 +1,10 @@
 import { Form, FormProps, Select } from "antd"
 import { type FC, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { FormDrawer } from "src/components/shared/form-drawer"
 import { Input } from "src/components/ui/input"
 import { InputPrice } from "src/components/ui/input-price"
-import { FORM_DEFAULT, SELECT_PLACEHOLDER } from "src/constants/form.constants"
+import { FORM_DEFAULT } from "src/constants/form.constants"
 import {
 	type Expense,
 	type ExpenseForm,
@@ -18,6 +19,8 @@ const ExpensesForm: FC = () => {
 	const [form] = Form.useForm<ExpenseForm>()
 
 	const { params, resetParams } = useFormDevtoolsStore()
+
+	const { t } = useTranslation()
 
 	const {
 		data: expenseTypes,
@@ -88,7 +91,7 @@ const ExpensesForm: FC = () => {
 							value: expenseType?.id,
 							label: expenseType?.name
 						}))}
-						placeholder={SELECT_PLACEHOLDER}
+						placeholder={t("select_placeholder")}
 					/>
 				</Form.Item>
 				<Form.Item<ExpenseForm>

@@ -30,6 +30,12 @@ export const useProductColumns = () => {
 			key: "rolls",
 			render: formatEmpty
 		},
+		{
+			title: t("pieces"),
+			dataIndex: "pieces",
+			key: "pieces",
+			render: formatEmpty
+		},
 		/* 	{
 			align: "center",
 			title: "Остаток площади",

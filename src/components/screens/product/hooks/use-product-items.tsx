@@ -23,6 +23,11 @@ const useProductItems = (data?: ProductItem) => {
 			children: formatEmpty(data?.remainder.meter_square)
 		},
 		{
+			key: "remainder_pieces",
+			label: t("remainder_pieces"),
+			children: formatEmpty(data?.remainder.pieces)
+		},
+		{
 			key: "color",
 			label: t("color"),
 			children: formatEmpty(data?.collar?.collar)
@@ -43,8 +48,13 @@ const useProductItems = (data?: ProductItem) => {
 			children: formatPriceUSD(data?.total_price_usd)
 		},
 		{
+			key: "measurement_unit",
+			label: t("measurement_unit"),
+			children: data?.measurement_unit.name
+		},
+		{
 			key: "sell_price",
-			label: "Сотув нархи",
+			label: t("sell_price"),
 			children: (
 				<UpdatePriceForm productId={data?.id} initialPrice={data?.sell_price} />
 			)

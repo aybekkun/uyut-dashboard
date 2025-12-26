@@ -1,8 +1,7 @@
 import { Form, Select } from "antd"
-import { SELECT_PLACEHOLDER } from "src/constants/form.constants"
-import { ProductForm } from "src/services/products"
-import { useGetProductsNameQuery } from "src/services/name"
 import { useTranslation } from "react-i18next"
+import { useGetProductsNameQuery } from "src/services/name"
+import { ProductForm } from "src/services/products"
 
 const FormItemName = ({
 	onChangeProductsName
@@ -22,7 +21,7 @@ const FormItemName = ({
 			rules={[{ required: true }]}>
 			<Select
 				onChange={onChangeProductsName}
-				placeholder={SELECT_PLACEHOLDER}
+				placeholder={t("select_placeholder")}
 				loading={isLoading || isFetching}
 				 showSearch={true}
 				optionFilterProp={"label"}

@@ -54,12 +54,12 @@ const FinancesByDateChart: FC<FinancesByDateChartProps> = ({
 	})
 	return (
 		<Card
-			bordered={false}
+			variant="borderless"
 			title={title}
 			extra={
 				<Space>
 					<DatePicker
-						picker={type === "days" ? "month" : "year"}
+						picker={type === "days" ? "date" : type}
 						format={{
 							format: type === "days" ? "MM.YYYY" : "YYYY",
 							type: "mask"

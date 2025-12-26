@@ -19,7 +19,7 @@ import { FormDrawer } from "src/components/shared/form-drawer"
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons"
 import { useTranslation } from "react-i18next"
 import { InputPrice } from "src/components/ui"
-import { FORM_DEFAULT, SELECT_PLACEHOLDER } from "src/constants/form.constants"
+import { FORM_DEFAULT } from "src/constants/form.constants"
 import { useGetProductsQuery } from "src/services/products"
 import {
 	type SalesProductForm,
@@ -46,7 +46,6 @@ const SalesProductsForm: FC = () => {
 	// Watch form values for calculations
 	const watchedValues = Form.useWatch([], form)
 	const productsList = watchedValues?.products || []
-	console.log(products)
 
 	// Define print type prices
 	const printTypePrices: Record<number, number> = {
@@ -188,7 +187,7 @@ const SalesProductsForm: FC = () => {
 			}
 		)
 	}
-
+	
 	return (
 		<FormDrawer form={form} width={1000} isLoading={addLoading}>
 			<Form
@@ -206,7 +205,7 @@ const SalesProductsForm: FC = () => {
 							<AutoComplete
 								showSearch={true}
 								notFoundContent={null}
-								placeholder={SELECT_PLACEHOLDER}
+								placeholder={t("select_placeholder")}
 								onSelect={(value) => handleClientSelect(value)}
 								options={clients?.data?.map((item) => ({
 									value: item.full_name,
@@ -264,7 +263,7 @@ const SalesProductsForm: FC = () => {
 												name={[name, "product_id"]}
 												rules={[{ required: true, message: "Выберите товар" }]}>
 												<Select
-													placeholder={SELECT_PLACEHOLDER}
+													placeholder={t("select_placeholder")}
 													showSearch={true}
 													style={{ width: 180 }}
 													optionFilterProp={"label"}
@@ -307,7 +306,7 @@ const SalesProductsForm: FC = () => {
 															{ required: true, message: "Введите принт тип" }
 														]}>
 														<Select
-															placeholder={SELECT_PLACEHOLDER}
+															placeholder={t("select_placeholder")}
 															optionFilterProp={"label"}
 															style={{ width: 120 }}
 															onChange={(value) =>
@@ -393,6 +392,7 @@ const SalesProductsForm: FC = () => {
 						</Text>
 					</div>
 				)}
+			
 			</Form>
 		</FormDrawer>
 	)

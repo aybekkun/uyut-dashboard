@@ -1,6 +1,6 @@
-import { Col, Form, FormInstance, InputNumber, Row } from "antd"
+import { Button, Col, Form, FormInstance, InputNumber, Row } from "antd"
 import { type FC } from "react"
-import { INPUT_PLACEHOLDER } from "src/constants/form.constants"
+import { useTranslation } from "react-i18next"
 // import { useConvertPrice } from "src/hooks/use-convert-price"
 import type { ProductForm } from "src/services/products"
 import { formatInputPrice } from "src/utils/formatter.utils"
@@ -9,7 +9,8 @@ interface FormItemPriceProps {
 	form: FormInstance<ProductForm>
 }
 
-const FormItemPrice: FC<FormItemPriceProps> = () => {
+const FormItemPrice: FC<FormItemPriceProps> = ({ form }) => {
+
 	// const priceUZS = Form.useWatch("price_uzs", form) || 0
 	// const priceUSD = Form.useWatch("price_usd", form) || 0
 
@@ -51,8 +52,15 @@ const FormItemPrice: FC<FormItemPriceProps> = () => {
 	// 		price_usd: convertedPriceUZStoUSD
 	// 	})
 	// }, [priceUSD, priceUZS, form])
+	const { t } = useTranslation()
+	const increaseByPercent = (field: keyof ProductForm, percent: number) => {
+		const current = form.getFieldValue(field) || 0
+		const updated = current + (current * percent) / 100
+		form.setFieldsValue({ [field]: updated })
+	}
+
 	return (
-		<Row gutter={20} style={{ rowGap: 20 }}>
+		<Row gutter={20} style={{ rowGap: 20, marginBottom: 40 }}>
 			<Col span={12}>
 				<Form.Item<ProductForm>
 					name={"price_uzs"}
@@ -61,9 +69,24 @@ const FormItemPrice: FC<FormItemPriceProps> = () => {
 					<InputNumber
 						formatter={formatInputPrice}
 						style={{ width: "100%" }}
-						placeholder={INPUT_PLACEHOLDER}
+						placeholder={t("input_placeholder")}
 					/>
 				</Form.Item>
+				<Row gutter={[8, 8]} style={{ width: "100%" }}>
+					{[25, 50, 75, 100].map((p) => (
+						<Col span={6} key={p}>
+							<Button
+								size="small"
+								style={{ width: "100%", fontSize: "10px", padding: "2px 0" }}
+								onClick={() => increaseByPercent("price_uzs", p)}
+							>
+								+{p}%
+							</Button>
+						</Col>
+					))}
+				</Row>
+
+
 			</Col>
 			{/*<Col span={4}>*/}
 			{/*	<Flex align={"baseline"} style={{ height: "100%" }}>*/}
@@ -78,9 +101,22 @@ const FormItemPrice: FC<FormItemPriceProps> = () => {
 					<InputNumber
 						formatter={formatInputPrice}
 						style={{ width: "100%" }}
-						placeholder={INPUT_PLACEHOLDER}
+						placeholder={t("input_placeholder")}
 					/>
 				</Form.Item>
+				<Row gutter={[8, 8]} style={{ width: "100%" }}>
+					{[25, 50, 75, 100].map((p) => (
+						<Col span={6} key={p}>
+							<Button
+								size="small"
+								style={{ width: "100%", fontSize: "10px", padding: "2px 0" }}
+								onClick={() => increaseByPercent("price_usd", p)}
+							>
+								+{p}%
+							</Button>
+						</Col>
+					))}
+				</Row>
 			</Col>
 		</Row>
 	)

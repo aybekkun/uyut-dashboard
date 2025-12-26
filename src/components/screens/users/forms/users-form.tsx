@@ -5,7 +5,7 @@ import { PatternFormat } from "react-number-format"
 import { FormDrawer } from "src/components/shared/form-drawer"
 import { Input } from "src/components/ui/input"
 import { InputPassword } from "src/components/ui/input-password"
-import { FORM_DEFAULT, SELECT_PLACEHOLDER } from "src/constants/form.constants"
+import { FORM_DEFAULT } from "src/constants/form.constants"
 import { useGetRolesQuery } from "src/services/shared/roles"
 import {
 	useCreateUsersMutation,
@@ -92,7 +92,7 @@ const UsersForm: FC = () => {
 					label={t("role")}
 					rules={[{ required: true }]}>
 					<Select
-						placeholder={SELECT_PLACEHOLDER}
+						placeholder={t("select_placeholder")}
 						loading={rolesLoading || rolesFetching}
 						showSearch={true}
 						optionFilterProp={"label"}

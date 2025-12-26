@@ -1,7 +1,6 @@
 import { Form, Select } from "antd"
 import { type FC } from "react"
 import { useTranslation } from "react-i18next"
-import { SELECT_PLACEHOLDER } from "src/constants/form.constants"
 import { SalesProductForm } from "src/services/sales-products"
 import { useGetPaymentTypesQuery } from "src/services/shared/payment-types"
 
@@ -20,7 +19,7 @@ const FormItemPaymentType: FC = () => {
 			<Select
 				showSearch={true}
 				optionFilterProp={"label"}
-				placeholder={SELECT_PLACEHOLDER}
+				placeholder={t("select_placeholder")}
 				loading={isLoading || isFetching}
 				options={paymentTypes?.data?.map((paymentType) => ({
 					value: paymentType.id,

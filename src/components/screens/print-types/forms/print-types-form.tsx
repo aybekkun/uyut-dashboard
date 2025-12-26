@@ -2,7 +2,7 @@ import { Form, FormProps, Input, InputNumber } from "antd"
 import { type FC, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { FormDrawer } from "src/components/shared/form-drawer"
-import { FORM_DEFAULT, INPUT_PLACEHOLDER } from "src/constants/form.constants"
+import { FORM_DEFAULT } from "src/constants/form.constants"
 import {
 	PrintType,
 	PrintTypeForm,
@@ -67,7 +67,7 @@ const PrintTypesForm: FC = () => {
 					name={"name"}
 					label={t("name")}
 					rules={[{ required: true }]}>
-					<Input placeholder={INPUT_PLACEHOLDER} />
+					<Input placeholder={t("input_placeholder")} />
 				</Form.Item>
 				<Form.Item<PrintTypeForm>
 					name={"amount"}
@@ -76,7 +76,7 @@ const PrintTypesForm: FC = () => {
 					<InputNumber
 						formatter={formatInputPrice}
 						style={{ width: "100%" }}
-						placeholder={INPUT_PLACEHOLDER}
+						placeholder={t("input_placeholder")}
 					/>
 				</Form.Item>
 			</Form>

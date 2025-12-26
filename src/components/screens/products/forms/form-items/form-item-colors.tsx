@@ -1,7 +1,6 @@
 import { Form, Select } from "antd"
 import { FC } from "react"
 import { useTranslation } from "react-i18next"
-import { SELECT_PLACEHOLDER } from "src/constants/form.constants"
 import { useGetColorsQuery } from "src/services/colors"
 import { ProductForm } from "src/services/products"
 
@@ -16,7 +15,7 @@ const FormItemColors: FC = () => {
 				label={t("colors")}
 				rules={[{ required: true }]}>
 				<Select
-					placeholder={SELECT_PLACEHOLDER}
+					placeholder={t("select_placeholder")}
 					loading={isLoading || isFetching}
 					showSearch={true}
 					optionFilterProp={"label"}

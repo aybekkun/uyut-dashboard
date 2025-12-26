@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { FormDrawer } from "src/components/shared"
 import { FormItemProducts } from "src/components/shared/form-items"
 import { DatePicker, Input, InputNumber, InputPrice } from "src/components/ui"
-import { FORM_DEFAULT, INPUT_PLACEHOLDER } from "src/constants/form.constants"
+import { FORM_DEFAULT } from "src/constants/form.constants"
 import {
 	useCreateWriteOffProductsMutation,
 	useEditWriteOffProductsMutation,
@@ -81,7 +81,7 @@ const WriteOffProductsForm: FC = () => {
 					name={"meter"}
 					label={t("length")}
 					rules={[{ required: true }]}>
-					<InputNumber placeholder={INPUT_PLACEHOLDER} />
+					<InputNumber placeholder={t("input_placeholder")} />
 				</Form.Item>
 				<Form.Item<WriteOffProductForm>
 					name={"amount"}

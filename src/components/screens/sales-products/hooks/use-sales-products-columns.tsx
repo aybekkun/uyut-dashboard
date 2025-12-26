@@ -9,32 +9,21 @@ import {
 	useDeleteSalesProductsMutation
 } from "src/services/sales-products"
 
+import { useTranslation } from "react-i18next"
+import { useGetProfileQuery } from "src/services/login"
 import {
-	formatDate,
+	formateHHDate,
 	formatEmpty,
 	formatPriceUZS
 } from "src/utils/formatter.utils"
 import { SalesProductsTableList } from "../tables/sales-products-table-list"
-import { useTranslation } from "react-i18next"
-import { useGetProfileQuery } from "src/services/login"
+import { UseSalesProductsTablePrint } from "./use-sales-products-table-print"
 
 export const useSalesProductsColumns = () => {
 	const { mutate: deleteSalesProduct } = useDeleteSalesProductsMutation()
 	const { data: profile } = useGetProfileQuery()
 	const { t } = useTranslation()
 	const columns: ColumnsType<SalesProduct> = [
-		{
-			title: t("total_area"),
-			dataIndex: "total_meter_square",
-			key: "total_meter_square",
-			render: formatEmpty
-		},
-		{
-			title: t("total_length"),
-			dataIndex: "total_meter",
-			key: "total_meter",
-			render: formatEmpty
-		},
 		{
 			title: t("total_cost"),
 			dataIndex: "total_cost",
@@ -80,7 +69,12 @@ export const useSalesProductsColumns = () => {
 			title: t("created"),
 			dataIndex: "created_at",
 			key: "created_at",
-			render: formatDate
+			render: formateHHDate
+		},
+		{
+			title: t("receipt"),
+			key: "print",
+			render: (_, record) => <UseSalesProductsTablePrint record={record} />
 		},
 		{
 			width: 100,

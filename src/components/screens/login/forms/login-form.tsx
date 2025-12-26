@@ -11,8 +11,9 @@ import {
 } from "antd"
 import { useResponsive } from "antd-style"
 import { type FC, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { PatternFormat } from "react-number-format"
-import { FORM_DEFAULT, INPUT_PLACEHOLDER } from "src/constants/form.constants"
+import { FORM_DEFAULT } from "src/constants/form.constants"
 import { useAuth } from "src/hooks/use-auth"
 import { type LoginForm, useLoginMutation } from "src/services/login"
 import { formatPhoneReverse } from "src/utils/formatter.utils"
@@ -22,6 +23,7 @@ const LoginForm: FC = () => {
 	const { mobile } = useResponsive()
 	const [form] = Form.useForm<LoginForm>()
 	const auth = useAuth()
+	const { t } = useTranslation()
 
 	const remember = Form.useWatch("remember", form)
 
@@ -45,10 +47,12 @@ const LoginForm: FC = () => {
 			router.invalidate()
 		}
 	}, [auth, isSuccess, loginData, remember, router])
+
+	
 	return (
 		<Flex vertical={true} align={"center"} style={{ padding: 24 }}>
 			<Card
-				bordered={false}
+				variant="borderless"
 				style={{
 					width: "100%",
 					maxWidth: 550
@@ -77,7 +81,7 @@ const LoginForm: FC = () => {
 						rules={[{ required: true }]}
 						initialValue={""}>
 						<PatternFormat
-							placeholder={INPUT_PLACEHOLDER}
+							placeholder={t("input_placeholder")}
 							format={"+998 ## ### ## ##"}
 							customInput={Input}
 						/>
@@ -86,7 +90,7 @@ const LoginForm: FC = () => {
 						label={"Пароль"}
 						name={"password"}
 						rules={[{ required: true }]}>
-						<Input.Password placeholder={INPUT_PLACEHOLDER} />
+						<Input.Password placeholder={t("input_placeholder")} />
 					</Form.Item>
 					<Form.Item<LoginForm>
 						// noStyle={true}

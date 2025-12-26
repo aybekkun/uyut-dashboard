@@ -33,7 +33,7 @@ const FinancesByTodayStatistic: FC<FinancesByTodayStatisticProps> = ({
 	url,
 	onlyUZS
 }) => {
-	const {t }= useTranslation()
+	const { t } = useTranslation()
 	const [priceType, setPriceType] = useState<FinancePriceType>("uzs")
 
 	const { data: financesByToday, isLoading } = useGetFinancesByTodayQuery(url, {
@@ -71,7 +71,7 @@ const FinancesByTodayStatistic: FC<FinancesByTodayStatisticProps> = ({
 			)
 		},
 		{
-			title:t("total_count"),
+			title: t("total_count"),
 			Icon: ShoppingCartOutlined,
 			value: isLoading ? (
 				<Skeleton.Input style={{ height: 20 }} />
@@ -87,7 +87,7 @@ const FinancesByTodayStatistic: FC<FinancesByTodayStatisticProps> = ({
 		<Row gutter={20} style={{ rowGap: 20 }}>
 			{data.map(({ Icon, value, title }, index) => (
 				<Col xs={24} sm={12} key={index}>
-					<Card bordered={false}>
+					<Card variant="borderless">
 						<Flex justify={"space-between"}>
 							<Space direction={"vertical"}>
 								<Typography.Title level={4}>{value}</Typography.Title>

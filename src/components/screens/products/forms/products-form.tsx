@@ -16,12 +16,14 @@ import FormItemColors from "./form-items/form-item-colors"
 import dayjs from "dayjs"
 import { useTranslation } from "react-i18next"
 import FormItemName from "./form-items/form-item-name"
+import { FormItemMeasurementUnits } from "./form-items/form-item-measurement_units"
 
 const ProductsForm: FC = () => {
 	const { t } = useTranslation()
 	const [form] = Form.useForm<ProductForm>()
 	const [productsNameId, setProductsNameId] = useState(0)
-	const isColor = ![2, 4].includes(productsNameId)
+	const measurementUnitId = Form.useWatch("measurement_unit_id", form)
+	const isColor = measurementUnitId === 1
 	const { params, resetParams } = useFormDevtoolsStore()
 
 	const { mutate: addProduct, isPending: addLoading } =
@@ -75,7 +77,10 @@ const ProductsForm: FC = () => {
 					onChangeProductsName={(val) => setProductsNameId(Number(val))}
 				/>
 
+				<FormItemMeasurementUnits />
+
 				{isColor && <FormItemColors />}
+
 
 				<Form.Item<ProductForm>
 					name={"rolls"}

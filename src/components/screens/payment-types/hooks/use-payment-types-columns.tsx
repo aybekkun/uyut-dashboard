@@ -1,20 +1,20 @@
-import { DeleteFilled, EditFilled } from "@ant-design/icons"
-import { Space } from "antd"
+/* import { DeleteFilled, EditFilled } from "@ant-design/icons"
+import { Space } from "antd" */
 import type { ColumnsType } from "antd/es/table"
 import { useTranslation } from "react-i18next"
-import { Button } from "src/components/ui/button"
+/* import { Button } from "src/components/ui/button" */
 import {
 	PaymentType,
-	useDeletePaymentTypesMutation
+	/* useDeletePaymentTypesMutation */
 } from "src/services/shared/payment-types"
-import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
+/* import { useFormDevtoolsStore } from "src/store/use-form-devtools-store" */
 import { formatEmpty } from "src/utils/formatter.utils"
 
 const usePaymentTypesColumns = () => {
 	const { t } = useTranslation()
-	const { mutate: deletePaymentType } = useDeletePaymentTypesMutation()
+	/* const { mutate: deletePaymentType } = useDeletePaymentTypesMutation()
 
-	const editPaymentType = useFormDevtoolsStore((state) => state.setParams)
+	const editPaymentType = useFormDevtoolsStore((state) => state.setParams) */
 
 	const columns: ColumnsType<PaymentType> = [
 		{
@@ -30,7 +30,7 @@ const usePaymentTypesColumns = () => {
 			key: "name",
 			render: formatEmpty
 		},
-		{
+		/* {
 			fixed: "right",
 			width: 100,
 			title: "",
@@ -53,7 +53,7 @@ const usePaymentTypesColumns = () => {
 					/>
 				</Space>
 			)
-		}
+		} */
 	]
 
 	return columns

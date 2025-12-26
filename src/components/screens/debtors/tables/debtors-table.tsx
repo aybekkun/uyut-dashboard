@@ -4,9 +4,10 @@ import { Route } from "src/routes/_layout/reports/debtors"
 import { Debtor, useGetDebtorsQuery } from "src/services/debtors"
 import { useDebtorsColumns } from "../hooks/use-debtors-columns"
 import { useTranslation } from "react-i18next"
+import { DebtorsForm } from "../forms/debtors-form"
 
 const DebtorsTable: FC = () => {
-	const {t} = useTranslation()
+	const { t } = useTranslation()
 	const { page, limit } = Route.useSearch()
 	const routeNavigate = Route.useNavigate()
 
@@ -22,9 +23,10 @@ const DebtorsTable: FC = () => {
 	const columns = useDebtorsColumns()
 	return (
 		<>
+			<DebtorsForm />
 			<Table<Debtor>
 				rowKey={(record) => record.id}
-				title={t("menu.report_suppliers"	)}
+				title={t("menu.report_debtors")}
 				columns={columns}
 				loading={isLoading || isFetching}
 				dataSource={debtors?.data}

@@ -53,7 +53,7 @@ export const formateHHDate = <T extends dayjs.ConfigType>(
 	value?: T
 ): string => {
 	const date = dayjs(value)
-	return date.isValid() ? date.format("DD.MM.YYYY HH:mm") : "-"
+	return date.isValid() ? date.format("DD.MM.YYYY - HH:mm") : "-"
 }
 export const formatFormDate = <T extends dayjs.ConfigType>(value?: T): string =>
 	dayjs(value).format("YYYY-MM-DD")

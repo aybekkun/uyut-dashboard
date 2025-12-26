@@ -1,0 +1,44 @@
+.expense-calendar-card {
+    overflow: hidden;
+}
+
+.category-cell {
+    font-weight: 600;
+}
+
+.row-start {
+    background-color: #fafafa;
+}
+
+.row-income {
+    background-color: #e6f4ff;
+    font-weight: 600;
+}
+
+.row-expense:nth-child(even) {
+    background-color: #fcfcfc;
+}
+
+.row-end {
+    background-color: #f6ffed;
+    font-weight: 700;
+}
+
+.income {
+    color: #1677ff;
+    font-weight: 600;
+}
+
+.expense {
+    color: #d32029;
+    font-weight: 600;
+}
+
+.expense-name {
+    display: block;
+    padding-left: 16px;
+    border-left: 3px solid #d9d9d9;
+    font-weight: 500;
+    color: #1677ff;
+    font-size: 16px;
+}

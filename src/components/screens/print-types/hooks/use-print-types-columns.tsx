@@ -31,7 +31,7 @@ const usePrintTypesColumns = () => {
 			render: formatEmpty
 		},
 		{
-			title: "Сотув нархи",
+			title: t("sell_price"),
 			dataIndex: "amount",
 			key: "amount",
 			render: formatPriceUZS

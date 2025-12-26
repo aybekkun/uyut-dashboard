@@ -2,7 +2,6 @@ import { Form, Select } from "antd"
 import { type FC, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useDebounce } from "react-use"
-import { SELECT_PLACEHOLDER } from "src/constants/form.constants"
 import { ProductForm } from "src/services/products"
 import { useGetSuppliersQuery } from "src/services/suppliers"
 
@@ -32,7 +31,7 @@ const FormItemSuppliers: FC = () => {
 			label={t("supplier")}
 			rules={[{ required: true }]}>
 			<Select
-				placeholder={SELECT_PLACEHOLDER}
+				placeholder={t("select_placeholder")}
 				loading={isLoading || isFetching}
 				showSearch={true}
 				optionFilterProp={"label"}

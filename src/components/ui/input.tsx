@@ -1,11 +1,12 @@
-import { ConfigProvider, Input as AntdInput, InputProps, InputRef } from "antd"
+import { Input as AntdInput, ConfigProvider, InputProps, InputRef } from "antd"
 import { forwardRef } from "react"
-import { INPUT_PLACEHOLDER } from "src/constants/form.constants"
+import { useTranslation } from "react-i18next"
 
 const Input = forwardRef<InputRef, InputProps>((props, ref) => {
+	const { t } = useTranslation()
 	return (
 		<ConfigProvider>
-			<AntdInput ref={ref} placeholder={INPUT_PLACEHOLDER} {...props} />
+			<AntdInput ref={ref} placeholder={t("input_placeholder")} {...props} />
 		</ConfigProvider>
 	)
 })

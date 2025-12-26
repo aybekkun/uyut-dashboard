@@ -1,5 +1,6 @@
 type FinanceByDate = {
 	date: string
+	month?: string
 	total: number | string
 }
 

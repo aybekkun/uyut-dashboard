@@ -3,6 +3,7 @@ import {
 	Button,
 	Card,
 	Col,
+	DatePicker,
 	Form,
 	Input,
 	Row,
@@ -11,7 +12,7 @@ import {
 	Typography
 } from "antd"
 import { FormProps } from "antd/lib"
-import { type FC } from "react"
+import { useEffect, useMemo, type FC } from "react"
 import { PatternFormat } from "react-number-format"
 import { FORM_DEFAULT } from "src/constants/form.constants"
 import {
@@ -23,7 +24,6 @@ import { formatPhoneReverse, formatPriceUZS } from "src/utils/formatter.utils"
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons"
 import { useTranslation } from "react-i18next"
 import { InputPrice } from "src/components/ui"
-import { SELECT_PLACEHOLDER } from "src/constants/form.constants"
 import { useGetProductsQuery } from "src/services/products"
 import { useGetClientsQuery } from "src/services/shared/clients"
 import { useGetPrintTypesQuery } from "src/services/shared/print-types"
@@ -41,6 +41,7 @@ interface ProductInfo {
 	hasWidth: boolean
 	width: number
 	unitOfMeasurement: string
+	measurementUnitId: number
 	shouldShowPrintType: boolean
 	maxValue: number
 }
@@ -58,6 +59,16 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 
 	const watchedValues = Form.useWatch([], form)
 	const productsList = watchedValues?.products || []
+	const paymentType = Form.useWatch<number | undefined>("payment_type_id", form)
+
+	useEffect(() => {
+		if (paymentType !== 2 && paymentType !== 4) {
+			form.setFieldsValue({ due_date: undefined, paid_amount: undefined })
+		}
+		if (paymentType === 2) {
+			form.setFieldsValue({ paid_amount: undefined })
+		}
+	}, [paymentType, form])
 
 	// Обработчик выбора клиента
 	const handleClientSelect = (selectedName: string) => {
@@ -78,7 +89,8 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 			return {
 				hasWidth: false,
 				width: 0,
-				unitOfMeasurement: "м",
+				unitOfMeasurement: "-",
+				measurementUnitId: 1,
 				shouldShowPrintType: true,
 				sellPrice: 0,
 				maxValue: 0
@@ -92,6 +104,9 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 			? product.remainder.meter_square
 			: product.remainder.meter
 
+		const unitOfMeasurement = product.measurement_unit.name
+		const measurementUnitId = product.measurement_unit.id
+
 		const shouldShowPrintType = !(
 			product.name.id === 2 || product.name.id === 4
 		)
@@ -101,43 +116,46 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 			hasWidth,
 			width,
 			maxValue: maxValue ?? 0,
-			unitOfMeasurement: hasWidth ? "м²" : "м",
+			unitOfMeasurement,
+			measurementUnitId,
 			shouldShowPrintType
 		}
 	}
 
-	const onFinish: FormProps<SalesProductForm>["onFinish"] = async (values) => {
-		// Обрабатываем продукты перед отправкой
+	const onFinish: FormProps<any>["onFinish"] = async (values) => {
 		const processedProducts =
-			values.products?.map((product) => {
+			values.products?.map((product: any) => {
 				const productInfo = getProductInfo(product.product_id)
-
-				// Если товар не имеет ширины, удаляем поля связанные с печатью
 				if (!productInfo.hasWidth) {
-					const {
-						print_type_id,
-						print_meter_square,
-						print_cost,
-						...productWithoutPrint
-					} = product
-					return productWithoutPrint
+					const { print_type_id, print_meter_square, print_cost, ...rest } = product
+					return rest
 				}
-
 				return product
 			}) || []
 
-		const processedValues = {
-			...values,
-			phone: formatPhoneReverse(values.phone),
-			products: processedProducts
+		const formatDate = (dateObj: any) => {
+			if (!dateObj) return undefined
+			const d = dateObj.toDate()
+			const year = d.getFullYear()
+			const month = String(d.getMonth() + 1).padStart(2, "0")
+			const day = String(d.getDate()).padStart(2, "0")
+			return `${year}-${month}-${day}`
 		}
 
-		await addSalesProduct(processedValues, {
-			onSuccess: () => {
-				form.resetFields()
-			}
-		})
+		const processedValues: SalesProductForm = {
+			...values,
+			phone: formatPhoneReverse(values.phone),
+			products: processedProducts,
+			paid_amount: values.paid_amount ?? 0,
+			...(values.payment_type_id === 2 || values.payment_type_id === 4
+				? { due_date: formatDate(values.due_date) }
+				: {}), // ← добавляем только если нужно
+		}
+
+		await addSalesProduct(processedValues, { onSuccess: () => form.resetFields() })
 	}
+
+
 	const calculateArea = (productId: number, length?: number) => {
 		const productInfo = getProductInfo(productId)
 
@@ -207,7 +225,31 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 			form.setFieldValue(["products", index, "material_cost"], materialCost)
 		}
 	}
-	const handleChangeLength = (index: number, productId: number) => {
+	const handleChangeQuantity = (index: number, productId: number) => {
+		const product = getProductInfo(productId)
+		const length = form.getFieldValue(["products", index, "length"]) ?? 0
+		const pieces = form.getFieldValue(["products", index, "pieces"]) ?? 0
+
+		let materialCost = 0
+
+		if (product.measurementUnitId === 3) {
+			// Штуки
+			materialCost = product.sellPrice * pieces
+		} else if (product.measurementUnitId === 1) {
+			// Метр квадратный → учитываем площадь
+			const area = calculateArea(productId, length)
+			materialCost = product.sellPrice * area
+		} else {
+			// Метр
+			materialCost = product.sellPrice * length
+		}
+
+		form.setFieldValue(["products", index, "material_cost"], materialCost)
+	}
+
+
+
+	/* const handleChangeLength = (index: number, productId: number) => {
 		const length = form.getFieldValue(["products", index, "length"]) ?? 0
 		const product = getProductInfo(productId)
 		const area = calculateArea(productId, length)
@@ -218,7 +260,7 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 			const materialCost = product.sellPrice * area
 			form.setFieldValue(["products", index, "material_cost"], materialCost)
 		}
-	}
+	} */
 
 	const onAddGarfon = (index: number, productId: number) => {
 		const length = form.getFieldValue(["products", index, "length"]) ?? 0
@@ -238,6 +280,20 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 		const printCost = form.getFieldValue(["products", index, "print_cost"]) ?? 0
 		return (materialCost + printCost).toFixed(2)
 	}
+
+	const calculateProductTotal = (product: any) => {
+		if (!product) return 0
+		const printCost = parseFloat(product.print_cost || 0)
+		const materialCost = parseFloat(product.material_cost || 0)
+		return printCost + materialCost
+	}
+
+	const grandTotal = useMemo(() => {
+		return productsList.reduce((sum: number, product: any) => {
+			return sum + calculateProductTotal(product)
+		}, 0)
+	}, [productsList])
+
 	// Опции для селекта продуктов
 	const productOptions =
 		products?.data?.map((item) => ({
@@ -262,9 +318,10 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 							<AutoComplete
 								showSearch={true}
 								notFoundContent={null}
-								placeholder={SELECT_PLACEHOLDER}
+								placeholder={t("select_placeholder")}
 								onSelect={(value) => handleClientSelect(value)}
 								options={clients?.data?.map((item) => ({
+									key: item.id,
 									value: item.full_name,
 									label: item.full_name
 								}))}
@@ -313,7 +370,7 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 												name={[name, "product_id"]}
 												rules={[{ required: true, message: "Выберите товар" }]}>
 												<Select
-													placeholder={SELECT_PLACEHOLDER}
+													placeholder={t("select_placeholder")}
 													showSearch={true}
 													style={{ width: "220px" }}
 													onChange={(value) => {
@@ -326,36 +383,60 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 											</Form.Item>
 
 											{/* Длина */}
-											<Form.Item
-												{...restField}
-												label={`${t("length")}(м)`}
-												name={[name, "length"]}>
-												<InputPrice
-													onChange={() => handleChangeLength(name, productId)}
-													placeholder="Длина в метрах"
-													min={0}
-												/>
-											</Form.Item>
+											{productInfo.measurementUnitId === 3 ? (
+												<Form.Item
+													{...restField}
+													label={"Штук материал"}
+													name={[name, "pieces"]}
+													rules={[{ required: true, message: "Введите количество штук" }]}
+												>
+													<InputPrice
+														min={0}
+														placeholder={"Введите количество штук"}
+														onChange={() => handleChangeQuantity(name, productId)}
+													/>
+												</Form.Item>
+
+											) : (
+												<Form.Item
+													{...restField}
+													label={`${t("length")}(м)`}
+													name={[name, "length"]}
+												>
+													<InputPrice
+														onChange={() => handleChangeQuantity(name, productId)}
+														placeholder="Длина в метрах"
+														min={0}
+													/>
+												</Form.Item>
+
+											)}
+
 
 											{/* Площадь печати (только для продуктов с шириной) */}
 											{productInfo.hasWidth && (
 												<Form.Item
 													{...restField}
-													label={`${t("meter_square")}(м2)`}
+													label={`${t("meter_square")}(м²)`}
 													name={[name, "print_meter_square"]}
 													rules={[
 														{ required: true, message: "Введите площадь" },
 														{
 															validator: (_, value) => {
-																if (value && value > area) {
+																// округляем оба значения до 2 знаков
+																const roundedArea = Number(area?.toFixed(2) || 0)
+																const roundedValue = Number((value ?? 0).toFixed(2))
+
+																if (roundedValue > roundedArea) {
 																	return Promise.reject(
-																		new Error(`Максимум ${area}`)
+																		new Error(`Максимум ${roundedArea}`)
 																	)
 																}
 																return Promise.resolve()
 															}
 														}
-													]}>
+													]}
+												>
 													<InputPrice
 														onChange={(value) =>
 															handleChangeMeterSquare(name, value as number)
@@ -365,6 +446,7 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 													/>
 												</Form.Item>
 											)}
+
 
 											{/* Тип печати (только для продуктов с шириной) */}
 											{productInfo.hasWidth && (
@@ -376,7 +458,7 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 														{ required: true, message: "Введите принт тип" }
 													]}>
 													<Select
-														placeholder={SELECT_PLACEHOLDER}
+														placeholder={t("select_placeholder")}
 														optionFilterProp={"label"}
 														style={{ width: 120 }}
 														onChange={(value) =>
@@ -442,24 +524,41 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 
 											<Col span={3}>
 												<Text strong style={{ display: "block" }}>
-													{t("pricePerMeter")}:
+													{productInfo.measurementUnitId === 3
+														? t("pricePerPiece")
+														: productInfo.measurementUnitId === 2
+															? t("pricePerMeter")
+															: t("pricePerMeter")}
+													:
 												</Text>
 												<Text>{formatPriceUZS(productInfo.sellPrice)}</Text>
 											</Col>
 
+
 											<Col span={3}>
 												<Text strong style={{ display: "block" }}>
-													{productInfo.hasWidth ? t("area") : t("length")}:
+													{productInfo.hasWidth
+														? t("area")
+														: productInfo.measurementUnitId === 3
+															? t("pieces")
+															: t("length")}
+													:
 												</Text>
+
 												<Text strong style={{ display: "block" }}>
-													{area.toFixed(2)} {productInfo.unitOfMeasurement}
+													{productInfo.measurementUnitId === 3
+														? (currentProduct?.pieces || 0)
+														: area.toFixed(2)}{" "}
+													{productInfo.unitOfMeasurement}
 												</Text>
-												{area > productInfo.maxValue && (
+
+												{productInfo.hasWidth && area > productInfo.maxValue && (
 													<Text strong style={{ color: "red" }}>
 														{t("maxValue")} {productInfo.maxValue}
 													</Text>
 												)}
 											</Col>
+
 
 											<Col span={3}>
 												<Text strong style={{ display: "block" }}>
@@ -493,6 +592,50 @@ export const SalesProduct: FC<Props> = ({ className = `` }) => {
 						</>
 					)}
 				</Form.List>
+				{(paymentType === 2 || paymentType === 4) && (
+					<Row gutter={8}>
+						<Col span={12}>
+							<Form.Item
+								name="due_date"
+								label={t("due_date")}
+								rules={[{ required: true, message: "Выберите дату" }]}
+							>
+								<DatePicker style={{ width: "100%" }} />
+							</Form.Item>
+						</Col>
+						{paymentType === 4 && (
+							<Col span={12}>
+								<Form.Item
+									name="paid_amount"
+									label={t("paid_amount")}
+									rules={[{ required: true, message: "Введите сумму оплаты" }]}
+								>
+									<InputPrice
+										precision={3}
+										step={0.1}
+										placeholder={t("input_placeholder")}
+									/>
+								</Form.Item>
+							</Col>
+						)}
+					</Row>
+				)}
+
+				{grandTotal > 0 && (
+					<div
+						style={{
+							marginTop: "24px",
+							padding: "16px",
+							backgroundColor: "transparent",
+							borderRadius: "6px",
+							textAlign: "right"
+						}}>
+						<Text strong style={{ fontSize: "20px", color: "blue" }}>
+							{t("total_cost")}: {grandTotal.toLocaleString()} UZS
+						</Text>
+					</div>
+				)}
+
 
 				{/* Кнопка сохранения */}
 				<Form.Item label={null}>

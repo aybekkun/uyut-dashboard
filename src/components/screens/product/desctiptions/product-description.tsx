@@ -26,7 +26,7 @@ const ProductDescription: FC<ProductDescriptionProps> = ({
 
 	return (
 		<Card
-			bordered={false}
+			variant="borderless"
 			title={`${t("product")}: ${product?.name?.name}`}
 			extra={
 				<Button

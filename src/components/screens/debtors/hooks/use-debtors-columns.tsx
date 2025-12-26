@@ -1,96 +1,121 @@
-import { EyeOutlined, FileImageOutlined } from "@ant-design/icons"
-import { Avatar, Image } from "antd"
+import { PlusOutlined, QuestionCircleOutlined } from "@ant-design/icons"
+import { Button, Popover, Space } from "antd"
 import { ColumnsType } from "antd/es/table"
 import { useTranslation } from "react-i18next"
+import { ClientTable } from "src/components/shared/client"
 import type { SalesProduct } from "src/services/sales-products"
+import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import {
-	formatDate,
+	formateHHDate,
 	formatEmpty,
 	formatPriceUZS
 } from "src/utils/formatter.utils"
+import { SalesProductsTableList } from "../../sales-products/tables/sales-products-table-list"
+import { TransactionsTable } from "../tables/transactions-table"
+import { UseDebtorsColumnDueDatePicker } from "./use-debtors-column-due-date-picker"
 
 export const useDebtorsColumns = () => {
 	const { t } = useTranslation()
-	const columns: ColumnsType<SalesProduct> = [
+	const { setParams } = useFormDevtoolsStore()
+
+	const columns: ColumnsType<any> = [
 		{
 			title: t("client"),
-			dataIndex: ["client", "full_name"],
-			key: "client",
-			render: formatEmpty
-		},
-		{
-			title: t("product"),
-			dataIndex: ["product", "name"],
-			key: "product",
-			render: formatEmpty
-		},
-		{
-			title: t("length"),
-			dataIndex: "length",
-			key: "length",
-			render: formatEmpty
-		},
-		// {
-		// 	title: t("print_type"),
-		// 	dataIndex: "print_detail",
-		// 	key: "print_detail",
-		// 	render: (value?: SalesProduct["print_detail"]) => {
-		// 		const [printDetail] = value || []
-		// 		if (!printDetail) return "-"
-		// 		return (
-		// 			<Space>
-		// 				{formatEmpty(printDetail?.print_type?.name)}
-		// 				<Popover content={<PrintDetailTable data={value} />}>
-		// 					<QuestionCircleOutlined style={{ cursor: "pointer" }} />
-		// 				</Popover>
-		// 			</Space>
-		// 		)
-		// 	}
-		// },
-		{
-			title: t("total_cost"),
-			dataIndex: "total_cost",
-			key: "total_cost",
-			render: formatPriceUZS
-		},
-		{
-			title: t("total_area"),
-			dataIndex: "total_meter_square",
-			key: "total_meter_square",
-			render: formatEmpty
+			dataIndex: ["client"],
+			key: "client_info",
+			render: (value?: SalesProduct["client"]) => {
+				return (
+					<Space>
+						{formatEmpty(value?.full_name)}
+						<Popover content={<ClientTable data={value} />}>
+							<QuestionCircleOutlined style={{ cursor: "pointer" }} />
+						</Popover>
+					</Space>
+				)
+			}
 		},
 		{
 			title: t("payment_method"),
-			dataIndex: ["payment_type", "name"],
+			dataIndex: ["sell", "payment_type", "name"],
 			key: "payment_type",
 			render: formatEmpty
 		},
 		{
-			title: t("file"),
-			dataIndex: "file",
-			key: "file",
-			render: (value: string) => (
-				<Avatar
-					shape={"square"}
-					src={
-						<Image
-							preview={{ mask: <EyeOutlined /> }}
-							loading={"lazy"}
-							src={value}
-							alt={""}
-						/>
-					}
-					icon={<FileImageOutlined />}
-					alt={""}
-				/>
-			)
+			title: t("products"),
+			key: "products",
+			render: (_, record) => {
+				const products = record?.sell?.products || []
+				return (
+					<Space>
+						<Popover
+							content={<SalesProductsTableList data={products} />}
+						>
+							<QuestionCircleOutlined style={{ cursor: "pointer" }} />
+						</Popover>
+					</Space>
+				)
+			}
+		},
+		{
+			title: t("transactions"),
+			key: "transactions",
+			render: (_, record) => {
+				const transaction = record?.transaction || []
+				return (
+					<Space>
+						<Popover
+							content={<TransactionsTable data={transaction} />}
+						>
+							<QuestionCircleOutlined style={{ cursor: "pointer" }} />
+						</Popover>
+					</Space>
+				)
+			}
+		},
+		{
+			title: t("total_amount"),
+			dataIndex: ["total_amount"],
+			key: "total_amount",
+			render: formatPriceUZS
+		},
+		{
+			title: t("total_paid_amount"),
+			dataIndex: ["total_paid_amount"],
+			key: "total_paid_amount",
+			render: formatPriceUZS
+		},
+		{
+			title: t("owed_amount"),
+			dataIndex: ["owed_amount"],
+			key: "owed_amount",
+			render: formatPriceUZS
+		},
+		{
+			title: t("due_date"),
+			dataIndex: "due_date",
+			key: "due_date",
+			render: (_, record) => <UseDebtorsColumnDueDatePicker record={record} />,
 		},
 		{
 			title: t("created"),
 			dataIndex: "created_at",
 			key: "created_at",
-			render: formatDate
-		}
+			render: formateHHDate
+		},
+		{
+			width: 100,
+			fixed: "right",
+			title: "",
+			key: "actions",
+			render: (_, record) => (
+				<Button
+					type="primary"
+					icon={<PlusOutlined />}
+					onClick={() => setParams(record)}
+				/>
+			),
+		},
+
 	]
 	return columns
 }

@@ -1,5 +1,6 @@
 import type { Supplier } from "src/services/suppliers"
 import type { PrintDetail } from "./print-details"
+import { MeasurementUnits } from "../shared/measurement-units/measurement-units.types"
 
 export type ProductItem = {
 	id: number
@@ -12,6 +13,7 @@ export type ProductItem = {
 		collar: string
 	} | null
 	width: number | null
+	measurement_unit: MeasurementUnits
 	total_length: number
 	total_price_uzs: number
 	total_price_usd: number
@@ -21,6 +23,7 @@ export type ProductItem = {
 	remainder: {
 		meter_square: null | number
 		meter: null | number
+		pieces: null | number
 	}
 	sell_price: string
 	imported_at: null | Date
@@ -76,6 +79,7 @@ type Product = {
 type ProductForm = {
 	name_id: string
 	collar_id: number | null
+	measurement_unit_id: string | number
 	price_uzs: string | number
 	price_usd: string | number
 	count: number | null
