@@ -42,6 +42,8 @@
     "name": "Название",
     "expense_type": "Тип расхода",
     "amount": "Сумма",
+    "expense_date": "Дата расхода",
+    "description": "Описание",
     "cashier": "Кассир",
     "password": "Пароль",
     "phone_number": "Телефон номер",
@@ -128,6 +130,7 @@
     "cashflow": {
         "start": "Начальный остаток",
         "income": "Доход (продажи)",
+        "purchase": "Расход (закупки)",
         "end": "Конечный остаток"
     },
     "months": {

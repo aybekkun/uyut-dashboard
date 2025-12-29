@@ -1,15 +1,9 @@
-import { QuestionCircleOutlined } from "@ant-design/icons"
-import { Popover, Space } from "antd"
 import { ColumnsType } from "antd/es/table"
 import { type FC } from "react"
 import { useTranslation } from "react-i18next"
 import { Table } from "src/components/ui"
-import { CashFlow } from "src/services/cash-flow/cash-flow.api"
 import { useGetCashFlowQuery } from "src/services/cash-flow/cash-flow.service"
-import { Expense } from "src/services/expenses"
-import { formatPrice } from "src/utils/formatter.utils"
 import "./cash.css"
-import { ExpensesTable } from "./expenses-table"
 const MONTH_KEYS = [
 	"jan",
 	"feb",
@@ -28,7 +22,7 @@ const MONTH_KEYS = [
 interface Props {
 	className?: string
 }
-const useCashFlowColumns = () => {
+/* const useCashFlowColumns = () => {
 	const { t } = useTranslation()
 	const columns: ColumnsType<CashFlow> = [
 		{
@@ -62,11 +56,11 @@ const useCashFlowColumns = () => {
 		}
 	]
 	return columns
-}
+} */
 type TableRow = {
 	key: string
 	category: string
-	type: "start" | "income" | "expense-group" | "expense" | "end"
+	type: "start" | "income" | "purchase" | "expense-group" | "expense" | "end"
 	values: number[]
 }
 
@@ -100,6 +94,14 @@ export const CashflowTable: FC<Props> = () => {
 		type: "income",
 
 		values: cashFlow?.data.map((m) => Number(m.sell_amount)) || []
+	})
+
+	// Закупки
+	rows.push({
+		key: "purchase",
+		category: t("cashflow.purchase"),
+		type: "purchase",
+		values: cashFlow?.data.map((m) => Number(m.purchase_amount)) || []
 	})
 
 	// Расходы
@@ -152,6 +154,8 @@ export const CashflowTable: FC<Props> = () => {
 
 				if (row.type === "income")
 					return <span className="income">+{formatCurrency(value)}</span>
+				if (row.type === "purchase")
+					return <span className="expense">-{formatCurrency(value)}</span>
 				if (row.type === "expense")
 					return <span className="expense">-{formatCurrency(value)}</span>
 				if (row.type === "end")

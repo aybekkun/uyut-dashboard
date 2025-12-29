@@ -27,7 +27,7 @@ interface Props {
 type TableRow = {
 	key: string
 	category: string
-	type: "income" | "expense" | "end"
+	type: "income" | "purchase" | "expense" | "end"
 	values: number[]
 }
 
@@ -53,6 +53,14 @@ export const ProfitLostTable: FC<Props> = () => {
 		category: t("total_sell"),
 		type: "income",
 		values: profitLose?.data.map((m) => Number(m.sell_amount)) || []
+	})
+
+	// Закупки
+	rows.push({
+		key: "purchase",
+		category: t("cashflow.purchase"),
+		type: "purchase",
+		values: profitLose?.data.map((m) => Number(m.purchase_amount)) || []
 	})
 
 	// Расходы
@@ -100,6 +108,8 @@ export const ProfitLostTable: FC<Props> = () => {
 
 				if (row.type === "income")
 					return <span className="income">+{formatCurrency(value)}</span>
+				if (row.type === "purchase")
+					return <span className="expense">-{formatCurrency(value)}</span>
 				if (row.type === "expense")
 					return <span className="expense">-{formatCurrency(value)}</span>
 				if (row.type === "end")

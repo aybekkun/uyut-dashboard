@@ -42,6 +42,8 @@
     "name": "Номи",
     "expense_type": "Харажат тури",
     "amount": "Сумма",
+    "expense_date": "Харажат санаси",
+    "description": "Тавсиф",
     "cashier": "Кассир",
     "password": "Парол",
     "phone_number": "Телефон рақами",
@@ -128,6 +130,7 @@
     "cashflow": {
         "start": "Бошланғич қолдиқ",
         "income": "Даромад (савдо)",
+        "purchase": "Чиқим (закуп)",
         "end": "Якуний қолдиқ"
     },
     "months": {

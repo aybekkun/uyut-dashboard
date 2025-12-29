@@ -42,6 +42,8 @@
     "name": "Name",
     "expense_type": "Expense type",
     "amount": "Amount",
+    "expense_date": "Expense date",
+    "description": "Description",
     "cashier": "Cashier",
     "password": "Password",
     "phone_number": "Phone number",
@@ -128,6 +130,7 @@
     "cashflow": {
         "start": "Initial Balance",
         "income": "Income (Sales)",
+        "purchase": "Purchase (Buying)",
         "end": "Final Balance"
     },
     "months": {

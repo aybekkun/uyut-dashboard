@@ -42,6 +42,8 @@
     "name": "Аты",
     "expense_type": "Қәрежет түри",
     "amount": "Сумма",
+    "expense_date": "Қәрежет сәнеси",
+    "description": "Түсиндирме",
     "cashier": "Кассир",
     "password": "Пароль",
     "phone_number": "Телефон номер",
@@ -128,6 +130,7 @@
     "cashflow": {
         "start": "Дәслепки қалдық",
         "income": "Дәрамад (сатыў)",
+        "purchase": "Шығыс (харид)",
         "end": "Ақырғы қалдық"
     },
     "months": {

@@ -5,6 +5,7 @@ import {
 } from "@ant-design/icons"
 import { Popover, Space } from "antd"
 import { ColumnsType } from "antd/es/table"
+import { useTranslation } from "react-i18next"
 import { Button } from "src/components/ui/button"
 import { Expense } from "src/services/expenses"
 import { useDeleteExpenseTypesMutation } from "src/services/shared/expense-types"
@@ -15,7 +16,6 @@ import {
 	formatPriceUZS
 } from "src/utils/formatter.utils"
 import { CashierMiniTable } from "../ui/cashier-mini-table"
-import { useTranslation } from "react-i18next"
 
 export const useExpensesColumns = () => {
 	const { mutate: deleteExpenseType } = useDeleteExpenseTypesMutation()
@@ -53,6 +53,18 @@ export const useExpensesColumns = () => {
 					</Popover>
 				</Space>
 			)
+		},
+		{
+			title: t("expense_date"),
+			dataIndex: "expense_date",
+			key: "expense_date",
+			render: (value: string) => (value ? formatDate(value) : "-")
+		},
+		{
+			title: t("description"),
+			dataIndex: "description",
+			key: "description",
+			render: formatEmpty
 		},
 		{
 			title: t("created"),
