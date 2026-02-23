@@ -23,6 +23,7 @@ class Routes {
 	REPORT_RECOMMENDED_ORDERS = "/reports/orders"
 	REPORT_SUPPLIERS = "/reports/suppliers"
 	REPORT_DEBTORS = "/reports/debtors"
+	REPORT_SOLD_PRODUCT_STAT = "/reports/sold-product-stat"
 
 	FINANCES_GROUP = "/finances"
 	FINANCES_COMING_PRODUCTS = "/finances/coming-products"

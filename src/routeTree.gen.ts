@@ -30,6 +30,7 @@ import { Route as LayoutSalesSalesProductImport } from './routes/_layout/sales/s
 import { Route as LayoutSalesProductsImport } from './routes/_layout/sales/products'
 import { Route as LayoutReportsWriteOffProductsImport } from './routes/_layout/reports/write-off-products'
 import { Route as LayoutReportsSuppliersImport } from './routes/_layout/reports/suppliers'
+import { Route as LayoutReportsSoldProductStatImport } from './routes/_layout/reports/sold-product-stat'
 import { Route as LayoutReportsSalesProductsImport } from './routes/_layout/reports/sales-products'
 import { Route as LayoutReportsExpensesImport } from './routes/_layout/reports/expenses'
 import { Route as LayoutReportsDebtorsImport } from './routes/_layout/reports/debtors'
@@ -164,6 +165,13 @@ const LayoutReportsSuppliersRoute = LayoutReportsSuppliersImport.update({
   path: '/reports/suppliers',
   getParentRoute: () => LayoutRoute,
 } as any)
+
+const LayoutReportsSoldProductStatRoute =
+  LayoutReportsSoldProductStatImport.update({
+    id: '/reports/sold-product-stat',
+    path: '/reports/sold-product-stat',
+    getParentRoute: () => LayoutRoute,
+  } as any)
 
 const LayoutReportsSalesProductsRoute = LayoutReportsSalesProductsImport.update(
   {
@@ -379,6 +387,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutReportsSalesProductsImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/reports/sold-product-stat': {
+      id: '/_layout/reports/sold-product-stat'
+      path: '/reports/sold-product-stat'
+      fullPath: '/reports/sold-product-stat'
+      preLoaderRoute: typeof LayoutReportsSoldProductStatImport
+      parentRoute: typeof LayoutImport
+    }
     '/_layout/reports/suppliers': {
       id: '/_layout/reports/suppliers'
       path: '/reports/suppliers'
@@ -512,6 +527,7 @@ interface LayoutRouteChildren {
   LayoutReportsDebtorsRoute: typeof LayoutReportsDebtorsRoute
   LayoutReportsExpensesRoute: typeof LayoutReportsExpensesRoute
   LayoutReportsSalesProductsRoute: typeof LayoutReportsSalesProductsRoute
+  LayoutReportsSoldProductStatRoute: typeof LayoutReportsSoldProductStatRoute
   LayoutReportsSuppliersRoute: typeof LayoutReportsSuppliersRoute
   LayoutReportsWriteOffProductsRoute: typeof LayoutReportsWriteOffProductsRoute
   LayoutSalesProductsRoute: typeof LayoutSalesProductsRoute
@@ -546,6 +562,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutReportsDebtorsRoute: LayoutReportsDebtorsRoute,
   LayoutReportsExpensesRoute: LayoutReportsExpensesRoute,
   LayoutReportsSalesProductsRoute: LayoutReportsSalesProductsRoute,
+  LayoutReportsSoldProductStatRoute: LayoutReportsSoldProductStatRoute,
   LayoutReportsSuppliersRoute: LayoutReportsSuppliersRoute,
   LayoutReportsWriteOffProductsRoute: LayoutReportsWriteOffProductsRoute,
   LayoutSalesProductsRoute: LayoutSalesProductsRoute,
@@ -585,6 +602,7 @@ export interface FileRoutesByFullPath {
   '/reports/debtors': typeof LayoutReportsDebtorsRoute
   '/reports/expenses': typeof LayoutReportsExpensesRoute
   '/reports/sales-products': typeof LayoutReportsSalesProductsRoute
+  '/reports/sold-product-stat': typeof LayoutReportsSoldProductStatRoute
   '/reports/suppliers': typeof LayoutReportsSuppliersRoute
   '/reports/write-off-products': typeof LayoutReportsWriteOffProductsRoute
   '/sales/products': typeof LayoutSalesProductsRoute
@@ -620,6 +638,7 @@ export interface FileRoutesByTo {
   '/reports/debtors': typeof LayoutReportsDebtorsRoute
   '/reports/expenses': typeof LayoutReportsExpensesRoute
   '/reports/sales-products': typeof LayoutReportsSalesProductsRoute
+  '/reports/sold-product-stat': typeof LayoutReportsSoldProductStatRoute
   '/reports/suppliers': typeof LayoutReportsSuppliersRoute
   '/reports/write-off-products': typeof LayoutReportsWriteOffProductsRoute
   '/sales/products': typeof LayoutSalesProductsRoute
@@ -657,6 +676,7 @@ export interface FileRoutesById {
   '/_layout/reports/debtors': typeof LayoutReportsDebtorsRoute
   '/_layout/reports/expenses': typeof LayoutReportsExpensesRoute
   '/_layout/reports/sales-products': typeof LayoutReportsSalesProductsRoute
+  '/_layout/reports/sold-product-stat': typeof LayoutReportsSoldProductStatRoute
   '/_layout/reports/suppliers': typeof LayoutReportsSuppliersRoute
   '/_layout/reports/write-off-products': typeof LayoutReportsWriteOffProductsRoute
   '/_layout/sales/products': typeof LayoutSalesProductsRoute
@@ -695,6 +715,7 @@ export interface FileRouteTypes {
     | '/reports/debtors'
     | '/reports/expenses'
     | '/reports/sales-products'
+    | '/reports/sold-product-stat'
     | '/reports/suppliers'
     | '/reports/write-off-products'
     | '/sales/products'
@@ -729,6 +750,7 @@ export interface FileRouteTypes {
     | '/reports/debtors'
     | '/reports/expenses'
     | '/reports/sales-products'
+    | '/reports/sold-product-stat'
     | '/reports/suppliers'
     | '/reports/write-off-products'
     | '/sales/products'
@@ -764,6 +786,7 @@ export interface FileRouteTypes {
     | '/_layout/reports/debtors'
     | '/_layout/reports/expenses'
     | '/_layout/reports/sales-products'
+    | '/_layout/reports/sold-product-stat'
     | '/_layout/reports/suppliers'
     | '/_layout/reports/write-off-products'
     | '/_layout/sales/products'
@@ -825,6 +848,7 @@ export const routeTree = rootRoute
         "/_layout/reports/debtors",
         "/_layout/reports/expenses",
         "/_layout/reports/sales-products",
+        "/_layout/reports/sold-product-stat",
         "/_layout/reports/suppliers",
         "/_layout/reports/write-off-products",
         "/_layout/sales/products",
@@ -904,6 +928,10 @@ export const routeTree = rootRoute
     },
     "/_layout/reports/sales-products": {
       "filePath": "_layout/reports/sales-products.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/reports/sold-product-stat": {
+      "filePath": "_layout/reports/sold-product-stat.tsx",
       "parent": "/_layout"
     },
     "/_layout/reports/suppliers": {

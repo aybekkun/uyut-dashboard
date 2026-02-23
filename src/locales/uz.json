@@ -27,7 +27,8 @@
         "settings_payment_types": "Тўлов турлари",
         "settings_expense_types": "Харажат турлари",
         "cash_flow": "Касcа ҳисоби",
-        "profit_lost": "Фойда/зарар"
+        "profit_lost": "Фойда/зарар",
+        "report_sold_product_stat": "Сотилган маҳсулотлар статистикаси"
     },
     "total_area": "Умумий майдон",
     "total_length": "Умумий узунлик",
@@ -146,5 +147,10 @@
         "oct": "Окт",
         "nov": "Ноя",
         "dec": "Дек"
-    }
+    },
+    "sold_product_stat": "Sotilgan mahsulotlar statistikasi",
+    "total_value": "Umumiy miqdor",
+    "unit": "O'lchov birligi",
+    "m2": "m²",
+    "meter": "m"
 }

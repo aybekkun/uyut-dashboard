@@ -27,7 +27,8 @@
         "settings_payment_types": "Төлем түрлери",
         "settings_expense_types": "Қәрежет түрлери",
         "cash_flow": "Ақша ағымы",
-        "profit_lost": "Фойда/зарар"
+        "profit_lost": "Фойда/зарар",
+        "report_sold_product_stat": "Satılǵan önimler statistikası"
     },
     "total_area": "Улыўма майданы",
     "total_length": "Улиўма узынлық",
@@ -146,5 +147,10 @@
         "oct": "Окт",
         "nov": "Ноя",
         "dec": "Дек"
-    }
+    },
+    "sold_product_stat": "Сатылган өнимлер статистикасы",
+    "total_value": "Улыўма саны",
+    "unit": "Олшем бирлиги",
+    "m2": "m²",
+    "meter": "m"
 }
