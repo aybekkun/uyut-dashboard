@@ -6,7 +6,7 @@ import { ProductForm } from "src/services/products"
 const FormItemName = ({
 	onChangeProductsName
 }: {
-	onChangeProductsName: (val: string) => void
+	onChangeProductsName?: (val: string) => void
 }) => {
 	const { t } = useTranslation()
 	const {
@@ -23,7 +23,7 @@ const FormItemName = ({
 				onChange={onChangeProductsName}
 				placeholder={t("select_placeholder")}
 				loading={isLoading || isFetching}
-				 showSearch={true}
+				showSearch={true}
 				optionFilterProp={"label"}
 				/* onSearch={setSearchValue} */
 				options={productsname?.data?.map((item) => ({

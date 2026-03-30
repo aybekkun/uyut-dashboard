@@ -74,7 +74,7 @@ export const useProductsColumns = () => {
 			key: "total_meter_square",
 			render: formatEmpty
 		},
-			/* 	{
+		/* 	{
 				title: "Создан",
 				dataIndex: "created_at",
 				key: "created_at",

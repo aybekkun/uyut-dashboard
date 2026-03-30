@@ -1,5 +1,5 @@
 import { DatePicker, Form, type FormProps /* Input */ /* Select */ } from "antd"
-import { type FC, useEffect, useState } from "react"
+import { type FC, useEffect } from "react"
 import { FormDrawer } from "src/components/shared/form-drawer"
 import { InputNumber /* InputPrice */ } from "src/components/ui"
 import {
@@ -15,16 +15,25 @@ import FormItemColors from "./form-items/form-item-colors"
 
 import dayjs from "dayjs"
 import { useTranslation } from "react-i18next"
-import FormItemName from "./form-items/form-item-name"
 import { FormItemMeasurementUnits } from "./form-items/form-item-measurement_units"
+import FormItemName from "./form-items/form-item-name"
+
+import { useGetProductsNameQuery } from "src/services/name"
+import {
+	formatProductAmount,
+	getProductMultiplier,
+	getProductUnit
+} from "src/utils/product.utils"
 
 const ProductsForm: FC = () => {
 	const { t } = useTranslation()
 	const [form] = Form.useForm<ProductForm>()
-	const [productsNameId, setProductsNameId] = useState(0)
+	const nameId = Form.useWatch("name_id", form)
 	const measurementUnitId = Form.useWatch("measurement_unit_id", form)
 	const isColor = measurementUnitId === 1
 	const { params, resetParams } = useFormDevtoolsStore()
+
+	const { data: productsName } = useGetProductsNameQuery({})
 
 	const { mutate: addProduct, isPending: addLoading } =
 		useCreateProductsMutation()
@@ -51,13 +60,32 @@ const ProductsForm: FC = () => {
 			})
 		}
 	}, [form, params])
+
 	const rolls = Form.useWatch("rolls", form)
-	const calculateMeters = () => {
+
+	const calculateAmount = () => {
 		if (typeof rolls !== "number") return null
 
-		if (productsNameId === 2) return rolls * 250
-		if (productsNameId === 4) return rolls * 2.5
-		return rolls * 200
+		const selectedName = productsName?.data?.find(
+			(item) => item.id === Number(nameId)
+		)
+		if (!selectedName) return null
+
+		const nameString = String(selectedName.name)
+		const unit = getProductUnit(nameString, selectedName.id)
+
+		if (unit === "м") {
+			const amount = rolls * 100 // Default 100 if not specified
+			return formatProductAmount(amount, "м")
+		}
+
+		if (unit === "м²") {
+			const multiplier = getProductMultiplier(nameString)
+			const amount = rolls * 100 * multiplier
+			return formatProductAmount(amount, "м²")
+		}
+
+		return formatProductAmount(rolls, "шт")
 	}
 	return (
 		<FormDrawer width={400} form={form} isLoading={addLoading}>
@@ -73,14 +101,11 @@ const ProductsForm: FC = () => {
 					rules={[{ required: true }]}>
 					<Input placeholder={INPUT_PLACEHOLDER} />
 				</Form.Item> */}
-				<FormItemName
-					onChangeProductsName={(val) => setProductsNameId(Number(val))}
-				/>
+				<FormItemName />
 
 				<FormItemMeasurementUnits />
 
 				{isColor && <FormItemColors />}
-
 
 				<Form.Item<ProductForm>
 					name={"rolls"}
@@ -89,7 +114,7 @@ const ProductsForm: FC = () => {
 					<InputNumber />
 				</Form.Item>
 				{typeof rolls === "number" && (
-					<div style={{ marginBottom: "16px" }}>{calculateMeters()}</div>
+					<div style={{ marginBottom: "16px" }}>{calculateAmount()}</div>
 				)}
 
 				<FormItemPrice form={form} />
