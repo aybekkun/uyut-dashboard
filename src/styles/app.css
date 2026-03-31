@@ -38,3 +38,15 @@ body {
 	font-family: "Inter", sans-serif;
 	min-height: 100vh;
 }
+
+.reorder-buttons {
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.2s ease-in-out;
+}
+
+.ant-menu-item:hover .reorder-buttons,
+.ant-menu-submenu-title:hover .reorder-buttons {
+	opacity: 1;
+	pointer-events: auto;
+}
