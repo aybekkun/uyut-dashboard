@@ -1,9 +1,10 @@
 {
     "menu": {
-        "store": "Сақлаў",
-        "store_list": "Өтиўлер дизими",
-        "sales": "Сатыў",
-        "sales_list": "Сатыў дизими",
+        "store": "Склад",
+        "store_list": "Дизим",
+        "sales": "Сатыўлар",
+        "sales_list": "Сатыўлар дизими",
+        "sales_product_monthly_report": "Өнимлердиң айлық есабаты",
         "employees": "Хызметкерлер",
         "employees_list": "Хызметкерлер дизими",
         "reports": "Есабатлар",
@@ -26,6 +27,8 @@
         "settings_print_types": "Баспа түрлери",
         "settings_payment_types": "Төлем түрлери",
         "settings_expense_types": "Қәрежет түрлери",
+        "settings_products_name": "Өним атлары",
+        "settings_products_collar": "Өним реңлери",
         "cash_flow": "Ақша ағымы",
         "profit_lost": "Фойда/зарар",
         "report_sold_product_stat": "Satılǵan önimler statistikası"
@@ -152,5 +155,13 @@
     "total_value": "Улыўма саны",
     "unit": "Олшем бирлиги",
     "m2": "m²",
-    "meter": "m"
+    "meter": "m",
+    "is_collar": "Рең",
+    "yes": "Аўа",
+    "no": "Яқ",
+    "collar": "Рең",
+    "sold_quantity": "Сатылған (муғдары)",
+    "total_revenue": "Улыўма түсим",
+    "current_stock": "Ҳәзирги қалдық",
+    "buy_price": "Satıp alıw bahası"
 }

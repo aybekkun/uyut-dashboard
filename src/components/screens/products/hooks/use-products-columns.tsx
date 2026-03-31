@@ -39,14 +39,16 @@ export const useProductsColumns = () => {
 			)
 		},
 		{
+			title: t("buy_price"),
+			dataIndex: "buy_price",
+			key: "buy_price",
+			render: (v) => formatPriceUZS(v)
+		},
+		{
 			title: t("sell_price"),
 			dataIndex: "sell_price",
 			key: "sell_price",
-			render: (_v, record) => (
-				<Space split={<Divider type={"vertical"} />}>
-					{formatPriceUZS(record.sell_price)}
-				</Space>
-			)
+			render: (v) => formatPriceUZS(v)
 		},
 		{
 			title: t("total_length"),

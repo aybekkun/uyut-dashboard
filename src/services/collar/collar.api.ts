@@ -1,4 +1,4 @@
-import { productsNameService } from "./name.service"
+import { productsCollarService } from "./collar.service"
 import {
 	keepPreviousData,
 	useMutation,
@@ -8,11 +8,11 @@ import {
 import { useMessage } from "src/hooks/use-message"
 import type { GetParams, ParamId, ResponseError } from "src/services/shared"
 
-const useGetProductsNameQuery = (params: GetParams) => {
+const useGetProductsCollarQuery = (params: GetParams) => {
 	const { message } = useMessage()
 	return useQuery({
-		queryFn: () => productsNameService.get(params),
-		queryKey: ["products name", ...Object.values(params)],
+		queryFn: () => productsCollarService.get(params),
+		queryKey: ["products collar", ...Object.values(params)],
 		placeholderData: keepPreviousData,
 		throwOnError: (error: ResponseError) => {
 			message.error({
@@ -24,11 +24,11 @@ const useGetProductsNameQuery = (params: GetParams) => {
 	})
 }
 
-const useGetProductsNameByIdQuery = (id: ParamId) => {
+const useGetProductsCollarByIdQuery = (id: ParamId) => {
 	const { message } = useMessage()
 	return useQuery({
-		queryFn: () => productsNameService.getById(id),
-		queryKey: ["products name", id],
+		queryFn: () => productsCollarService.getById(id),
+		queryKey: ["products collar", id],
 		placeholderData: keepPreviousData,
 		enabled: !!id,
 		throwOnError: (error: ResponseError) => {
@@ -41,18 +41,18 @@ const useGetProductsNameByIdQuery = (id: ParamId) => {
 	})
 }
 
-const useCreateProductsNameMutation = () => {
+const useCreateProductsCollarMutation = () => {
 	const { message } = useMessage()
 	const queryClient = useQueryClient()
 	return useMutation({
-		mutationFn: productsNameService.create,
+		mutationFn: productsCollarService.create,
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({
-				queryKey: ["products name"]
+				queryKey: ["products collar"]
 			})
 			message.success({
 				message: "Success",
-				description: "Product name created successfully"
+				description: "Product collar created successfully"
 			})
 		},
 		onError: (error: ResponseError) => {
@@ -64,18 +64,18 @@ const useCreateProductsNameMutation = () => {
 	})
 }
 
-const useEditProductsNameMutation = () => {
+const useEditProductsCollarMutation = () => {
 	const { message } = useMessage()
 	const queryClient = useQueryClient()
 	return useMutation({
-		mutationFn: productsNameService.edit,
+		mutationFn: productsCollarService.edit,
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({
-				queryKey: ["products name"]
+				queryKey: ["products collar"]
 			})
 			message.success({
 				message: "Success",
-				description: "Product name updated successfully"
+				description: "Product collar updated successfully"
 			})
 		},
 		onError: (error: ResponseError) => {
@@ -87,18 +87,18 @@ const useEditProductsNameMutation = () => {
 	})
 }
 
-const useDeleteProductsNameMutation = () => {
+const useDeleteProductsCollarMutation = () => {
 	const { message } = useMessage()
 	const queryClient = useQueryClient()
 	return useMutation({
-		mutationFn: productsNameService.delete,
+		mutationFn: productsCollarService.delete,
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({
-				queryKey: ["products name"]
+				queryKey: ["products collar"]
 			})
 			message.success({
 				message: "Success",
-				description: "Product name deleted successfully"
+				description: "Product collar deleted successfully"
 			})
 		},
 		onError: (error: ResponseError) => {
@@ -111,9 +111,9 @@ const useDeleteProductsNameMutation = () => {
 }
 
 export {
-	useGetProductsNameQuery,
-	useGetProductsNameByIdQuery,
-	useCreateProductsNameMutation,
-	useEditProductsNameMutation,
-	useDeleteProductsNameMutation
+	useGetProductsCollarQuery,
+	useGetProductsCollarByIdQuery,
+	useCreateProductsCollarMutation,
+	useEditProductsCollarMutation,
+	useDeleteProductsCollarMutation
 }

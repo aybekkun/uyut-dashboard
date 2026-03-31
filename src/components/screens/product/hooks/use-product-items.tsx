@@ -53,10 +53,25 @@ const useProductItems = (data?: ProductItem) => {
 			children: data?.measurement_unit.name
 		},
 		{
+			key: "buy_price",
+			label: t("buy_price"),
+			children: (
+				<UpdatePriceForm
+					productId={data?.id}
+					initialPrice={data?.buy_price}
+					type="buy_price"
+				/>
+			)
+		},
+		{
 			key: "sell_price",
 			label: t("sell_price"),
 			children: (
-				<UpdatePriceForm productId={data?.id} initialPrice={data?.sell_price} />
+				<UpdatePriceForm
+					productId={data?.id}
+					initialPrice={data?.sell_price}
+					type="sell_price"
+				/>
 			)
 		}
 	]
@@ -66,30 +81,33 @@ const useProductItems = (data?: ProductItem) => {
 
 export const UpdatePriceForm = ({
 	productId,
-	initialPrice
+	initialPrice,
+	type
 }: {
 	productId?: number
 	initialPrice?: string
+	type: "sell_price" | "buy_price"
 }) => {
 	const [form] = Form.useForm()
+	const { t } = useTranslation()
 	const { mutate, isPending } = useUpdateProductPrice()
 	useEffect(() => {
 		if (initialPrice) form.setFieldValue("price", initialPrice)
-	}, [initialPrice, productId])
+	}, [initialPrice, productId, form])
 	const onFinish = (values: { price: string }) => {
-		if (productId) mutate({ id: productId, sell_price: values.price })
+		if (productId) mutate({ id: productId, [type]: values.price })
 	}
 
 	return (
 		<Form form={form} layout="inline" onFinish={onFinish}>
 			<Form.Item
 				name="price"
-				rules={[{ required: true, message: "Введите цену" }]}>
+				rules={[{ required: true, message: t("enter_price") }]}>
 				<InputPrice />
 			</Form.Item>
 			<Form.Item>
 				<Button type="primary" htmlType="submit" loading={isPending}>
-					Изменить
+					{t("edit")}
 				</Button>
 			</Form.Item>
 		</Form>

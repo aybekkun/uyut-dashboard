@@ -1,9 +1,10 @@
 {
     "menu": {
-        "store": "Store",
-        "store_list": "Store list",
+        "store": "Warehouse",
+        "store_list": "Product stock",
         "sales": "Sales",
         "sales_list": "Sales list",
+        "sales_product_monthly_report": "Monthly product report",
         "employees": "Employees",
         "employees_list": "Employees list",
         "reports": "Reports",
@@ -26,6 +27,8 @@
         "settings_print_types": "Print types",
         "settings_payment_types": "Payment types",
         "settings_expense_types": "Expense types",
+        "settings_products_name": "Product names",
+        "settings_products_collar": "Product colors",
         "cash_flow": "Cash flow",
         "profit_lost": "Profit/loss"
     },
@@ -146,5 +149,13 @@
         "oct": "Oct",
         "nov": "Nov",
         "dec": "Dec"
-    }
+    },
+    "is_collar": "Color",
+    "yes": "Yes",
+    "no": "No",
+    "collar": "Color",
+    "sold_quantity": "Sold quantity",
+    "total_revenue": "Total revenue",
+    "current_stock": "Current stock",
+    "buy_price": "Buy price"
 }

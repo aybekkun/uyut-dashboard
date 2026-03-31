@@ -26,6 +26,7 @@ export type ProductItem = {
 		pieces: null | number
 	}
 	sell_price: string
+	buy_price: string
 	imported_at: null | Date
 	created_at: Date
 	updated_at: Date
@@ -87,6 +88,7 @@ type ProductForm = {
 	supplier_id: number
 	imported_at: string
 	sell_price: string | number
+	buy_price: string | number
 }
 
 // type ProductForm = {

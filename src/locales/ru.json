@@ -1,9 +1,10 @@
 {
     "menu": {
         "store": "Склад",
-        "store_list": "Список проходов",
+        "store_list": "Остатки товаров",
         "sales": "Продажи",
-        "sales_list": "Список продаж",
+        "sales_list": "История продаж",
+        "sales_product_monthly_report": "Месячный отчет по товарам",
         "employees": "Сотрудники",
         "employees_list": "Список сотрудников",
         "reports": "Отчёты",
@@ -26,6 +27,8 @@
         "settings_print_types": "Типы печати",
         "settings_payment_types": "Типы оплаты",
         "settings_expense_types": "Типы расходов",
+        "settings_products_name": "Наименования товаров",
+        "settings_products_collar": "Цвета товаров",
         "cash_flow": "Денежный поток",
         "profit_lost": "Прибыль/убыток",
         "report_sold_product_stat": "Статистика проданных товаров"
@@ -152,5 +155,13 @@
     "total_value": "Общее количество",
     "unit": "Ед. изм.",
     "m2": "м²",
-    "meter": "м"
+    "meter": "м",
+    "is_collar": "Цвет",
+    "yes": "Да",
+    "no": "Нет",
+    "collar": "Цвет",
+    "sold_quantity": "Проданное кол-во",
+    "total_revenue": "Общая выручка",
+    "current_stock": "Текущий остаток",
+    "buy_price": "Цена покупки"
 }

@@ -4,6 +4,7 @@
         "store_list": "Киришлар рўйхати",
         "sales": "Сотувлар",
         "sales_list": "Сотувлар рўйхати",
+        "sales_product_monthly_report": "Маҳсулотларнинг ойлик ҳисоботи",
         "employees": "Ходимлар",
         "employees_list": "Ходимлар рўйхати",
         "reports": "Ҳисоботлар",
@@ -26,6 +27,8 @@
         "settings_print_types": "Босиб чиқариш турлари",
         "settings_payment_types": "Тўлов турлари",
         "settings_expense_types": "Харажат турлари",
+        "settings_products_name": "Маҳсулот номлари",
+        "settings_products_collar": "Маҳсулот ранглари",
         "cash_flow": "Касcа ҳисоби",
         "profit_lost": "Фойда/зарар",
         "report_sold_product_stat": "Сотилган маҳсулотлар статистикаси"
@@ -152,5 +155,13 @@
     "total_value": "Umumiy miqdor",
     "unit": "O'lchov birligi",
     "m2": "m²",
-    "meter": "m"
+    "meter": "m",
+    "is_collar": "Ранг",
+    "yes": "Ҳа",
+    "no": "Йўқ",
+    "collar": "Ранг",
+    "sold_quantity": "Сотилган (миқдори)",
+    "total_revenue": "Умумий тушум",
+    "current_stock": "Жорий қолдиқ",
+    "buy_price": "Сотиб олиш нархи"
 }

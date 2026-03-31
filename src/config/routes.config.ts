@@ -11,6 +11,7 @@ class Routes {
 
 	SALES_GROUP = "/sales"
 	SALES_PRODUCTS = "/sales/products"
+	SALES_PRODUCT_MONTHLY_REPORT = "/sales/product-monthly-report"
 
 	EMPLOYEES_GROUP = "/employees"
 	EMPLOYEES_USERS = "/employees/users"
@@ -40,6 +41,8 @@ class Routes {
 	SETTINGS_PRINT_TYPES = "/settings/print-types"
 	SETTINGS_PAYMENT_TYPES = "/settings/payment-types"
 	SETTINGS_EXPENSE_TYPES = "/settings/expense-types"
+	SETTINGS_PRODUCTS_NAME = "/settings/products-name"
+	SETTINGS_PRODUCTS_COLLAR = "/settings/products-collar"
 }
 
 export const ROUTES = new Routes()

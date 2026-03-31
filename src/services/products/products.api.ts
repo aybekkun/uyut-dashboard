@@ -112,8 +112,15 @@ export const useUpdateProductPrice = () => {
 	const queryClient = useQueryClient()
 	const { message } = useMessage()
 	return useMutation({
-		mutationFn: ({ id, sell_price }: { id: number; sell_price: string }) =>
-			productsService.updatePrice(id, sell_price),
+		mutationFn: ({
+			id,
+			sell_price,
+			buy_price
+		}: {
+			id: number
+			sell_price?: string
+			buy_price?: string
+		}) => productsService.updatePrice(id, { sell_price, buy_price }),
 		onSuccess: async (_, variables) => {
 			// Обновляем кэш для конкретного продукта
 			await queryClient.invalidateQueries({

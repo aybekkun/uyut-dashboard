@@ -35,11 +35,12 @@ class ProductsService {
 	}
 	updatePrice = async (
 		id: ParamId,
-		sell_price: string
+		form: {
+			sell_price?: string
+			buy_price?: string
+		}
 	): Promise<ResponseSingleData<ProductItem>> => {
-		const response = await api.patch(`/products/${id}`, {
-			sell_price: sell_price
-		})
+		const response = await api.patch(`/products/${id}`, form)
 		return response.data
 	}
 	createPrintDetailsById = async (

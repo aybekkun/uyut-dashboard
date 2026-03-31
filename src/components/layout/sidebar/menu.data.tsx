@@ -37,6 +37,11 @@ export const useMenu = (): MenuProps["items"] => {
 			label: t("menu.sales_list")
 		},
 		{
+			key: ROUTES.SALES_PRODUCT_MONTHLY_REPORT,
+			icon: <UnorderedListOutlined />,
+			label: t("menu.sales_product_monthly_report")
+		},
+		{
 			key: ROUTES.REPORT_SOLD_PRODUCT_STAT,
 			icon: <UnorderedListOutlined />,
 			label: t("menu.report_sold_product_stat")
@@ -147,6 +152,16 @@ export const useMenu = (): MenuProps["items"] => {
 			key: ROUTES.SETTINGS_EXPENSE_TYPES,
 			icon: <AppstoreAddOutlined />,
 			label: t("menu.settings_expense_types")
+		},
+		{
+			key: ROUTES.SETTINGS_PRODUCTS_NAME,
+			icon: <UnorderedListOutlined />,
+			label: t("menu.settings_products_name")
+		},
+		{
+			key: ROUTES.SETTINGS_PRODUCTS_COLLAR,
+			icon: <UnorderedListOutlined />,
+			label: t("menu.settings_products_collar")
 		}
 	]
 }
