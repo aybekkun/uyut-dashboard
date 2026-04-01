@@ -10,8 +10,6 @@ import {
 	UnorderedListOutlined,
 	UsergroupAddOutlined,
 	UsergroupDeleteOutlined,
-	/* VerticalAlignBottomOutlined, */
-	VerticalAlignMiddleOutlined,
 	VerticalAlignTopOutlined
 } from "@ant-design/icons"
 import type { MenuProps } from "antd"
