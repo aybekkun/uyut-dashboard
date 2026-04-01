@@ -3,13 +3,18 @@ import {
 	ExportOutlined,
 	ImportOutlined,
 	MinusSquareOutlined,
-	MoneyCollectOutlined,
 	PrinterOutlined,
 	TeamOutlined,
-	UnorderedListOutlined,
 	UsergroupAddOutlined,
 	UsergroupDeleteOutlined,
-	VerticalAlignTopOutlined
+	VerticalAlignTopOutlined,
+	CalendarOutlined,
+	FileTextOutlined,
+	BarChartOutlined,
+	AccountBookOutlined,
+	FallOutlined,
+	TagOutlined,
+	SkinOutlined
 } from "@ant-design/icons"
 import type { MenuProps } from "antd"
 import { useTranslation } from "react-i18next"
@@ -32,24 +37,24 @@ export const useMenu = (): MenuProps["items"] => {
 		},
 		{
 			key: ROUTES.SALES_PRODUCT_MONTHLY_REPORT,
-			icon: <UnorderedListOutlined />,
+			icon: <CalendarOutlined />,
 			label: t("menu.sales_product_monthly_report")
 		},
 		{
 			key: ROUTES.SALES_PRINT_MONTHLY_REPORT,
-			icon: <UnorderedListOutlined />,
+			icon: <FileTextOutlined />,
 			label: t("menu.sales_print_monthly_report")
 		},
 		{
 			key: ROUTES.REPORT_SOLD_PRODUCT_STAT,
-			icon: <UnorderedListOutlined />,
+			icon: <BarChartOutlined />,
 			label: t("menu.report_sold_product_stat")
 		},
 
 		{ key: ROUTES.EXPENSES_GROUP, type: "group", label: t("menu.expenses") },
 		{
 			key: ROUTES.EXPENSES_LIST,
-			icon: <UnorderedListOutlined />,
+			icon: <AccountBookOutlined />,
 			label: t("menu.expenses_list")
 		},
 		/* 	{
@@ -64,17 +69,13 @@ export const useMenu = (): MenuProps["items"] => {
 		},
 		 */ {
 			key: ROUTES.EXPENSES_WRITE_OFF_PRODUCTS,
-			icon: <UnorderedListOutlined />,
+			icon: <FallOutlined />,
 			label: t("menu.expenses_write_off")
 		},
 
-		{ key: ROUTES.EMPLOYEES_GROUP, type: "group", label: t("menu.employees") },
-		{
-			key: ROUTES.EMPLOYEES_USERS,
-			icon: <TeamOutlined />,
-			label: t("menu.employees_list")
-		},
-
+		/* 		{ key: ROUTES.EMPLOYEES_GROUP, type: "group", label: t("menu.employees") },
+	
+ */
 		{ key: ROUTES.REPORT_GROUP, type: "group", label: t("menu.reports") },
 		/* 	{
 			key: ROUTES.REPORT_PRODUCTS,
@@ -134,6 +135,11 @@ export const useMenu = (): MenuProps["items"] => {
 
 		{ key: ROUTES.SETTINGS_GROUP, type: "group", label: t("menu.settings") },
 		{
+			key: ROUTES.EMPLOYEES_USERS,
+			icon: <TeamOutlined />,
+			label: t("menu.employees_list")
+		},
+		{
 			key: ROUTES.REPORT_SUPPLIERS,
 			icon: <UsergroupAddOutlined />,
 			label: t("menu.report_suppliers")
@@ -143,11 +149,11 @@ export const useMenu = (): MenuProps["items"] => {
 			icon: <PrinterOutlined />,
 			label: t("menu.settings_print_types")
 		},
-		{
+		/* 	{
 			key: ROUTES.SETTINGS_PAYMENT_TYPES,
 			icon: <MoneyCollectOutlined />,
 			label: t("menu.settings_payment_types")
-		},
+		}, */
 		{
 			key: ROUTES.SETTINGS_EXPENSE_TYPES,
 			icon: <AppstoreAddOutlined />,
@@ -155,12 +161,12 @@ export const useMenu = (): MenuProps["items"] => {
 		},
 		{
 			key: ROUTES.SETTINGS_PRODUCTS_NAME,
-			icon: <UnorderedListOutlined />,
+			icon: <TagOutlined />,
 			label: t("menu.settings_products_name")
 		},
 		{
 			key: ROUTES.SETTINGS_PRODUCTS_COLLAR,
-			icon: <UnorderedListOutlined />,
+			icon: <SkinOutlined />,
 			label: t("menu.settings_products_collar")
 		}
 	]
