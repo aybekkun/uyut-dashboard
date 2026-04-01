@@ -105,12 +105,12 @@ export const useMenu = (): MenuProps["items"] => {
 			label: t("menu.report_recommended_orders"),
 			disabled: true
 		}, */
-
+		/* 
 		{
 			key: ROUTES.REPORT_WRITE_OFF_PRODUCTS,
 			icon: <VerticalAlignMiddleOutlined />,
 			label: t("menu.report_write_off")
-		},
+		}, */
 		{
 			key: ROUTES.REPORT_DEBTORS,
 			icon: <UsergroupDeleteOutlined />,
