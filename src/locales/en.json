@@ -1,5 +1,6 @@
 {
     "menu": {
+        "dashboard": "Dashboard",
         "store": "Warehouse",
         "store_list": "Product stock",
         "sales": "Sales",
@@ -158,5 +159,12 @@
     "sold_quantity": "Sold quantity",
     "total_revenue": "Total revenue",
     "current_stock": "Current stock",
-    "buy_price": "Buy price"
+    "buy_price": "Buy price",
+    "dashboard": {
+        "revenue": "Total Revenue",
+        "expenses": "Total Expenses",
+        "net_profit": "Net Profit",
+        "distribution": "Revenue vs Expenses Distribution",
+        "select_date": "Select Month and Year"
+    }
 }

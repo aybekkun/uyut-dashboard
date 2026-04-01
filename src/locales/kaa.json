@@ -1,5 +1,6 @@
 {
     "menu": {
+        "dashboard": "Басқарыў панели",
         "store": "Склад",
         "store_list": "Дизим",
         "sales": "Сатыўлар",
@@ -164,5 +165,12 @@
     "sold_quantity": "Сатылған (муғдары)",
     "total_revenue": "Улыўма түсим",
     "current_stock": "Ҳәзирги қалдық",
-    "buy_price": "Satıp alıw bahası"
+    "buy_price": "Satıp alıw bahası",
+    "dashboard": {
+        "revenue": "Улыўма түсим",
+        "expenses": "Улыўма қәрежетлер",
+        "net_profit": "Таза пайда",
+        "distribution": "Дәрамад ҳәм қәрежетлер бөлистирилиўи",
+        "select_date": "Ай ҳәм жылды таңлаң"
+    }
 }

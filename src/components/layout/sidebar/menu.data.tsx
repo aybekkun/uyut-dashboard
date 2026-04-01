@@ -2,6 +2,7 @@ import {
 	AccountBookOutlined,
 	AppstoreAddOutlined,
 	CalendarOutlined,
+	DashboardOutlined,
 	ExportOutlined,
 	FallOutlined,
 	FileTextOutlined,
@@ -21,6 +22,11 @@ import { ROUTES } from "src/config/routes.config"
 export const useMenu = (): MenuProps["items"] => {
 	const { t } = useTranslation()
 	return [
+		{
+			key: ROUTES.DASHBOARD,
+			icon: <DashboardOutlined />,
+			label: t("menu.dashboard")
+		},
 		{ key: ROUTES.STORE_GROUP, type: "group", label: t("menu.store") },
 		{
 			key: ROUTES.STORE_PRODUCTS,
