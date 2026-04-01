@@ -1,20 +1,19 @@
 import {
+	AccountBookOutlined,
 	AppstoreAddOutlined,
+	CalendarOutlined,
 	ExportOutlined,
+	FallOutlined,
+	FileTextOutlined,
 	ImportOutlined,
 	MinusSquareOutlined,
 	PrinterOutlined,
+	SkinOutlined,
+	TagOutlined,
 	TeamOutlined,
 	UsergroupAddOutlined,
 	UsergroupDeleteOutlined,
-	VerticalAlignTopOutlined,
-	CalendarOutlined,
-	FileTextOutlined,
-	BarChartOutlined,
-	AccountBookOutlined,
-	FallOutlined,
-	TagOutlined,
-	SkinOutlined
+	VerticalAlignTopOutlined
 } from "@ant-design/icons"
 import type { MenuProps } from "antd"
 import { useTranslation } from "react-i18next"
@@ -45,11 +44,11 @@ export const useMenu = (): MenuProps["items"] => {
 			icon: <FileTextOutlined />,
 			label: t("menu.sales_print_monthly_report")
 		},
-		{
+		/* 	{
 			key: ROUTES.REPORT_SOLD_PRODUCT_STAT,
 			icon: <BarChartOutlined />,
 			label: t("menu.report_sold_product_stat")
-		},
+		}, */
 
 		{ key: ROUTES.EXPENSES_GROUP, type: "group", label: t("menu.expenses") },
 		{
