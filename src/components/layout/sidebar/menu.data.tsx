@@ -7,7 +7,6 @@ import {
 	MinusCircleOutlined,
 	MinusSquareOutlined,
 	MoneyCollectOutlined,
-	PlusCircleOutlined,
 	PrinterOutlined,
 	TeamOutlined,
 	UnorderedListOutlined,
@@ -115,12 +114,12 @@ export const useMenu = (): MenuProps["items"] => {
 			label: t("menu.report_debtors")
 		},
 
-		{ key: ROUTES.FINANCES_GROUP, type: "group", label: t("menu.finances") },
+		/* { key: ROUTES.FINANCES_GROUP, type: "group", label: t("menu.finances") },
 		{
 			key: ROUTES.FINANCES_COMING_PRODUCTS,
 			icon: <PlusCircleOutlined />,
 			label: t("menu.finances_income")
-		},
+		}, */
 		{
 			key: ROUTES.FINANCES_WRITE_OFF_PRODUCTS,
 			icon: <MinusCircleOutlined />,
