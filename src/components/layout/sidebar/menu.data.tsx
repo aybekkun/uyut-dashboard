@@ -39,6 +39,11 @@ export const useMenu = (): MenuProps["items"] => {
 			label: t("menu.sales_product_monthly_report")
 		},
 		{
+			key: ROUTES.SALES_PRINT_MONTHLY_REPORT,
+			icon: <UnorderedListOutlined />,
+			label: t("menu.sales_print_monthly_report")
+		},
+		{
 			key: ROUTES.REPORT_SOLD_PRODUCT_STAT,
 			icon: <UnorderedListOutlined />,
 			label: t("menu.report_sold_product_stat")

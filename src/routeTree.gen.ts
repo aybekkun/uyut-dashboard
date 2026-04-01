@@ -31,6 +31,7 @@ import { Route as LayoutSettingsExpenseTypesImport } from './routes/_layout/sett
 import { Route as LayoutSalesSalesProductImport } from './routes/_layout/sales/sales-product'
 import { Route as LayoutSalesProductsImport } from './routes/_layout/sales/products'
 import { Route as LayoutSalesProductMonthlyReportImport } from './routes/_layout/sales/product-monthly-report'
+import { Route as LayoutSalesPrintMonthlyReportImport } from './routes/_layout/sales/print-monthly-report'
 import { Route as LayoutReportsWriteOffProductsImport } from './routes/_layout/reports/write-off-products'
 import { Route as LayoutReportsSuppliersImport } from './routes/_layout/reports/suppliers'
 import { Route as LayoutReportsSoldProductStatImport } from './routes/_layout/reports/sold-product-stat'
@@ -175,6 +176,13 @@ const LayoutSalesProductMonthlyReportRoute =
   LayoutSalesProductMonthlyReportImport.update({
     id: '/sales/product-monthly-report',
     path: '/sales/product-monthly-report',
+    getParentRoute: () => LayoutRoute,
+  } as any)
+
+const LayoutSalesPrintMonthlyReportRoute =
+  LayoutSalesPrintMonthlyReportImport.update({
+    id: '/sales/print-monthly-report',
+    path: '/sales/print-monthly-report',
     getParentRoute: () => LayoutRoute,
   } as any)
 
@@ -433,6 +441,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutReportsWriteOffProductsImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/sales/print-monthly-report': {
+      id: '/_layout/sales/print-monthly-report'
+      path: '/sales/print-monthly-report'
+      fullPath: '/sales/print-monthly-report'
+      preLoaderRoute: typeof LayoutSalesPrintMonthlyReportImport
+      parentRoute: typeof LayoutImport
+    }
     '/_layout/sales/product-monthly-report': {
       id: '/_layout/sales/product-monthly-report'
       path: '/sales/product-monthly-report'
@@ -576,6 +591,7 @@ interface LayoutRouteChildren {
   LayoutReportsSoldProductStatRoute: typeof LayoutReportsSoldProductStatRoute
   LayoutReportsSuppliersRoute: typeof LayoutReportsSuppliersRoute
   LayoutReportsWriteOffProductsRoute: typeof LayoutReportsWriteOffProductsRoute
+  LayoutSalesPrintMonthlyReportRoute: typeof LayoutSalesPrintMonthlyReportRoute
   LayoutSalesProductMonthlyReportRoute: typeof LayoutSalesProductMonthlyReportRoute
   LayoutSalesProductsRoute: typeof LayoutSalesProductsRoute
   LayoutSalesSalesProductRoute: typeof LayoutSalesSalesProductRoute
@@ -614,6 +630,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutReportsSoldProductStatRoute: LayoutReportsSoldProductStatRoute,
   LayoutReportsSuppliersRoute: LayoutReportsSuppliersRoute,
   LayoutReportsWriteOffProductsRoute: LayoutReportsWriteOffProductsRoute,
+  LayoutSalesPrintMonthlyReportRoute: LayoutSalesPrintMonthlyReportRoute,
   LayoutSalesProductMonthlyReportRoute: LayoutSalesProductMonthlyReportRoute,
   LayoutSalesProductsRoute: LayoutSalesProductsRoute,
   LayoutSalesSalesProductRoute: LayoutSalesSalesProductRoute,
@@ -657,6 +674,7 @@ export interface FileRoutesByFullPath {
   '/reports/sold-product-stat': typeof LayoutReportsSoldProductStatRoute
   '/reports/suppliers': typeof LayoutReportsSuppliersRoute
   '/reports/write-off-products': typeof LayoutReportsWriteOffProductsRoute
+  '/sales/print-monthly-report': typeof LayoutSalesPrintMonthlyReportRoute
   '/sales/product-monthly-report': typeof LayoutSalesProductMonthlyReportRoute
   '/sales/products': typeof LayoutSalesProductsRoute
   '/sales/sales-product': typeof LayoutSalesSalesProductRoute
@@ -696,6 +714,7 @@ export interface FileRoutesByTo {
   '/reports/sold-product-stat': typeof LayoutReportsSoldProductStatRoute
   '/reports/suppliers': typeof LayoutReportsSuppliersRoute
   '/reports/write-off-products': typeof LayoutReportsWriteOffProductsRoute
+  '/sales/print-monthly-report': typeof LayoutSalesPrintMonthlyReportRoute
   '/sales/product-monthly-report': typeof LayoutSalesProductMonthlyReportRoute
   '/sales/products': typeof LayoutSalesProductsRoute
   '/sales/sales-product': typeof LayoutSalesSalesProductRoute
@@ -737,6 +756,7 @@ export interface FileRoutesById {
   '/_layout/reports/sold-product-stat': typeof LayoutReportsSoldProductStatRoute
   '/_layout/reports/suppliers': typeof LayoutReportsSuppliersRoute
   '/_layout/reports/write-off-products': typeof LayoutReportsWriteOffProductsRoute
+  '/_layout/sales/print-monthly-report': typeof LayoutSalesPrintMonthlyReportRoute
   '/_layout/sales/product-monthly-report': typeof LayoutSalesProductMonthlyReportRoute
   '/_layout/sales/products': typeof LayoutSalesProductsRoute
   '/_layout/sales/sales-product': typeof LayoutSalesSalesProductRoute
@@ -779,6 +799,7 @@ export interface FileRouteTypes {
     | '/reports/sold-product-stat'
     | '/reports/suppliers'
     | '/reports/write-off-products'
+    | '/sales/print-monthly-report'
     | '/sales/product-monthly-report'
     | '/sales/products'
     | '/sales/sales-product'
@@ -817,6 +838,7 @@ export interface FileRouteTypes {
     | '/reports/sold-product-stat'
     | '/reports/suppliers'
     | '/reports/write-off-products'
+    | '/sales/print-monthly-report'
     | '/sales/product-monthly-report'
     | '/sales/products'
     | '/sales/sales-product'
@@ -856,6 +878,7 @@ export interface FileRouteTypes {
     | '/_layout/reports/sold-product-stat'
     | '/_layout/reports/suppliers'
     | '/_layout/reports/write-off-products'
+    | '/_layout/sales/print-monthly-report'
     | '/_layout/sales/product-monthly-report'
     | '/_layout/sales/products'
     | '/_layout/sales/sales-product'
@@ -921,6 +944,7 @@ export const routeTree = rootRoute
         "/_layout/reports/sold-product-stat",
         "/_layout/reports/suppliers",
         "/_layout/reports/write-off-products",
+        "/_layout/sales/print-monthly-report",
         "/_layout/sales/product-monthly-report",
         "/_layout/sales/products",
         "/_layout/sales/sales-product",
@@ -1013,6 +1037,10 @@ export const routeTree = rootRoute
     },
     "/_layout/reports/write-off-products": {
       "filePath": "_layout/reports/write-off-products.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/sales/print-monthly-report": {
+      "filePath": "_layout/sales/print-monthly-report.tsx",
       "parent": "/_layout"
     },
     "/_layout/sales/product-monthly-report": {
