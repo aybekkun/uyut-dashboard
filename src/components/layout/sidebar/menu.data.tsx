@@ -60,12 +60,12 @@ export const useMenu = (): MenuProps["items"] => {
 			icon: <UnorderedListOutlined />,
 			label: t("menu.cash_flow")
 		}, */
-		{
+		/* {
 			key: ROUTES.PROFIT_LOSE,
 			icon: <UnorderedListOutlined />,
 			label: t("menu.profit_lost")
 		},
-		{
+		 */ {
 			key: ROUTES.EXPENSES_WRITE_OFF_PRODUCTS,
 			icon: <UnorderedListOutlined />,
 			label: t("menu.expenses_write_off")
