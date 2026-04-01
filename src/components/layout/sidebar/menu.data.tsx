@@ -1,10 +1,8 @@
 import {
 	AppstoreAddOutlined,
 	ClockCircleOutlined,
-	DollarCircleOutlined,
 	ExportOutlined,
 	ImportOutlined,
-	MinusCircleOutlined,
 	MinusSquareOutlined,
 	MoneyCollectOutlined,
 	PrinterOutlined,
@@ -52,11 +50,11 @@ export const useMenu = (): MenuProps["items"] => {
 			icon: <UnorderedListOutlined />,
 			label: t("menu.expenses_list")
 		},
-		{
+		/* 	{
 			key: ROUTES.CASH_FLOW,
 			icon: <UnorderedListOutlined />,
 			label: t("menu.cash_flow")
-		},
+		}, */
 		{
 			key: ROUTES.PROFIT_LOSE,
 			icon: <UnorderedListOutlined />,
@@ -120,7 +118,7 @@ export const useMenu = (): MenuProps["items"] => {
 			icon: <PlusCircleOutlined />,
 			label: t("menu.finances_income")
 		}, */
-		{
+		/* 		{
 			key: ROUTES.FINANCES_WRITE_OFF_PRODUCTS,
 			icon: <MinusCircleOutlined />,
 			label: t("menu.finances_write_off")
@@ -129,7 +127,7 @@ export const useMenu = (): MenuProps["items"] => {
 			key: ROUTES.FINANCES_SALE_PRODUCTS,
 			icon: <DollarCircleOutlined />,
 			label: t("menu.finances_sales")
-		},
+		}, */
 		{
 			key: ROUTES.FINANCES_EXPENSES,
 			icon: <ClockCircleOutlined />,
