@@ -1,6 +1,5 @@
 import {
 	AppstoreAddOutlined,
-	ClockCircleOutlined,
 	ExportOutlined,
 	ImportOutlined,
 	MinusSquareOutlined,
@@ -131,11 +130,11 @@ export const useMenu = (): MenuProps["items"] => {
 			icon: <DollarCircleOutlined />,
 			label: t("menu.finances_sales")
 		}, */
-		{
+		/* 	{
 			key: ROUTES.FINANCES_EXPENSES,
 			icon: <ClockCircleOutlined />,
 			label: t("menu.finances_expenses")
-		},
+		}, */
 
 		{ key: ROUTES.SETTINGS_GROUP, type: "group", label: t("menu.settings") },
 		{
