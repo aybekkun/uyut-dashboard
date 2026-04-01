@@ -81,11 +81,7 @@ export const useMenu = (): MenuProps["items"] => {
 			icon: <VerticalAlignBottomOutlined />,
 			label: t("menu.report_income")
 		}, */
-		{
-			key: ROUTES.REPORT_SUPPLIERS,
-			icon: <UsergroupAddOutlined />,
-			label: t("menu.report_suppliers")
-		},
+
 		{
 			key: ROUTES.REPORT_SALES_PRODUCTS,
 			icon: <VerticalAlignTopOutlined />,
@@ -137,6 +133,11 @@ export const useMenu = (): MenuProps["items"] => {
 		}, */
 
 		{ key: ROUTES.SETTINGS_GROUP, type: "group", label: t("menu.settings") },
+		{
+			key: ROUTES.REPORT_SUPPLIERS,
+			icon: <UsergroupAddOutlined />,
+			label: t("menu.report_suppliers")
+		},
 		{
 			key: ROUTES.SETTINGS_PRINT_TYPES,
 			icon: <PrinterOutlined />,
